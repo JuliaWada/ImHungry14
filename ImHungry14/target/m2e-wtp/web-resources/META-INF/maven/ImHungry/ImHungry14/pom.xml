@@ -15,6 +15,29 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+  		<!-- jsoup HTML parser library @ https://jsoup.org/ -->
+	  <groupId>org.jsoup</groupId>
+	  <artifactId>jsoup</artifactId>
+	  <version>1.11.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jsp-api</artifactId>
+	    <version>2.0</version>
+	    <scope>provided</scope>
+  </dependency>
+  <dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>javax.servlet.jsp-api</artifactId>
+        <version>2.3.1</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+	   <groupId>org.apache.commons</groupId>
+	   <artifactId>commons-text</artifactId>
+	   <version>1.6</version>
+	</dependency>
 	</dependencies>
 	<build>
 		<finalName>ImHungry14</finalName>
