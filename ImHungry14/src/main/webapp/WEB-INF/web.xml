@@ -4,4 +4,14 @@
 
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
+	<servlet>
+		<servlet-name>collageData</servlet-name>
+		<display-name>collageData</display-name>
+		<description></description>
+		<servlet-class>collageData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>collageData</servlet-name>
+		<url-pattern>/collageData</url-pattern>
+	</servlet-mapping>
 </web-app>
