@@ -2,7 +2,6 @@
 
 *{
 	padding: 0;
-	margin: 0;
 }
 body {
 	background-color: #f5f5f5;
@@ -11,9 +10,77 @@ body {
 #container {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	flex-basis: 80%;
+	padding-top: 10%;
 	
-	#numResults {
-		width: 30px;
+	#numResults{
+		width: 50px;
 		text-align: center;
 	}
+	#titleDiv {
+	font-size: 40px;
+		h1 {
+			padding: 0;
+			margin: 0;
+		}
+	}
+	
+	#searchDiv{
+	padding-left: 24%;
+	margin-top: 0;
+		#hoverMessage {
+			padding-left: 21.5%;
+			visibility: hidden;
+			margin-bottom: 0;
+			width: 40%;
+			height: 25%; 
+			img{
+				height: auto;
+				width: 100%;
+			}
+		}
+		#formDiv{
+			
+			#searchBar{
+				padding: 1% 20% 1% 0%;
+			}
+			
+			#numResults{
+				margin-left: 5%;
+				padding: 1%;
+			}
+			input {
+				font-size: 20px;
+				color: black;
+			}
+		}
+	}
+	
+	
+	button {
+		color: purple;
+		font-weight: bold;
+		background-image: url('../images/angry.png');
+		background-repeat: no-repeat;
+    	background-size: cover;
+    	padding: 2% 4%;
+    	margin-top: 5%;
+    	font-size: 35px;
+    	background-position: center;
+	}
+	
+	
 }
+
+@media(max-width: 767px){
+	#container {
+		#titleDiv {
+			font-size: 30px;
+		}
+		#searchDiv{
+			padding-left: 10%;
+		}
+	}
+}
+
