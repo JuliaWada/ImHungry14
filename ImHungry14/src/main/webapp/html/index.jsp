@@ -13,17 +13,28 @@
 			<h1>I'm Hungry</h1>
 		</div>
 		<div id = "searchDiv">
+			<div id = "hoverMessage">
+				<img src = "../images/hoverMessage.png">
+			</div>
 			<div id = "formDiv">
-				<form action = "POST">
-					<input placeholder = "Enter food...">
+				<form method = "POST">
+					<input id ="searchBar" placeholder = "Enter food...">
 					<input id = "numResults" placeholder = "5">
 				</form>
 			</div>
 		</div>
+		<button onclick = "toResults()">Feed Me!</button>
 	</div>
 <script>
-	document.querySelector("#numResults").onmouseenter = function(){
-		alert("Number of results to display");
+
+	function toResults(){
+		window.location.href = "results.jsp";
+	}
+	 document.querySelector("#numResults").onmouseenter = function(){
+		document.querySelector("#hoverMessage").style.visibility = "visible";
+	} 
+	 document.querySelector("#numResults").onmouseout = function(){
+		document.querySelector("#hoverMessage").style.visibility = "hidden";
 	}
 </script>
 </body>
