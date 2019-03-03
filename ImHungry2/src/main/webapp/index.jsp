@@ -28,10 +28,10 @@
 <script>
 	
 	function toResults(){
-	/* 	var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest();
 	 	var food = document.querySelector("#searchBar").value;
 	  	xhttp.open("POST", "TestServlet?name=" + food, false);
-		xhttp.send(); */
+		xhttp.send(); 
 		var foodName = document.querySelector("#searchBar").value;
 		sessionStorage.setItem("foodName", foodName);
 		if (foodName == ""){
