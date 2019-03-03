@@ -3,16 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../css/results.css">
+<link rel="stylesheet" href="css/restaurant.css">
 <meta charset="UTF-8">
 <title>I'm Hungry</title>
 </head>
-<body onload = "loadPage()">
-	<div id = "topDiv">
-		<div id ="collageDiv">
-			pictures go here
+<body>
+	<div id ="container">
+		<div id = "infoDiv">
+			<h1>Ramen Kenjo</h1>
+			<p>Phone Number: <span id = "phoneNumber">(213)-536-5922</span></p>
+			<br>
+			<p >Website: <span id ="url">https://www.uscvillage.com/ramen</span></p>
+			<br>
+			<p>Address: <span id ="address">929 W Jefferson Blvd, Los Angeles, CA 90007</span></p>
 		</div>
 		<div id ="buttonDiv">
+			<button onclick = "toPrintVersion()" class = "button">Printable Version</button>
+			<button onclick = "toResults()" class = "button">Back to Results</button>
+			<button onclick = "toAddtoList()" class = "button">Add to List</button>
 			<div id = "dropdown">
 				<div id = "dropText"></div>
 				<span id = "dropAction">&#9660</span>
@@ -24,43 +32,21 @@
 					<li>Do Not Show</li>
 				</ul>
 			</div>
-			<button onclick = "toManageList()" class = "button">Manage List</button>
-			<button onclick = "toSearchPage()" class = "button">Return to Search</button>
-		</div>
-	</div>
-	<div id ="titleDiv">
-		<h1>Results for <span id = "foodname"></span></h1>
-	</div>
-	<div id = "listTitleDiv">
-		<div class = "name">Restaurants</div>
-		<div class = "name">Recipes</div>
-	</div>
-	<div id= "resultDiv">
-		<div id ="restaurantDiv">
-			
-		</div>
-		<div id ="recipeDiv">
-		
 		</div>
 	</div>
 	<script>
 	
-	function loadPage(){
-		var foodName = sessionStorage.getItem("foodName");
-		document.querySelector("#foodname").innerHTML = foodName;
-	}
-	function toManageList(){
-		
-	}
-	function toSearchPage(){
-		
-		window.location.href = "index.jsp";
+	function toPrintVersion(){
+		document.querySelector("#buttonDiv").style.visibility = "hidden";
+		document.querySelector("#dropdownContent").style.visibility = "hidden";
 	}
 	
+	function toResults(){
+		window.location.href = "results.jsp";
+	}
 	document.querySelector("#dropAction").onclick = function(){
 		document.querySelector("#dropdownContent").style.visibility = "visible";
 	}
-	
 	
 	var list = document.getElementsByTagName("li");
 	for(let i = 0; i < list.length; i++){
@@ -69,7 +55,6 @@
 			document.querySelector("#dropdownContent").style.visibility = "hidden";
 		}
 	}
-	
 	</script>
 </body>
 </html>
