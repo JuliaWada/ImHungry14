@@ -30,6 +30,7 @@ scraping.Recipe"
 			getCollage(query);
 			getRecipes(query, num);
 			
+			
 		}
 
 		function testReload() {
@@ -79,6 +80,26 @@ scraping.Recipe"
 			xhttp.send();
 			console.log("recipe data sent to Backend");
 		}
+		
+		/**
+		 * getResataurants
+		 *
+		 */
+		 
+		 
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
