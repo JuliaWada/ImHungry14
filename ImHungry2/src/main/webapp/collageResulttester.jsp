@@ -11,7 +11,9 @@ scraping.Recipe" language="java" contentType="text/html; charset=ISO-8859-1"
 	<title>Result</title>
 	</head>
 	<body onload="readData()">
+	
 		<div id="collageContainer"></div>
+		<button  type="button" onclick="testReload()">Reload Testing</button>
 		<div id="recipeContainer"></div>
 		<script>
 		var query = "";
@@ -26,12 +28,12 @@ scraping.Recipe" language="java" contentType="text/html; charset=ISO-8859-1"
 			console.log("query: " + query);
 			console.log("num: " + num);
 			
-			loadingResults(query, num);
-		}
-		
-		function loadingResults(query, num) {
 			getCollage(query);
 			getRecipes(query, num);
+		}
+		
+		function testReload() {
+			window.location.href = "testReload.jsp";
 		}
 		
 		/**

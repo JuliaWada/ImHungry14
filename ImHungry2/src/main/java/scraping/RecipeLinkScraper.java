@@ -28,7 +28,7 @@ public class RecipeLinkScraper {
     	Document doc = null;
     	try {
     		//getting the links from the search page
-    		doc = Jsoup.connect("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=p").userAgent(USER_AGENT).get();
+    		doc = Jsoup.connect("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re").userAgent(USER_AGENT).get();
     		Elements linkResults = doc.select("div.fixed-recipe-card__info > a");
     		System.out.println("linkResults: " + linkResults.size());
     		for(int i=0; i<numResults; i++) {

@@ -29,9 +29,9 @@
 			var collageReady = false;
 			function sendingSearch() {
 				console.log("beginning search");
-				var toSend = document.getElementById('searchInput').value;
+				var food = document.getElementById('searchInput').value;
 				var numResults = document.getElementById('numInput').value;
-				going(toSend, numResults);
+				going(food, numResults);
 				redirection();
 			}	
 			
@@ -40,7 +40,7 @@
 				xhttp.onreadystatechange = function () {
 					collageReady = true;
 				}
-				xhttp.open("POST", "collageData?extra=testing&query=" + toSend + "&numResults=" + num, true);
+				xhttp.open("POST", "collageData?extra=settingVariables&query=" + toSend + "&numResults=" + num, true);
 				xhttp.send();
 				console.log("collage Data sent to backend");
 			}

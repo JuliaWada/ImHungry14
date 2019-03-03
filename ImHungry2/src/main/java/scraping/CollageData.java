@@ -49,7 +49,7 @@ public class CollageData extends HttpServlet {
 		String query = request.getParameter("query").trim();
 		String numResults = request.getParameter("numResults");
 //		System.out.println("Inside of Collage Data: " + query);
-		if(extra.equals("testing")) {
+		if(extra.equals("settingVariables")) {
 			System.out.println("Setting session");
 			HttpSession session2 = request.getSession();
 			session2.setAttribute("query", query);
