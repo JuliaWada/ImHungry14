@@ -17,11 +17,8 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class RecipeData
  */
-<<<<<<< HEAD:ImHungry2/src/main/java/RecipeData.java
-@WebServlet("/RecipeData")
-=======
+
 @WebServlet("/recipeData")
->>>>>>> master:ImHungry2/src/main/java/scraping/RecipeData.java
 public class RecipeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
