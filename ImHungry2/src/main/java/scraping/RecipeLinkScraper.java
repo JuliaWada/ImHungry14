@@ -8,6 +8,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class RecipeLinkScraper {
@@ -34,7 +37,17 @@ public class RecipeLinkScraper {
     		for(int i=0; i<numResults; i++) {
     			recipeLinks.add(linkResults.get(i).attr("href"));
     		}
-    		
+//    		WebDriver driver;
+//    		System.setProperty("webdriver.chrome.driver", "E://Selenium//Selenium_Jars//chromedriver.exe");
+//            driver = new ChromeDriver();
+//
+//            JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//            // Launch the application		
+//            driver.get("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re");
+//
+//            //This will scroll the web page till end.		
+//            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     		for(int i =0; i<numResults; i++) {
     			System.out.println("***************Start***************");
     			System.out.println("Link " + i + ": " + recipeLinks.get(i));
