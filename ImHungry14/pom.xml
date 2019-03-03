@@ -8,6 +8,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ImHungry14 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
