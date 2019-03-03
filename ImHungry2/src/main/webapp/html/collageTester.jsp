@@ -1,23 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
-	<head>
-	</head>
-	<body>
-		<h2>Hello World!</h2>
-		<form >
-			Search: <input type="text" name="query" id="searchInput"><br/>
-			Num Results: <input type="text" name="numResults" id="numInput"> <br/>
-			<button type="button" onclick="sendingSearch()">Submit</button>
-			
-			
-		</form>
-		
-		
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<head>
+	<link rel="stylesheet" type="text/css" href="collageTester.css"/>
+</head>
+<body onload="sendMessage()">
+<h2>Hello World!</h2>
+<form >
+Search: <input type="text" name="fname" id="searchInput"><br/>
+Num: <input type="text" name="numresults" id="numInput"> <br/ >
+<button type="button" onclick="sendingSearch()">Submit</button>
+
+</form>
+<div id="collageContainer">
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
-<script>
+<script >
 /*
 	var API_KEY = 'YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx'
 	var CLIENT_ID = 'uZhpw9YgNvae3jxqHr1gNw';
@@ -68,44 +69,24 @@
 		console.log("javascript is working?");
 	}
 	
-	</script>
-		
-		
-		<script>
-			/**
-			 * sendingSearch()
-			 * ------------------------------------
-			 * grabs the necessary data from the html inputs to send to the backend to get necesssary results
-			 * for restaurants and recipes and collage
-			 * Inserts html with the required information by inserting into the innerHTML
-			 * 
-			 *
-			 *
-			 *
-			*/
-			var recipeReady = false;
-			var collageReady = false;
-			function sendingSearch() {
-				console.log("beginning search");
-				var food = document.getElementById('searchInput').value;
-				var numResults = document.getElementById('numInput').value;
-				going(food, numResults);
-				redirection();
-			}	
-			
-			function going(toSend, num) {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function () {
-					collageReady = true;
-				}
-				xhttp.open("POST", "collageData?extra=settingVariables&query=" + toSend + "&numResults=" + num, true);
-				xhttp.send();
-				console.log("collage Data sent to backend");
-			}
-			
-			function redirection() {
-				window.location.href = "collageResulttester.jsp";
-			}
-		</script>
-	</body>
+	/*
+	function sendingSearch() {
+		console.log("beginning search");
+		var toSend = document.getElementById('searchInput').value;
+		console.log("search term: " + toSend);
+		gettingCollage(toSend);
+	}
+	
+	function gettingCollage(toSend) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function () {
+			document.getElementById("collageContainer").innerHTML = this.responseText;
+		}
+		xhttp.open("POST", "collagedata?query=" + toSend, true);
+		xhttp.send();
+		console.log("sent to backend");
+	} */
+	
+</script>
+</body>
 </html>

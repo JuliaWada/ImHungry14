@@ -1,2 +1,8 @@
 /target/
+<<<<<<< HEAD
 /bin/
+=======
+/.metadata/
+ImHungry2/pom.xml
+ImHungry2/.classpath
+>>>>>>> origin/grace-new-branch

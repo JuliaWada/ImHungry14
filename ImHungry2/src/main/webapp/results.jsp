@@ -44,9 +44,10 @@
 		</div>
 	</div>
 	<script>
+		
 	
 	function loadPage(){
-		var foodName = sessionStorage.getItem("foodName");
+		//var foodName = sessionStorage.getItem("foodName");
 		document.querySelector("#foodname").innerHTML = foodName;
 	}
 	function toManageList(){
