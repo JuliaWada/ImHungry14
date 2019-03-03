@@ -19,16 +19,23 @@
 			<div id = "formDiv">
 				<form method = "POST">
 					<input id ="searchBar" placeholder = "Enter food...">
-					<input id = "numResults" placeholder = "5">
+					<input id = "numResults" value ="5">
 				</form>
 			</div>
 		</div>
 		<button onclick = "toResults()">Feed Me!</button>
 	</div>
 <script>
-
+	
 	function toResults(){
-		window.location.href = "results.jsp";
+		var foodName = document.querySelector("#searchBar").value;
+		sessionStorage.setItem("foodName", foodName);
+		if (foodName == ""){
+			alert("Please Enter Food");
+		} else {
+			window.location.href = "results.jsp";
+		}
+		
 	}
 	 document.querySelector("#numResults").onmouseenter = function(){
 		document.querySelector("#hoverMessage").style.visibility = "visible";
