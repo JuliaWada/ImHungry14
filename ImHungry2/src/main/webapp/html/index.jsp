@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../webapp/css/index.css">
+<link rel="stylesheet" href="../css/index.css">
 <meta charset="UTF-8">
 <title>I'm Hungry</title>
 </head>
