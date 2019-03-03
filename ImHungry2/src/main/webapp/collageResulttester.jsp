@@ -15,6 +15,7 @@ scraping.Recipe"
 	<div id="collageContainer"></div>
 	<button type="button" onclick="testReload()">Reload Testing</button>
 	<div id="recipeContainer"></div>
+	<div id="restaurantContainer"><</div>
 	<script>
 		var query = "";
 		var num = 0;
@@ -29,7 +30,7 @@ scraping.Recipe"
 
 			getCollage(query);
 			getRecipes(query, num);
-			
+			getRestaurants(query, num);
 			
 		}
 
@@ -82,11 +83,20 @@ scraping.Recipe"
 		}
 		
 		/**
-		 * getResataurants
+		 * getRestaurants
 		 *
 		 */
 		 
-		 
+		 function getRestaurants(toSend, numResults) {
+			var xhttp = nre XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				document.getElementById("restaurantContainer").innerHTML = this.responseText;
+			}
+			xhttp.open("POST", "restaurantData?query=" + toSend + "&numResults=" + numResults, true);
+			xhttp.send();
+			console.log("restaurant data sent to BACKEND!");
+			
+		}
 	</script>
 </body>
 </html>

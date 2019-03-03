@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>yelp.YelpResults</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>restaurantData</servlet-name>
+  	<display-name>restaurantData</display-name>
+  	<description></description>
+  	<servlet-class>yelp.restaurantData</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>YelpResults</servlet-name>
   	<url-pattern>/YelpResults</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>restaurantData</servlet-name>
+  	<url-pattern>/restaurantData</url-pattern>
   </servlet-mapping>
 </web-app>
