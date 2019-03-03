@@ -4,4 +4,15 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>RecipeData</servlet-name>
+  	<display-name>RecipeData</display-name>
+  	<description></description>
+  	<servlet-class>RecipeData</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>RecipeData</servlet-name>
+  	<url-pattern>/RecipeData</url-pattern>
+  </servlet-mapping>
+
 </web-app>
