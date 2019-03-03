@@ -1,6 +1,9 @@
+package scraping;
+
 
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -38,18 +42,31 @@ public class CollageData extends HttpServlet {
 //		System.out.println("Inside of collage data");
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		String query = request.getParameter("query").trim();
-//		System.out.println("Inside of Collage Data: " + query);
-		CollageScraper scraper = new CollageScraper();
-		ArrayList<String> collageResults = scraper.scrapeCollage(query);
-		for(int i =0; i<collageResults.size(); i++) {
-//			System.out.println(StringEscapeUtils.unescapeJava(collageResults.get(i)));
-			String unescaped = StringEscapeUtils.unescapeJava(collageResults.get(i));
-			
-			num = random.nextInt(91) - 45;
-			out.println("<img class=\"collageImg\" src=" + unescaped +
-					" style=\"transform:rotate(" + num + "deg); max-height: 200px\">" );
+		String extra = request.getParameter("extra");
+		if(extra == null) {
+			extra = "poo";
 		}
+		String query = request.getParameter("query").trim();
+		String numResults = request.getParameter("numResults");
+//		System.out.println("Inside of Collage Data: " + query);
+		if(extra.equals("settingVariables")) {
+			System.out.println("Setting session");
+			HttpSession session2 = request.getSession();
+			session2.setAttribute("query", query);
+			session2.setAttribute("numResults", numResults);
+		} else {
+			CollageScraper scraper = new CollageScraper();
+			ArrayList<String> collageResults = scraper.scrapeCollage(query);
+			for(int i =0; i<collageResults.size(); i++) {
+				System.out.println(StringEscapeUtils.unescapeJava(collageResults.get(i)));
+				String unescaped = StringEscapeUtils.unescapeJava(collageResults.get(i));
+				
+				num = random.nextInt(91) - 45;
+				out.println("<img class=\"collageImg\" src=" + unescaped +
+						" style=\"transform:rotate(" + num + "deg); max-height: 200px\">" );
+			}
+		}
+	
 	}
 
 	/**

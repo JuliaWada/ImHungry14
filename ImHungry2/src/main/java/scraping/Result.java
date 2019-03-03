@@ -1,3 +1,5 @@
+package scraping;
+
 public class Result {
 	public String name = "";
 	

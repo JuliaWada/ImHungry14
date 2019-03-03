@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="index.css"/>
 	</head>
 	<body>
 		<h2>Hello World!</h2>
@@ -10,9 +9,9 @@
 			Search: <input type="text" name="query" id="searchInput"><br/>
 			Num Results: <input type="text" name="numResults" id="numInput"> <br/>
 			<button type="button" onclick="sendingSearch()">Submit</button>
+			
+			
 		</form>
-		<div id="collageContainer"></div>
-		<div id="recipeContainer"></div>
 		
 		<script >
 			/**
@@ -26,57 +25,28 @@
 			 *
 			 *
 			*/
+			var recipeReady = false;
+			var collageReady = false;
 			function sendingSearch() {
 				console.log("beginning search");
-				var toSend = document.getElementById('searchInput').value;
+				var food = document.getElementById('searchInput').value;
 				var numResults = document.getElementById('numInput').value;
-				console.log("search term: " + toSend);
-				console.log("number of results: " + numResults);
-				getCollage(toSend);
-				getRecipes(toSend, numResults);
-				
-			}
-			/**
-			 * getCollage
-			 * --------------------------
-			 * Takes in the search query that will use AJAX calls to reach the backend to scrape the top
-			 * 10 results for the search query
-			 *
-			 * @param: toSend a String that contains the term that user wants food recommendations for
-			 * @see: HTML
-			 *
-			*/
+				going(food, numResults);
+				redirection();
+			}	
 			
-			function getCollage(toSend) {
+			function going(toSend, num) {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function () {
-					document.getElementById("collageContainer").innerHTML = this.responseText;
+					collageReady = true;
 				}
-				xhttp.open("POST", "collageData?query=" + toSend, true);
+				xhttp.open("POST", "collageData?extra=settingVariables&query=" + toSend + "&numResults=" + num, true);
 				xhttp.send();
 				console.log("collage Data sent to backend");
 			}
 			
-			/**
-			 * getRecipes
-			 * --------------------------
-			 * Takes in the search query that will use AJAX calls to reach the backend to scrape the top
-			 * results for recipes sorted by shortest prep time
-			 *
-			 * @param: toSend a String that contains the term that user wants food recommendations for
-			 * @param: numResults an int that represents the number of results that the wants to see for the query
-			 * @see: HTML
-			 *
-			*/
-			
-			function getRecipes(toSend, numResults) {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function () {
-					document.getElementById("recipeContainer").innerHTML = this.responseText;
-				}
-				xhttp.open("POST", "RecipeData?query=" + toSend + "&numResults=" + numResults, true);
-				xhttp.send();
-				console.log("recipe data sent to Backend");
+			function redirection() {
+				window.location.href = "collageResulttester.jsp";
 			}
 		</script>
 	</body>

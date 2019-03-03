@@ -1,3 +1,5 @@
+package scraping;
+
 import java.util.ArrayList;
 
 
