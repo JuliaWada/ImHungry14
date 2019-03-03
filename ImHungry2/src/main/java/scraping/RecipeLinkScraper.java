@@ -1,5 +1,8 @@
+package scraping;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,8 +20,9 @@ public class RecipeLinkScraper {
      * @param query      a String that the represents what the user is searching for
      * @param numResults an integer that represents the max number of results that the user wants to see
      * @return           an ArrayList of Recipe objects containing all scraped information with a max size equal to numResults
+     * @throws InterruptedException 
      */
-    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) {
+    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) throws InterruptedException {
     	ArrayList<Recipe> toReturn = new ArrayList<Recipe>();
     	ArrayList<String> recipeLinks = new ArrayList<String>();
     	Document doc = null;
@@ -29,13 +33,13 @@ public class RecipeLinkScraper {
     		System.out.println("linkResults: " + linkResults.size());
     		for(int i=0; i<numResults; i++) {
     			recipeLinks.add(linkResults.get(i).attr("href"));
-//    			linkResults."a[data-internal-referrer-link=hub recipe");
     		}
     		
     		for(int i =0; i<numResults; i++) {
     			System.out.println("***************Start***************");
     			System.out.println("Link " + i + ": " + recipeLinks.get(i));
     			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
+    			TimeUnit.SECONDS.sleep(1);
     			toReturn.add(toAdd);
     		}
     	} catch (IOException ioe) {
@@ -56,9 +60,10 @@ public class RecipeLinkScraper {
      * 
      * @param url   a String that has the link of a recipe result from which to grab the recipe details
      * @return      a Recipe object containing all scraped data from the url of a specific recipe
+     * @throws InterruptedException 
      */
     
-    public Recipe scrapeRecipeDetails(String url) {
+    public Recipe scrapeRecipeDetails(String url) throws InterruptedException {
     	String html = "";
     	String title = "";
 		String prepTime = "";
