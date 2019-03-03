@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="collageTester.css"/>
 	</head>
 	<body>
 		<h2>Hello World!</h2>

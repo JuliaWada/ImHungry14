@@ -8,17 +8,11 @@ scraping.Recipe" language="java" contentType="text/html; charset=ISO-8859-1"
 	<head>
 	<meta charset="ISO-8859-1">
 			<link rel="stylesheet" type="text/css" href="collageTester.css"/>
-	
 	<title>Result</title>
 	</head>
 	<body onload="readData()">
-		<h1>Hello</h1>
 		<div id="collageContainer"></div>
 		<div id="recipeContainer"></div>
-	
-		<p> Hi! </p>
-	
-
 		<script>
 		var query = "";
 		var num = 0;

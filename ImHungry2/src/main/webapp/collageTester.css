@@ -1,5 +1,9 @@
 @charset "ISO-8859-1";
 
 img {
-	max-width:300px;
+	max-width:200px;
+}
+
+div.recipeContainer {
+	margin-top: 100px;
 }
