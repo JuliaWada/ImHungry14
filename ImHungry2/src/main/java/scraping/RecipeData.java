@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class RecipeData
  */
+
 @WebServlet("/recipeData")
 public class RecipeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,9 +50,7 @@ public class RecipeData extends HttpServlet {
 				//TODO remove this and put in the actual code 
 				//for now making sure everything works
 				out.println("<div>" +
-								"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" +
-								"<img src=\"" + toFormat.getImageURL() + 
-								"\"style=\"max-height: 50px\">" + 
+								"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 								"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 								"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +
 								"</div>"
