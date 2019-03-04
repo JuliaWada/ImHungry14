@@ -34,11 +34,4 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Tomcat v9.0 Server at localhost-config</name>
-			<type>2</type>
-			<location>/Users/stevenmarsh/Desktop/eclipse/Servers/Tomcat v9.0 Server at localhost-config</location>
-		</link>
-	</linkedResources>
 </projectDescription>

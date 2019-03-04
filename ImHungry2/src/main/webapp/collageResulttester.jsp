@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-=======
-<%@ page
-	import="
-scraping.Recipe"
-	language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
->>>>>>> origin/grace-new-branch
 <!DOCTYPE html>
 <html>
 <head>

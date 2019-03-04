@@ -31,10 +31,6 @@
 	
 	
 	function toResults(){
-		var xhttp = new XMLHttpRequest();
-	 	var food = document.querySelector("#searchBar").value;
-	  	xhttp.open("POST", "TestServlet?name=" + food, false);
-		xhttp.send(); 
 		var foodName = document.querySelector("#searchBar").value;
 		sessionStorage.setItem("foodName", foodName);
 		
@@ -44,6 +40,7 @@
 		if (foodName == ""){
 			alert("Please Enter Food");
 		} else {
+			going(foodName, numResultsToDisplay);
 			window.location.href = "results.jsp";  
 		}
 		
@@ -54,6 +51,17 @@
 	 document.querySelector("#numResults").onmouseout = function(){
 		document.querySelector("#hoverMessage").style.visibility = "hidden";
 	}
+	 
+	 function going(toSend, num) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				collageReady = true;
+			}
+			xhttp.open("POST", "collageData?extra=settingVariables&query=" + toSend + "&numResults=" + num, true);
+			xhttp.send();
+			console.log("collage Data sent to backend");
+		}
+		 
 </script>
 </body>
 </html>
