@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,7 +27,6 @@
 	</div>
 <script>
 	
-	
 	function toResults(){
 	/* 	var xhttp = new XMLHttpRequest();
 	 	var food = document.querySelector("#searchBar").value;
@@ -37,14 +34,11 @@
 		xhttp.send(); */
 		var foodName = document.querySelector("#searchBar").value;
 		sessionStorage.setItem("foodName", foodName);
-		
-		var numResultsToDisplay = document.querySelector("#numResults").value;
-		sessionStorage.setItem("numResultsToDisplay", numResultsToDisplay);
-		
 		if (foodName == ""){
 			alert("Please Enter Food");
 		} else {
-			window.location.href = "results.jsp";  
+			
+			window.location.href = "results.jsp";
 		}
 		
 	}

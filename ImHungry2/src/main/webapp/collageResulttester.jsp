@@ -30,7 +30,7 @@
 		}
 		
 		function testReload() {
-			window.location.href = "testReload.jsp";
+			window.location.href = "collageTester.jsp";
 		}
 		
 		/**
