@@ -1,7 +1,4 @@
-<%@ page
-	import="
-scraping.Recipe"
-	language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -88,7 +85,7 @@ scraping.Recipe"
 		 */
 		 
 		 function getRestaurants(toSend, numResults) {
-			var xhttp = nre XMLHttpRequest();
+			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				document.getElementById("restaurantContainer").innerHTML = this.responseText;
 			}
