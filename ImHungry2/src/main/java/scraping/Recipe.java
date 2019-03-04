@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 public class Recipe extends Result {
+	private String type = "Recipe";
 	private String imageURL = "";
 	private String prepTime = "";
 	private String cookTime = "";
@@ -33,6 +34,9 @@ public class Recipe extends Result {
 		return this.cookTime;
 	}
 	
+	public String getType() {
+		return this.type;
+	}
 	public ArrayList<String> getIngredients() {
 		return this.ingredients;
 	}
