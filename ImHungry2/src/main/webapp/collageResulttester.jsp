@@ -12,6 +12,7 @@
 		<div id="collageContainer"></div>
 		<button  type="button" onclick="testReload()">Reload Testing</button>
 		<div id="recipeContainer"></div>
+		<div id="restaurantContainer"></div>
 		<script>
 		var query = "";
 		var num = 0;
@@ -27,6 +28,7 @@
 
 			getCollage(query);
 			getRecipes(query, num);
+			getRestaurants(query, num);
 		}
 
 		function testReload() {

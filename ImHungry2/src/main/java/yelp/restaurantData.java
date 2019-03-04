@@ -1,6 +1,9 @@
 package yelp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +46,9 @@ public class restaurantData extends HttpServlet {
 
 		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
 		String CLIENT_ID_YELP = "uZhpw9YgNvae3jxqHr1gNw";
+		
+		PrintWriter out = response.getWriter();
+		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
 
 
 		// GET /businesses/search
@@ -77,34 +83,54 @@ public class restaurantData extends HttpServlet {
             System.out.println();
 
             for(int i=0; i<numResultsToShow; i++) {
-            	System.out.println(myResponse.getJSONObject(i).getString("name"));
-                System.out.println(myResponse.getJSONObject(i).getString("price"));
-                System.out.println(myResponse.getJSONObject(i).getString("display_phone"));
-                System.out.println(myResponse.getJSONObject(i).getString("url"));
+            	String rname = myResponse.getJSONObject(i).getString("name");
+            	String rwebsite = myResponse.getJSONObject(i).getString("url");
+            	String rphone = myResponse.getJSONObject(i).getString("display_phone");
+            	String rpricing = myResponse.getJSONObject(i).getString("price");
+            	int rminaway = 10;
+            	String raddress = "";
+            	
+            	System.out.println(rname);
+                System.out.println(rpricing);
+                System.out.println(rphone);
+                System.out.println(rwebsite);
 
                 JSONObject location = (JSONObject) myResponse.getJSONObject(i).get("location");
                 JSONArray address = (JSONArray) location.get("display_address");
                 for(int j=0; j<address.length(); j++) {
+                	raddress += address.get(j) + " ";
                 	System.out.println(address.get(j));
                 }
+                Restaurant r = new Restaurant(rname, rwebsite, raddress, rphone, rpricing, rminaway);
+                restaurantArray.add(r);
+                
+//                double distanceMeters = myResponse.getJSONObject(i).getDouble("distance");
+//                double distanceKilometers = distanceMeters / 1000.0;
+//                double timeHour = distanceKilometers / 50.0;
+//                double timeMin = timeHour * 60.0;
+//                int timeMinInt = (int)timeMin;
+//               
+//                System.out.println("Distance in Meters: " + distanceMeters);
+//                System.out.println("Min driving (double): " + timeMin);
+//                System.out.println("Min driving (int): " + timeMinInt);
+//                
+//                System.out.println();
+                
             }
-//
-//            System.out.println(myResponse.getJSONObject(0).getString("name"));
-//            System.out.println(myResponse.getJSONObject(0).getString("price"));
-//            System.out.println(myResponse.getJSONObject(0).getString("display_phone"));
-//            System.out.println(myResponse.getJSONObject(0).getString("url"));
-//
-//            JSONObject location = (JSONObject) myResponse.getJSONObject(0).get("location");
-//            JSONArray address = (JSONArray) location.get("display_address");
-//            for(int i=0; i<address.length(); i++) {
-//            	System.out.println(address.get(i));
-//            }
-
-
-
 
             System.out.println();
             System.out.println();
+            
+            
+            for(int i=0; i<restaurantArray.size(); i++) {
+            	Restaurant r = restaurantArray.get(i);
+            	out.println("<div>" +
+            					"<p>" + r.getName() + "</p>" +
+            					"<p>" + r.getAddress() + "</p>" +
+            					"<p>" + r.getMinsAway() + "</p>" +
+            					"<p>" + r.getPricing() + "</p>" +
+            			 	"</div>");
+            }
 
 
         }
@@ -113,37 +139,10 @@ public class restaurantData extends HttpServlet {
 //            e.printStackTrace();
         } catch (JSONException e) {
         	System.out.println("JSON Exception in restauarant Data!!!!");
-        	System.out.println("------------------- STACKTRACE --------------------");
         	System.out.println("Hello error: " + e.getMessage());
         	System.out.println();
-			e.printStackTrace();
-			System.out.println("----------------------- END OF STACKTRACE ------------------");
+			
 		}
-
-
-
-//		Sting data = null;
-//		var xhttp = new XMLHttpRequest();
-//
-//		var yelpString = "?term=" + foodName + "&latitude=34.020566&longitude=-118.285443"
-//		xhttp.open("GET", "https://api.yelp.com/v3/businesses/search" + yelpString, true);
-//		xhttp.setRequestHeader("Authorization", "Bearer " + API_KEY);
-//		xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-//
-//		xhttp.onreadystatechange = function () {
-//			document.getElementById("collageContainer").innerHTML = this.responseText;
-//		}
-//		xhttp.addEventListener("readystatechange", function () {
-//		  if (this.readyState === 4) {
-//		    data = JSON.parse(this.responseText);
-//		    console.log(data);
-//		  }
-//		});
-//		xhttp.send(data);
-//		//xhttp.send();
-//		console.log("yelp request sent to backend");
-
-
 
 		}
 
