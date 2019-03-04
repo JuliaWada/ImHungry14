@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="ImHungry14/src/main/java"/>
+	<classpathentry kind="src" path="ImHungry2/src/main/java"/>
+	<classpathentry kind="lib" path="ImHungry14/target/ImHungry14/WEB-INF/lib/commons-lang3-3.8.1.jar"/>
+	<classpathentry kind="lib" path="ImHungry14/target/ImHungry14/WEB-INF/lib/commons-text-1.6.jar"/>
+	<classpathentry kind="lib" path="ImHungry14/target/ImHungry14/WEB-INF/lib/jsoup-1.11.3.jar"/>
+	<classpathentry kind="output" path="ImHungry14/target/ImHungry14/WEB-INF/classes"/>
+</classpath>
