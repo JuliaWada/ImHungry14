@@ -10,19 +10,19 @@ public class AllTests {
 	// Do: Map design elements and implementation structures
 	// Grading: Complete with respect to design diagram and elements
 			//  Clear explanation of mapping
-	// should some tests fail? ex. test elements of classes based on class diagram,
+	// should some tests fail? NO ex. test elements of classes based on class diagram,
 			// but our designs changed in implementation process
+			// all tests should pass; write tests for the implementation
 			// https://piazza.com/class/jqh6yg2ejhc2aj?cid=128
 			// "Points will not be deducted if your implementation deviates from the design,
 			// as long as you explain and justify this in your validation against design section." - Halfond
-	// Design Diagrams: some of these can probably be technically satisfied by the same test - ask in OH
-		// Software Architecture- do we need to test this? - ask in OH
+	// Design Diagrams:
+		// make sure every class in the diagram has complete coverage, or why it doesn't have coverage
+			// ex. "this class doesn't have this element, and this is why"
 		// Communication
 		// Class Overall Diagram
 		// Sequence Diagrams
 		// State Machine
-		// User Interfaces
-			// already tested with Cucumber? - ask in OH
 	
 	
 	public static Test suite() {
