@@ -12,8 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.*;
 
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.DirectionsResult;
+
 import okhttp3.*;
 import okhttp3.Request.Builder;
+import yelp.Restaurant;
 
 /**
  * Servlet implementation class restaurantData
@@ -43,26 +50,47 @@ public class restaurantData extends HttpServlet {
 		System.out.println();
 		System.out.println("in yelp servlet service");
 		System.out.println();
-
-		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
-		String CLIENT_ID_YELP = "uZhpw9YgNvae3jxqHr1gNw";
 		
 		PrintWriter out = response.getWriter();
 		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
+		restaurantArray = getRestaurants(restaurantArray, request, response);
+		for(int i=0; i<restaurantArray.size(); i++) {
+        	Restaurant r = restaurantArray.get(i);
+        	out.println("<div>" +
+        					"<p>" + r.getName() + "</p>" +
+        					"<p>" + r.getAddress() + "</p>" +
+        					"<p>" + r.getMinsAway() + "</p>" +
+        					"<p>" + r.getPricing() + "</p>" +
+        					"<p>" + r.getMinsAway() + " minutes away </p>" +
+        			 	"</div>");
+        }
 
 
+		}
+	/**
+	 * 
+	 * Inputs are an array list of restaurants, request, and response
+	 * 
+	 * getRestaurants makes call Yelp API in order to get name, address, url, phone number, and
+	 * price of the restaurants that show up when the user searches for food. 
+	 * 
+	 * Returns an array list of Restaurants
+	 * 
+	 */
+
+	private ArrayList<Restaurant> getRestaurants(ArrayList<Restaurant> restaurantArray, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
+		
 		// GET /businesses/search
         OkHttpClient client = new OkHttpClient();
 
-
         String foodName = request.getParameter("query");                       // term
         int numResultsToShow = Integer.parseInt(request.getParameter("numResults").trim());		 //limit
-        //String myurl = "https://api.yelp.com/v3/businesses/search?term=" + foodName + "&latitude=34.020566&longitude=-118.285443" + "&limit=" + numResultsToShow;
-        //String myurl = "https://api.yelp.com/v3/businesses/search?term=" + foodName + "&location=Los Angeles, CA" + "&limit=" + numResultsToShow;
-
 
         Request APIrequest = new Builder()
-                .url("https://api.yelp.com/v3/businesses/search?term=" + foodName + "&latitude=34.020566&longitude=-118.285443" + "&limit=" + numResultsToShow)
+                .url("https://api.yelp.com/v3/businesses/search?term=" + foodName + "&latitude=34.020566&longitude=-118.285443" 
+                		+ "&limit=" + numResultsToShow + "&sort_by=distance")
                 .get()
                 .addHeader("authorization", "Bearer " + API_KEY_YELP)
                 .build();
@@ -84,54 +112,32 @@ public class restaurantData extends HttpServlet {
 
             for(int i=0; i<numResultsToShow; i++) {
             	String rname = myResponse.getJSONObject(i).getString("name");
-            	String rwebsite = myResponse.getJSONObject(i).getString("url");
-            	String rphone = myResponse.getJSONObject(i).getString("display_phone");
-            	String rpricing = myResponse.getJSONObject(i).getString("price");
-            	int rminaway = 10;
-            	String raddress = "";
-            	
             	System.out.println(rname);
-                System.out.println(rpricing);
-                System.out.println(rphone);
-                System.out.println(rwebsite);
-
+            	String rwebsite = myResponse.getJSONObject(i).getString("url");
+            	System.out.println(rwebsite);
+            	String rphone = myResponse.getJSONObject(i).getString("display_phone");
+            	System.out.println(rphone);
+            	String rpricing = myResponse.getJSONObject(i).getString("price");
+            	System.out.println(rpricing);
+            	String raddress = "";
+ 
+                
                 JSONObject location = (JSONObject) myResponse.getJSONObject(i).get("location");
                 JSONArray address = (JSONArray) location.get("display_address");
                 for(int j=0; j<address.length(); j++) {
                 	raddress += address.get(j) + " ";
                 	System.out.println(address.get(j));
                 }
+                raddress = raddress.trim();
+                int rminaway = getDrivingTime(raddress);
+                
                 Restaurant r = new Restaurant(rname, rwebsite, raddress, rphone, rpricing, rminaway);
                 restaurantArray.add(r);
-                
-//                double distanceMeters = myResponse.getJSONObject(i).getDouble("distance");
-//                double distanceKilometers = distanceMeters / 1000.0;
-//                double timeHour = distanceKilometers / 50.0;
-//                double timeMin = timeHour * 60.0;
-//                int timeMinInt = (int)timeMin;
-//               
-//                System.out.println("Distance in Meters: " + distanceMeters);
-//                System.out.println("Min driving (double): " + timeMin);
-//                System.out.println("Min driving (int): " + timeMinInt);
-//                
-//                System.out.println();
-                
             }
 
             System.out.println();
             System.out.println();
             
-            
-            for(int i=0; i<restaurantArray.size(); i++) {
-            	Restaurant r = restaurantArray.get(i);
-            	out.println("<div>" +
-            					"<p>" + r.getName() + "</p>" +
-            					"<p>" + r.getAddress() + "</p>" +
-            					"<p>" + r.getMinsAway() + "</p>" +
-            					"<p>" + r.getPricing() + "</p>" +
-            			 	"</div>");
-            }
-
 
         }
         catch (IOException e) {
@@ -143,7 +149,68 @@ public class restaurantData extends HttpServlet {
         	System.out.println();
 			
 		}
-
+        
+        return restaurantArray;
+		
+	}
+	
+	/**
+	 * 
+	 * Input is a restaurantAddress.
+	 * 
+	 * getDrivingTime makes a call to the Google Directions API to get the duration of driving time
+	 * it takes to get from Tommy Trojan to the restaurant.
+	 * 
+	 * Returns the driving time in minutes.
+	 */
+	private int getDrivingTime(String restaurantAddress) {
+		String API_KEY_GOOGLE = "AIzaSyAozhhiSQVAAlrlAwnFRuYOVWX2bGkRUqk";
+		long routeMin = 0;
+		//set up key
+	   	GeoApiContext gcontext = new GeoApiContext.Builder()
+			    .apiKey("AIzaSyAozhhiSQVAAlrlAwnFRuYOVWX2bGkRUqk")
+			    .build();
+	   	String formatAddress = restaurantAddress.replace(" ", "+");
+	   	System.out.println("Formatted address: " + formatAddress);
+	   	try {
+			DirectionsResult request =  DirectionsApi.getDirections(gcontext, "Tommy+Trojan", formatAddress).await();
+			
+			long routeSeconds = request.routes[0].legs[0].duration.inSeconds;
+			System.out.println("Route in Seconds: " + routeSeconds);
+			
+			routeMin = routeSeconds / 60;
+			System.out.println("Route in Minutes: " + routeMin);
+			
+			
+			
+		} catch (ApiException e) {
+			System.out.println("API Exception");
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			System.out.println("IE Exception");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("IO Exception");
+			e.printStackTrace();
 		}
+	   		
+
+		return Math.toIntExact(routeMin);
+		
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
