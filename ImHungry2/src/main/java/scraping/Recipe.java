@@ -22,6 +22,10 @@ public class Recipe extends Result implements Comparable<Recipe>{
 		this.instructions = instructions;
 	}
 	
+	public Recipe() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getPrep() {
 		return prep;
 	}
@@ -77,4 +81,12 @@ public class Recipe extends Result implements Comparable<Recipe>{
 		// TODO Auto-generated method stub
 		return (this.prep - recipe.prep);
 	}
+
+	@Override
+	public String toString() {
+		return "Recipe [imageURL=" + imageURL + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients="
+				+ ingredients + ", instructions=" + instructions + ", prep=" + prep + "]";
+	}
+	
+	
 }

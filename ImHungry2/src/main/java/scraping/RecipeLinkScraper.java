@@ -21,14 +21,15 @@ public class RecipeLinkScraper {
      * @param numResults an integer that represents the max number of results that the user wants to see
      * @return           an ArrayList of Recipe objects containing all scraped information with a max size equal to numResults
      * @throws InterruptedException 
+     * @throws IOException 
      */
-    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) throws InterruptedException {
+    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) throws InterruptedException, IOException {
     	ArrayList<Recipe> toReturn = new ArrayList<Recipe>();
     	ArrayList<String> recipeLinks = new ArrayList<String>();
     	Document doc = null;
     	int currPage = 1;
     	int numResultsNeeded = (int)Math.ceil(numResults/20.0);
-    	try {
+
     		//getting the links from the search page
     		for(int i = 0; i<numResultsNeeded; i++) {
     			doc = Jsoup.connect("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re&page=" + currPage).userAgent(USER_AGENT).get();
@@ -48,10 +49,6 @@ public class RecipeLinkScraper {
     			TimeUnit.SECONDS.sleep(1);
     			toReturn.add(toAdd);
     		}
-    	} catch (IOException ioe) {
-    		System.out.println("IOException in scrapeRecipeLinks: " + ioe.getMessage());
-    		ioe.printStackTrace();
-    	}
     	Collections.sort(toReturn);
     	return toReturn;
     }
@@ -68,9 +65,10 @@ public class RecipeLinkScraper {
      * @param url   a String that has the link of a recipe result from which to grab the recipe details
      * @return      a Recipe object containing all scraped data from the url of a specific recipe
      * @throws InterruptedException 
+     * @throws IOException 
      */
     
-    public Recipe scrapeRecipeDetails(String url) throws InterruptedException {
+    public Recipe scrapeRecipeDetails(String url) throws InterruptedException, IOException {
     	String html = "";
     	String title = "";
 		String prepTime = "";
@@ -81,7 +79,7 @@ public class RecipeLinkScraper {
 		ArrayList<String> instructions = new ArrayList<String>();
 		//opening the links grabbed and adding new things to it 
 		Document doc = null;
-		try {
+
 			doc = Jsoup.connect(url).userAgent(USER_AGENT).get();
 			title = doc.select("h1#recipe-main-content").text();
 			System.out.println("Title: " + title);
@@ -110,24 +108,20 @@ public class RecipeLinkScraper {
 			for(int i = 0; i < ingredients.size(); i++) {
 				System.out.println("Ingredient " + (i+1) + ": " + ingredients.get(i));
 			}
-			
+		 
 			//Instructions
-			Elements instructionResults = doc.select("span.recipe-directions__list--item");
+			Elements instructionResults = doc.select("li.step > span.recipe-directions__list--item");
 			for(Element instruct : instructionResults) {
 				String toCheck = instruct.text();
 				if(!toCheck.equals("")) {
-					instructions.add(instruct.text());
+					String finalInstruction = instruct.text().replace(" Watch now.", "");
+					instructions.add(finalInstruction);
 				}
 			}
 			
 			for(int i = 0; i < instructions.size(); i++) {
 				System.out.println("Instruction " + (i+1) + ": " + instructions.get(i));
 			}
-		} catch (IOException ioe) {
-			System.out.println("IOException in scrapeRecipeDetails:" + ioe.getMessage());
-			ioe.printStackTrace();
-		}
-		
 		Recipe recipe = new Recipe(title, image, prepTime, prep, cookTime, ingredients, instructions);
 		
 		
