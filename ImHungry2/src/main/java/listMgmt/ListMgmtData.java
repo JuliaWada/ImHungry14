@@ -71,11 +71,13 @@ public class ListMgmtData extends HttpServlet {
 				System.out.println("What type of class is " + i + ": " + grabbedList.get(i).getClass().getName());
 				if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
 					recipeToDisplay = (Recipe)grabbedList.get(i);
-					out.println("<div>" + 
-									"<div>" + 
+					out.println("<div class = \"row\">" + 
+									"<div class=\"recipeCard\">" + 
 										"<p class=\"name\">" + recipeToDisplay.getName() + "</p>" + 
 										"<p> Prep Time: " + recipeToDisplay.getPrepTime() + "</p>" +
 										"<p> Cook Time: " + recipeToDisplay.getCookTime() + "</p>" +
+									"</div>" +
+									"<div class =\"buttons\">" +
 										"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button>" +
 										"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 										"				 <option value = \"0\"> </option>\r\n" + 
@@ -89,13 +91,13 @@ public class ListMgmtData extends HttpServlet {
 					+ "");
 				} else {
 					restaurantToDisplay = (Restaurant)grabbedList.get(i); 
-					out.println("<div>" + 
-									"<div>" +
+					out.println("<div class =\"row\">" + 
+									"<div class =\"restaurantCard\">" +
 										"<p class=\"name\">" + restaurantToDisplay.getName() + "</p>" + 
 										"<p> Prep Time: " + restaurantToDisplay.getAddress() + "</p>" +
 										"<p> Cook Time: " + restaurantToDisplay.getPricing() + "</p>" +
 									"</div>" +
-									"<div>" +
+									"<divclass =\"buttons\">" +
 										"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button>" +
 									"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 									"				 <option value = \"0\"> </option>\r\n" + 
