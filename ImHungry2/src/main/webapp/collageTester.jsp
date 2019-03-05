@@ -62,6 +62,7 @@
 				}
 				xhttp.open("POST", "collageData?extra=settingVariables&query=" + toSend + "&numResults=" + num, true);
 				xhttp.send();
+				
 				console.log("collage Data sent to backend");
 			}
 			/**
