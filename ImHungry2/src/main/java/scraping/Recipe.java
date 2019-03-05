@@ -3,7 +3,7 @@ package scraping;
 import java.util.ArrayList;
 
 
-public class Recipe extends Result {
+public class Recipe extends Result implements Comparable<Recipe>{
 	private String imageURL = "";
 	private String prepTime = "";
 	private String cookTime = "";
@@ -70,5 +70,11 @@ public class Recipe extends Result {
 	
 	public void setInstructions(ArrayList<String> instructions) {
 		this.instructions = instructions;
+	}
+
+	@Override
+	public int compareTo(Recipe recipe) {
+		// TODO Auto-generated method stub
+		return (this.prep - recipe.prep);
 	}
 }

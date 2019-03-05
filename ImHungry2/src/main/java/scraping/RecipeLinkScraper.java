@@ -2,6 +2,7 @@ package scraping;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import org.jsoup.Jsoup;
@@ -51,6 +52,7 @@ public class RecipeLinkScraper {
     		System.out.println("IOException in scrapeRecipeLinks: " + ioe.getMessage());
     		ioe.printStackTrace();
     	}
+    	Collections.sort(toReturn);
     	return toReturn;
     }
     
