@@ -8,10 +8,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 
 public class RecipeLinkScraper {
     public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
@@ -29,25 +25,21 @@ public class RecipeLinkScraper {
     	ArrayList<Recipe> toReturn = new ArrayList<Recipe>();
     	ArrayList<String> recipeLinks = new ArrayList<String>();
     	Document doc = null;
+    	int currPage = 1;
+    	int numResultsNeeded = (int)Math.ceil(numResults/20.0);
     	try {
     		//getting the links from the search page
-    		doc = Jsoup.connect("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re").userAgent(USER_AGENT).get();
-    		Elements linkResults = doc.select("div.fixed-recipe-card__info > a");
-    		System.out.println("linkResults: " + linkResults.size());
-    		for(int i=0; i<numResults; i++) {
-    			recipeLinks.add(linkResults.get(i).attr("href"));
+    		for(int i = 0; i<numResultsNeeded; i++) {
+    			doc = Jsoup.connect("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re&page=" + currPage).userAgent(USER_AGENT).get();
+        		Elements linkResults = doc.select("div.fixed-recipe-card__info > a");
+        		System.out.println("linkResults: " + linkResults.size());
+        		for(int j=0; j<linkResults.size(); j++) {
+        			recipeLinks.add(linkResults.get(j).attr("href"));
+        		}
+        		System.out.println("Page number: " + currPage);
+        		currPage++;
     		}
-//    		WebDriver driver;
-//    		System.setProperty("webdriver.chrome.driver", "E://Selenium//Selenium_Jars//chromedriver.exe");
-//            driver = new ChromeDriver();
-//
-//            JavascriptExecutor js = (JavascriptExecutor) driver;
-//
-//            // Launch the application		
-//            driver.get("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re");
-//
-//            //This will scroll the web page till end.		
-//            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    		
     		for(int i =0; i<numResults; i++) {
     			System.out.println("***************Start***************");
     			System.out.println("Link " + i + ": " + recipeLinks.get(i));
@@ -82,6 +74,7 @@ public class RecipeLinkScraper {
 		String prepTime = "";
 		String cookTime = "";
 		String image = "";
+		int prep = 0;
 		ArrayList<String> ingredients = new ArrayList<String>();
 		ArrayList<String> instructions = new ArrayList<String>();
 		//opening the links grabbed and adding new things to it 
@@ -91,8 +84,12 @@ public class RecipeLinkScraper {
 			title = doc.select("h1#recipe-main-content").text();
 			System.out.println("Title: " + title);
 			prepTime = doc.select("[itemprop='prepTime'] > span").text().trim();
+			String prepTimeParse = doc.select("[itemprop='prepTime'] > span").text().trim();
+			prep = convertTime(prepTimeParse);
+			//parsing the time x...xxh xxx...xxm
+			System.out.println("Prep mins: " + prep);
 			prepTime = prepTime.replace("h", "hour");
-			prepTime = prepTime.replaceAll("m", "mins");
+			prepTime = prepTime.replaceAll("m", "mins");			
 			System.out.println("Prep Time: " + prepTime);
 			cookTime = doc.select("[itemprop='cookTime'] > span").text().trim();
 			cookTime = cookTime.replace("h", "hour");
@@ -129,10 +126,30 @@ public class RecipeLinkScraper {
 			ioe.printStackTrace();
 		}
 		
-		Recipe recipe = new Recipe(title, image, prepTime, cookTime, ingredients, instructions);
+		Recipe recipe = new Recipe(title, image, prepTime, prep, cookTime, ingredients, instructions);
 		
 		
 		return recipe;
+    }
+    
+    public int convertTime(String time) {
+    	//if the string has the hour in it
+    	int finalTime = 0;
+    	if(time.equals("")) {
+    		return -1;
+    	}
+    	String replaced = time.replace(" m", "");
+    	String[] split = replaced.split(" h ");
+    	if(split.length == 2) {
+    		int hour = Integer.parseInt(split[0]);
+    		int mins = Integer.parseInt(split[1]);
+    		hour *= 60;
+    		finalTime = hour + mins;
+    		
+    	} else {
+    		finalTime = Integer.parseInt(split[0]);
+    	}
+		return finalTime;
     }
 	
 }

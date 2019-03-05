@@ -58,6 +58,7 @@ public class CollageData extends HttpServlet {
 			CollageScraper scraper = new CollageScraper();
 			ArrayList<String> collageResults = scraper.scrapeCollage(query);
 			for(int i =0; i<collageResults.size(); i++) {
+				System.out.println(collageResults.get(i));
 				System.out.println(StringEscapeUtils.unescapeJava(collageResults.get(i)));
 				String unescaped = StringEscapeUtils.unescapeJava(collageResults.get(i));
 				
