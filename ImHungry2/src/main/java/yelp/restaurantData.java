@@ -109,19 +109,41 @@ public class restaurantData extends HttpServlet {
             System.out.println("Total Num of Results:");
             System.out.println(numYelpResults);
             System.out.println();
+            
+            //TODO Perhaps API might return nothing! Should maybe add an error check to see if entire JSON object is null
 
             for(int i=0; i<numResultsToShow; i++) {
+            	String rwebsite, rphone, rpricing = "";
+            	
             	String rname = myResponse.getJSONObject(i).getString("name");
             	System.out.println(rname);
-            	String rwebsite = myResponse.getJSONObject(i).getString("url");
+            	
+            	if(!myResponse.getJSONObject(i).has("url") && myResponse.getJSONObject(i).isNull("url")) {
+            		rwebsite = "No URL available";
+            	}
+            	else {
+            		rwebsite = myResponse.getJSONObject(i).getString("url");
+            	}
             	System.out.println(rwebsite);
-            	String rphone = myResponse.getJSONObject(i).getString("display_phone");
+            	
+            	if(!myResponse.getJSONObject(i).has("display_phone") && myResponse.getJSONObject(i).isNull("display_phone")) {
+            		rphone = "No phone number available";
+            	}
+            	else {
+            		rphone = myResponse.getJSONObject(i).getString("display_phone");
+            	}
             	System.out.println(rphone);
-            	String rpricing = myResponse.getJSONObject(i).getString("price");
+            	
+            	if(!myResponse.getJSONObject(i).has("price") && myResponse.getJSONObject(i).isNull("price")) {
+            		rpricing = "No price available";
+            	}
+            	else {
+            		rpricing = myResponse.getJSONObject(i).getString("price");
+            	}
             	System.out.println(rpricing);
+            	
             	String raddress = "";
  
-                
                 JSONObject location = (JSONObject) myResponse.getJSONObject(i).get("location");
                 JSONArray address = (JSONArray) location.get("display_address");
                 for(int j=0; j<address.length(); j++) {
