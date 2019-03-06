@@ -24,8 +24,8 @@
 					<li>Do Not Show</li>
 				</ul>
 			</div>
-			<button onclick = "toManageList()" class = "button">Manage List</button>
-			<button onclick = "toSearchPage()" class = "button">Return to Search</button>
+			<button id = "Lbutton" onclick = "toManageList()" class = "button">Manage List</button>
+			<button id = "RTSbutton" onclick = "toSearchPage()" class = "button">Return to Search</button>
 		</div>
 	</div>
 	<div id ="titleDiv">
@@ -36,9 +36,11 @@
 		<div class = "name">Recipes</div>
 	</div>
 	<div id= "resultDiv">
+		<span id = "restuarantName" class = "name">Restuarants</span>
 		<div id ="restaurantDiv">
 			
 		</div>
+		<span id = "recipeName" class = "name">Recipes</span>
 		<div id ="recipeDiv">
 		
 		</div>
@@ -58,6 +60,7 @@
 		num =<%=num%>;
 		getCollage(query);
 		getRecipes(query, num);
+		getRestaurants(query, num);
 	}
 	function toManageList(){
 		window.location.href = "listMgmt.jsp";
@@ -99,6 +102,30 @@
 				+ numResults, true);
 		xhttp.send();
 		console.log("recipe data sent to Backend");
+	}
+	
+	function getRestaurants(toSend, numResults) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			document.getElementById("restaurantDiv").innerHTML = this.responseText;
+		}
+		xhttp.open("POST", "restaurantData?query=" + toSend + "&numResults=" + numResults, true);
+		xhttp.send();
+		console.log("restaurant data sent to BACKEND!");
+
+	}
+	
+	var recipeCards = document.getElementsByClassName("recipeCard");
+	for(let i = 0; i < recipeCards.length; i++){
+		recipeCards[i].onclick = function(){
+			
+		}
+	}
+	var restaurantCards = document.getElementsByClassName("restaurantCard");
+	for(let i = 0; i < restaurantCards.length; i++){
+		restaurantCards[i].onclick = function(){
+			
+		}
 	}
 	
 	</script>

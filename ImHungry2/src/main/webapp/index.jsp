@@ -23,7 +23,7 @@
 				</form>
 			</div>
 		</div>
-		<button onclick = "toResults()">Feed Me!</button>
+		<button id = "feedMeButton" onclick = "toResults()">Feed Me!</button>
 	</div>
 <script>
 
@@ -32,7 +32,7 @@
 		var numResultsToDisplay = document.querySelector("#numResults").value;
 		sessionStorage.setItem("foodName", foodName);
 		if (foodName == ""){
-			alert("Please Enter Food");
+			
 		} else {
 			going(foodName, numResultsToDisplay);
 			window.location.href = "results.jsp";

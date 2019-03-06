@@ -23,7 +23,7 @@ import org.apache.commons.text.StringEscapeUtils;
 @WebServlet("/collageData")
 public class CollageData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -61,12 +61,12 @@ public class CollageData extends HttpServlet {
 				System.out.println("Unescaped: " + collageResults.get(i));
 				System.out.println("Escaped: " + StringEscapeUtils.unescapeJava(collageResults.get(i)));
 				String unescaped = StringEscapeUtils.unescapeJava(collageResults.get(i));
-				
+
 				num = random.nextInt(91) - 45;
-				out.println("<img class=\"collageImg\" src=" + StringEscapeUtils.unescapeJava(collageResults.get(i)) +
-						" style=\"transform:rotate(" + num + "deg); max-height: 150px\">" );
+				out.println("<img class=\"collageImg\" src=" + unescaped +
+						" style=\"transform:rotate(" + num + "deg)\">" );
 			}
 		}
-	
+
 	}
 }
