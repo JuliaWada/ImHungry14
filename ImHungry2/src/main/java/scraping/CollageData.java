@@ -58,12 +58,12 @@ public class CollageData extends HttpServlet {
 			CollageScraper scraper = new CollageScraper();
 			ArrayList<String> collageResults = scraper.scrapeCollage(query);
 			for(int i =0; i<collageResults.size(); i++) {
-				System.out.println(collageResults.get(i));
-				System.out.println(StringEscapeUtils.unescapeJava(collageResults.get(i)));
+				System.out.println("Unescaped: " + collageResults.get(i));
+				System.out.println("Escaped: " + StringEscapeUtils.unescapeJava(collageResults.get(i)));
 				String unescaped = StringEscapeUtils.unescapeJava(collageResults.get(i));
 				
 				num = random.nextInt(91) - 45;
-				out.println("<img class=\"collageImg\" src=" + unescaped +
+				out.println("<img class=\"collageImg\" src=" + StringEscapeUtils.unescapeJava(collageResults.get(i)) +
 						" style=\"transform:rotate(" + num + "deg); max-height: 150px\">" );
 			}
 		}

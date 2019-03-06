@@ -35,19 +35,23 @@ public class RecipeLinkScraper {
     			doc = Jsoup.connect("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re&page=" + currPage).userAgent(USER_AGENT).get();
         		Elements linkResults = doc.select("div.fixed-recipe-card__info > a");
         		System.out.println("linkResults: " + linkResults.size());
-        		for(int j=0; j<linkResults.size(); j++) {
-        			recipeLinks.add(linkResults.get(j).attr("href"));
+        		if(linkResults.size() > 1) {
+        			for(int j=0; j<linkResults.size(); j++) {
+            			recipeLinks.add(linkResults.get(j).attr("href"));
+            		}
+            		System.out.println("Page number: " + currPage);
+            		currPage++;
+        			break;
         		}
-        		System.out.println("Page number: " + currPage);
-        		currPage++;
     		}
-    		
-    		for(int i =0; i<numResults; i++) {
-    			System.out.println("***************Start***************");
-    			System.out.println("Link " + i + ": " + recipeLinks.get(i));
-    			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
-    			TimeUnit.SECONDS.sleep(1);
-    			toReturn.add(toAdd);
+    		if(recipeLinks.size() > 0) {
+	    		for(int i =0; i<numResults; i++) {
+	    			System.out.println("***************Start***************");
+	    			System.out.println("Link " + i + ": " + recipeLinks.get(i));
+	    			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
+	    			TimeUnit.SECONDS.sleep(1);
+	    			toReturn.add(toAdd);
+	    		}
     		}
     	Collections.sort(toReturn);
     	return toReturn;
