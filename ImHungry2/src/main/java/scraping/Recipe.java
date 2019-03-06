@@ -3,24 +3,37 @@ package scraping;
 import java.util.ArrayList;
 
 
-public class Recipe extends Result {
-	private String type = "Recipe";
+public class Recipe extends Result implements Comparable<Recipe>{
 	private String imageURL = "";
 	private String prepTime = "";
 	private String cookTime = "";
 	private ArrayList<String> ingredients = new ArrayList<String>();
 	private ArrayList<String> instructions = new ArrayList<String>();
+	private int prep = 0;
 	
-	public Recipe(String name, String imageURL, String prepTime, String cookTime,
+	public Recipe(String name, String imageURL, String prepTime, int prep, String cookTime,
 			ArrayList<String> ingredients, ArrayList<String> instructions) {
 		this.name = name;
 		this.imageURL = imageURL;
 		this.prepTime = prepTime;
+		this.prep = prep;
 		this.cookTime = cookTime;
 		this.ingredients = ingredients;
 		this.instructions = instructions;
 	}
 	
+	public Recipe() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getPrep() {
+		return prep;
+	}
+
+	public void setPrep(int prep) {
+		this.prep = prep;
+	}
+
 	//getters	
 	public String getImageURL() {
 		return this.imageURL;
@@ -34,9 +47,6 @@ public class Recipe extends Result {
 		return this.cookTime;
 	}
 	
-	public String getType() {
-		return this.type;
-	}
 	public ArrayList<String> getIngredients() {
 		return this.ingredients;
 	}
@@ -65,4 +75,18 @@ public class Recipe extends Result {
 	public void setInstructions(ArrayList<String> instructions) {
 		this.instructions = instructions;
 	}
+
+	@Override
+	public int compareTo(Recipe recipe) {
+		// TODO Auto-generated method stub
+		return (this.prep - recipe.prep);
+	}
+
+	@Override
+	public String toString() {
+		return "Recipe [imageURL=" + imageURL + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", ingredients="
+				+ ingredients + ", instructions=" + instructions + ", prep=" + prep + "]";
+	}
+	
+	
 }

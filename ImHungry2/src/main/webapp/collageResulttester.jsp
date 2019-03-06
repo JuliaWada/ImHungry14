@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,10 +8,11 @@
 	<title>Result</title>
 	</head>
 	<body onload="readData()">
-	
+
 		<div id="collageContainer"></div>
 		<button  type="button" onclick="testReload()">Reload Testing</button>
 		<div id="recipeContainer"></div>
+		<div id="restaurantContainer"></div>
 		<script>
 		var query = "";
 		var num = 0;
@@ -24,15 +25,16 @@
 			num = <%= num %>;
 			console.log("query: " + query);
 			console.log("num: " + num);
-			
+
 			getCollage(query);
 			getRecipes(query, num);
+			getRestaurants(query, num);
 		}
-		
+
 		function testReload() {
 			window.location.href = "collageTester.jsp";
 		}
-		
+
 		/**
 		 * getCollage
 		 * --------------------------
@@ -43,7 +45,7 @@
 		 * @see: HTML
 		 *
 		*/
-	
+
 		function getCollage(toSend) {
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function () {
@@ -53,7 +55,7 @@
 			xhttp.send();
 			console.log("collage Data sent to backend");
 		}
-		
+
 		/**
 		 * getRecipes
 		 * --------------------------
@@ -75,6 +77,22 @@
 			xhttp.send();
 			console.log("recipe data sent to Backend");
 		}
-		</script>
-	</body>
+
+		/**
+		 * getRestaurants
+		 *
+		 */
+
+		 function getRestaurants(toSend, numResults) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				document.getElementById("restaurantContainer").innerHTML = this.responseText;
+			}
+			xhttp.open("POST", "restaurantData?query=" + toSend + "&numResults=" + numResults, true);
+			xhttp.send();
+			console.log("restaurant data sent to BACKEND!");
+
+		}
+	</script>
+</body>
 </html>

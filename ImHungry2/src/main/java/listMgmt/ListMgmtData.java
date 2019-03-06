@@ -50,8 +50,8 @@ public class ListMgmtData extends HttpServlet {
 			ArrayList<String> ingredients = new ArrayList<String>();
 			ingredients.add("cookie dough");
 			ingredients.add("chocoloate chips");
-			Recipe r1 = new Recipe("Cookie dough " + listName , "pie", "15 min", "30 mins", ingredients, instructions);
-			Recipe r2 = new Recipe("Chocolate chips " + listName, "chocolate", "20 mins", "45 mins", ingredients, instructions);
+			Recipe r1 = new Recipe("Cookie dough " + listName , "pie", "15 min", 0, "30 mins", ingredients, instructions);
+			Recipe r2 = new Recipe("Chocolate chips " + listName, "chocolate", "20 mins", 0, "45 mins", ingredients, instructions);
 			ArrayList<Object> toAdd = new ArrayList<Object>();
 			toAdd.add(r1);
 			toAdd.add(r2);
