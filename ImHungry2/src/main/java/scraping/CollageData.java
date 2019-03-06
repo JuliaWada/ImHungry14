@@ -63,7 +63,7 @@ public class CollageData extends HttpServlet {
 				
 				num = random.nextInt(91) - 45;
 				out.println("<img class=\"collageImg\" src=" + unescaped +
-						" style=\"transform:rotate(" + num + "deg); max-height: 150px\">" );
+						" style=\"transform:rotate(" + num + "deg)\">" );
 			}
 		}
 	

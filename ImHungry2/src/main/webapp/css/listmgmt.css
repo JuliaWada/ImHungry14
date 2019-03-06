@@ -96,24 +96,24 @@ body h1 {
   background-color: #787878;
 }
 
-/* line 3, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
+/* line 88, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
 .recipeCard {
   width: 400px;
   height: 100px;
 }
 
-/* line 7, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
+/* line 92, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
 .recipeCard p:nth-child(2) {
   float: left;
   position: relative;
-  top: 60%;
+  top: 60px;
 }
 
-/* line 12, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
+/* line 97, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
 .recipeCard p:nth-child(3) {
   float: right;
   position: relative;
-  top: 60%;
+  top: 60px;
 }
 
 /*# sourceMappingURL=../css/listmgmt.map */
