@@ -21,6 +21,10 @@ public class Restaurant extends Result {
 		this.pricing = pricing;
 		this.minsAway = minsAway;
 	}
+	
+	public Restaurant() {
+		//default constructor.
+	}
 
 	public String getWebsite() {
 		return website;
