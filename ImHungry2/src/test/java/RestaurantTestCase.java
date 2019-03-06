@@ -22,17 +22,20 @@ public class RestaurantTestCase {
 		restaurantResult.setPricing("No price available");
 		restaurantResult.setAddress("929 W Jefferson Blvd USC Village Los Angeles, CA 90089");
 		restaurantResult.setMinsAway(7);
+		expectedList.add(restaurantResult);
 		
 		
 		restaurantData yelpAPI = new restaurantData();
-		ArrayList<Restaurant> actualList = new ArrayList<Restaurant>();
-		actualList = yelpAPI.getRestaurants(actualList, "ramen", 1);
+		ArrayList<Restaurant> actualList = yelpAPI.getRestaurants("ramen", 1);
 		
-		System.out.println(expectedList.get(0).toString());
-		System.out.println(actualList.get(0).toString());
+		System.out.println("/////////////////////////////////////////////////////////////");
+		System.out.println("EXPECTED" + expectedList.get(0).toString());
+		System.out.println();
+		System.out.println("ACTUAL" + actualList.get(0).toString());
+		System.out.println("/////////////////////////////////////////////////////////////");
 		
 		assertEquals(expectedList.size(), actualList.size());
-		assertEquals(expectedList.get(0).toString(), actualList.get(0).toString());
+		assertEquals(expectedList.get(0).getAddress(), actualList.get(0).toString());
 		
 	}
 	

@@ -52,12 +52,12 @@ public class restaurantData extends HttpServlet {
 		System.out.println();
 		
 		PrintWriter out = response.getWriter();
-		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
+		//ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
 		
 		String foodName = request.getParameter("query");                       // term
         int numResultsToShow = Integer.parseInt(request.getParameter("numResults").trim());		 //limit
 		
-		restaurantArray = getRestaurants(restaurantArray, foodName, numResultsToShow);
+        ArrayList<Restaurant>restaurantArray = getRestaurants(foodName, numResultsToShow);
 		for(int i=0; i<restaurantArray.size(); i++) {
         	Restaurant r = restaurantArray.get(i);
         	out.println("<div>" +
@@ -83,7 +83,8 @@ public class restaurantData extends HttpServlet {
 	 * 
 	 */
 
-	public ArrayList<Restaurant> getRestaurants(ArrayList<Restaurant> restaurantArray, String foodName, int numResultsToShow) throws ServletException, IOException {
+	public ArrayList<Restaurant> getRestaurants(String foodName, int numResultsToShow) throws ServletException, IOException {
+		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>(); 
 
 		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
 		
