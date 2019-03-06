@@ -19,8 +19,7 @@
 			/**
 			 * sendingSearch()
 			 * ------------------------------------
-			 * grabs the necessary data 
-			 from the html inputs to send to the backend to get necesssary results
+			 * grabs the necessary data from the html inputs to send to the backend to get necesssary results
 			 * for restaurants and recipes and collage
 			 * Inserts html with the required information by inserting into the innerHTML
 			 * 

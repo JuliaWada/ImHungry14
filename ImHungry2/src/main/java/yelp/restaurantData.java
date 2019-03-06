@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.*;
 
 import com.google.maps.DirectionsApi;
-import com.google.maps.DirectionsApiRequest;
+//import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.DirectionsResult;
@@ -116,9 +116,11 @@ public class restaurantData extends HttpServlet {
             	for(int i=0; i<numResultsToShow; i++) {
                 	String rwebsite, rphone, rpricing = "";
                 	
+                	//NAME
                 	String rname = myResponse.getJSONObject(i).getString("name");
                 	System.out.println(rname);
                 	
+                	//URL
                 	if(!myResponse.getJSONObject(i).has("url") && myResponse.getJSONObject(i).isNull("url")) {
                 		rwebsite = "No URL available";
                 	}
@@ -127,6 +129,7 @@ public class restaurantData extends HttpServlet {
                 	}
                 	System.out.println(rwebsite);
                 	
+                	//PHONE NUMBER
                 	if(!myResponse.getJSONObject(i).has("display_phone") && myResponse.getJSONObject(i).isNull("display_phone")) {
                 		rphone = "No phone number available";
                 	}
@@ -135,6 +138,7 @@ public class restaurantData extends HttpServlet {
                 	}
                 	System.out.println(rphone);
                 	
+                	//PRICE
                 	if(!myResponse.getJSONObject(i).has("price") && myResponse.getJSONObject(i).isNull("price")) {
                 		rpricing = "No price available";
                 	}
@@ -145,6 +149,7 @@ public class restaurantData extends HttpServlet {
                 	
                 	String raddress = "";
      
+                	//LOCATION
                     JSONObject location = (JSONObject) myResponse.getJSONObject(i).get("location");
                     JSONArray address = (JSONArray) location.get("display_address");
                     for(int j=0; j<address.length(); j++) {
@@ -162,8 +167,6 @@ public class restaurantData extends HttpServlet {
                 System.out.println();
             	
             }
-
-            
             
 
         }
@@ -195,7 +198,7 @@ public class restaurantData extends HttpServlet {
 		long routeMin = 0;
 		//set up key
 	   	GeoApiContext gcontext = new GeoApiContext.Builder()
-			    .apiKey("AIzaSyAozhhiSQVAAlrlAwnFRuYOVWX2bGkRUqk")
+			    .apiKey(API_KEY_GOOGLE)
 			    .build();
 	   	String formatAddress = restaurantAddress.replace(" ", "+");
 	   	System.out.println("Formatted address: " + formatAddress);
