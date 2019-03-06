@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class RecipeData
  */
+
 @WebServlet("/recipeData")
 public class RecipeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -48,10 +49,8 @@ public class RecipeData extends HttpServlet {
 				Recipe toFormat = recipeResults.get(i);
 				//TODO remove this and put in the actual code 
 				//for now making sure everything works
-				out.println("<div>" +
-								"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" +
-								"<img src=\"" + toFormat.getImageURL() + 
-								"\"style=\"max-height: 50px\">" + 
+				out.println("<div class =\"recipeCard\">" +
+								"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 								"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 								"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +
 								"</div>"
@@ -61,22 +60,6 @@ public class RecipeData extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

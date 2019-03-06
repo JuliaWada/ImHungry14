@@ -20,17 +20,13 @@ public class CollageScraper {
  * escapeJava is used to account for utf-8 encoding on the links    
  * @param query a String that defines the search terms from the users input passed from the front end
  * @return an ArrayList<String> that has all 10 links 
+ * @throws IOException 
  */
-public ArrayList<String> scrapeCollage (String query) {
+public ArrayList<String> scrapeCollage (String query) throws IOException {
 	   ArrayList<String> toReturn = new ArrayList<String>();
         //Fetch the page
         Document doc = null;
-		try {
 			doc = Jsoup.connect("https://google.com/search?tbm=isch&q=" + query).userAgent(USER_AGENT).get();
-		} catch (IOException ioe) {
-			System.out.println("IOException in scrape:  " + ioe.getMessage());
-			ioe.printStackTrace();
-		}
         System.out.println("Getting the collage results");
         	Elements result = doc.select("div.rg_meta");
             final String outer = result.outerHtml();
@@ -40,7 +36,8 @@ public ArrayList<String> scrapeCollage (String query) {
             	splitAgain = split[j].split(",\"");
             	if(j != 0) {
             		splitAgain[j] = StringEscapeUtils.escapeJava(splitAgain[j]);
-            		toReturn.add(splitAgain[0]);
+            		System.out.println(splitAgain[0]);
+            		toReturn.add(StringEscapeUtils.escapeJava(splitAgain[0]));
             	}            	
             }
             

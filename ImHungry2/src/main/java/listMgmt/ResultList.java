@@ -6,9 +6,9 @@ import scraping.Result;
 
 public class ResultList {
 	String name = "";
-	ArrayList<Result> cards;
+	ArrayList<Object> cards;
 	
-	public ResultList(String name, ArrayList<Result> cards) {
+	public ResultList(String name, ArrayList<Object> cards) {
 		super();
 		this.name = name;
 		this.cards = cards;
@@ -22,23 +22,26 @@ public class ResultList {
 		this.name = name;
 	}
 
-	public ArrayList<Result> getCards() {
+	public ArrayList<Object> getCards() {
 		return cards;
 	}
 
-	public void setCards(ArrayList<Result> cards) {
+	public void setCards(ArrayList<Object> cards) {
 		this.cards = cards;
 	}
 	
-	public void addCard(Result result) {
+	public void addCard(Object result) {
+		System.out.println("Add " + name + "- new List size: " + cards.size());
 		cards.add(result);
+		System.out.println("Add " + name + "- new List size: " + cards.size());
 	}
 	
-	public void removeCard(Result result) {
-		String name = result.getName();
+	public void removeCard(String name) {
 		for(int i=0; i<cards.size(); i++) {
-			if(cards.get(i).getName().equals(name)) {
+			if(((Result) cards.get(i)).getName().equals(name)) {
+				System.out.println("Removed: " + ((Result)cards.get(i)).getName());
 				cards.remove(i);
+				System.out.println("Remove " + name + " - new list size: " + cards.size());
 				return;
 			}
 		}
@@ -48,8 +51,8 @@ public class ResultList {
 	public Result getItem(String name) {;
 		Result toReturn = new Result();
 		for(int i=0; i<cards.size(); i++) {
-			if(cards.get(i).getName().equals(name)) {
-				toReturn = cards.get(i);
+			if(((Result) cards.get(i)).getName().equals(name)) {
+				toReturn = (Result) cards.get(i);
 			}
 		}
 		return toReturn;
