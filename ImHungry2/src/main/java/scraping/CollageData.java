@@ -43,7 +43,7 @@ public class CollageData extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		String extra = request.getParameter("extra");
-		if(extra == null) {
+		if(extra == null || extra.equals("")) {
 			extra = "poo";
 		}
 		String query = request.getParameter("query").trim();
@@ -58,31 +58,15 @@ public class CollageData extends HttpServlet {
 			CollageScraper scraper = new CollageScraper();
 			ArrayList<String> collageResults = scraper.scrapeCollage(query);
 			for(int i =0; i<collageResults.size(); i++) {
+				System.out.println(collageResults.get(i));
 				System.out.println(StringEscapeUtils.unescapeJava(collageResults.get(i)));
 				String unescaped = StringEscapeUtils.unescapeJava(collageResults.get(i));
 				
 				num = random.nextInt(91) - 45;
 				out.println("<img class=\"collageImg\" src=" + unescaped +
-						" style=\"transform:rotate(" + num + "deg); max-height: 200px\">" );
+						" style=\"transform:rotate(" + num + "deg); max-height: 150px\">" );
 			}
 		}
 	
 	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

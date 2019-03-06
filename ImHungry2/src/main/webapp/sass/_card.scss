@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.recipeCard{
+	
+	width: 400px;
+	height: 100px;
+	p:nth-child(2){
+		float: left;
+		position: relative;
+		top: 60%;
+	}
+	p:nth-child(3){ 
+		float: right;
+		position: relative;
+		top: 60%;
+	}
+}
+
+
+.restaurantCard{
+	
+}
