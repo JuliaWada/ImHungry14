@@ -53,15 +53,20 @@ public class restaurantData extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
-		restaurantArray = getRestaurants(restaurantArray, request, response);
+		
+		String foodName = request.getParameter("query");                       // term
+        int numResultsToShow = Integer.parseInt(request.getParameter("numResults").trim());		 //limit
+		
+		restaurantArray = getRestaurants(restaurantArray, foodName, numResultsToShow);
 		for(int i=0; i<restaurantArray.size(); i++) {
         	Restaurant r = restaurantArray.get(i);
         	out.println("<div>" +
         					"<p>" + r.getName() + "</p>" +
         					"<p>" + r.getAddress() + "</p>" +
-        					"<p>" + r.getMinsAway() + "</p>" +
         					"<p>" + r.getPricing() + "</p>" +
         					"<p>" + r.getMinsAway() + " minutes away </p>" +
+        					"<p>" + r.getPhoneNum() + "</p>" +
+        					"<p>" + r.getWebsite()+ "</p>" +
         			 	"</div>");
         }
 
@@ -78,15 +83,12 @@ public class restaurantData extends HttpServlet {
 	 * 
 	 */
 
-	private ArrayList<Restaurant> getRestaurants(ArrayList<Restaurant> restaurantArray, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ArrayList<Restaurant> getRestaurants(ArrayList<Restaurant> restaurantArray, String foodName, int numResultsToShow) throws ServletException, IOException {
 
 		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
 		
 		// GET /businesses/search
         OkHttpClient client = new OkHttpClient();
-
-        String foodName = request.getParameter("query");                       // term
-        int numResultsToShow = Integer.parseInt(request.getParameter("numResults").trim());		 //limit
 
         Request APIrequest = new Builder()
                 .url("https://api.yelp.com/v3/businesses/search?term=" + foodName + "&latitude=34.020566&longitude=-118.285443" 
@@ -110,42 +112,60 @@ public class restaurantData extends HttpServlet {
             System.out.println(numYelpResults);
             System.out.println();
             
-            //TODO Perhaps API might return nothing! Should maybe add an error check to see if entire JSON object is null
+            //Perhaps API might return nothing! Should maybe add an error check to see if entire JSON object is null
             if(myResponse.length() != 0) {
             	
             	for(int i=0; i<numResultsToShow; i++) {
-                	String rwebsite, rphone, rpricing = "";
+                	String rwebsite = "", rphone = "", rpricing = "";
                 	
                 	//NAME
                 	String rname = myResponse.getJSONObject(i).getString("name");
-                	System.out.println(rname);
+                	System.out.println("name: " + rname);
                 	
                 	//URL
                 	if(!myResponse.getJSONObject(i).has("url") && myResponse.getJSONObject(i).isNull("url")) {
                 		rwebsite = "No URL available";
                 	}
                 	else {
-                		rwebsite = myResponse.getJSONObject(i).getString("url");
+                		if(myResponse.getJSONObject(i).getString("url").equals("")) {
+                			rphone = "No URL available";
+                		}
+                		else {
+                			rwebsite = myResponse.getJSONObject(i).getString("url");
+                		}
+                		
                 	}
-                	System.out.println(rwebsite);
+                	System.out.println("website: " + rwebsite);
                 	
                 	//PHONE NUMBER
                 	if(!myResponse.getJSONObject(i).has("display_phone") && myResponse.getJSONObject(i).isNull("display_phone")) {
                 		rphone = "No phone number available";
                 	}
                 	else {
-                		rphone = myResponse.getJSONObject(i).getString("display_phone");
+                		if(myResponse.getJSONObject(i).getString("display_phone").equals("")) {
+                			rphone = "No phone number available";
+                		}
+                		else {
+                			rphone = myResponse.getJSONObject(i).getString("display_phone");
+                		}
+                		
                 	}
-                	System.out.println(rphone);
+                	System.out.println("phoneNum: " + rphone);
                 	
                 	//PRICE
                 	if(!myResponse.getJSONObject(i).has("price") && myResponse.getJSONObject(i).isNull("price")) {
                 		rpricing = "No price available";
                 	}
                 	else {
-                		rpricing = myResponse.getJSONObject(i).getString("price");
+                		if(myResponse.getJSONObject(i).getString("price").equals("")) {
+                			rphone = "No price available";
+                		}
+                		else {
+                			rpricing = myResponse.getJSONObject(i).getString("price");
+                		}
+                		
                 	}
-                	System.out.println(rpricing);
+                	System.out.println("pricing: " + rpricing);
                 	
                 	String raddress = "";
      
@@ -157,7 +177,9 @@ public class restaurantData extends HttpServlet {
                     	System.out.println(address.get(j));
                     }
                     raddress = raddress.trim();
+                    System.out.println("address: " + raddress);
                     int rminaway = getDrivingTime(raddress);
+                    System.out.println("minsAway: " + rminaway);
                     
                     Restaurant r = new Restaurant(rname, rwebsite, raddress, rphone, rpricing, rminaway);
                     restaurantArray.add(r);
