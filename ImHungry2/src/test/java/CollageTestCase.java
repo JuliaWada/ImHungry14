@@ -22,8 +22,8 @@ public class CollageTestCase {
 		expected.add("\\\"https://www.closetcooking.com/wp-content/uploads/2018/03/TonkotsuRamen8000837-min.jpg\\\"");
 		expected.add("\\\"http://glebekitchen.com/wp-content/uploads/2017/09/curryramenclose.jpg\\\"");
 		expected.add("\\\"http://seonkyounglongest.com/wp-content/uploads/2018/04/chicken-ramen-02-copy-625x1000.jpg?x61413\\\"");
-		expected.add("\\\"https://media.blueapron.com/recipes/2658/square_newsletter_images/1512507588-1-0010-1330/1211_2PV2_Shiitake-Ramen_98006_SQ_hi_res.jpg\\\"");
 		expected.add("\\\"https://images.britcdn.com/wp-content/uploads/2018/08/Miso-Lit-Ramen.jpg?w\\\\u003d1000\\\\u0026auto\\\\u003dformat\\\"");
+		expected.add("\\\"https://peasandcrayons.com/wp-content/uploads/2018/01/healthy-spicy-sriracha-shrimp-ramen-noodle-soup-bowls-recipe-7075.jpg\\\"");
 		ArrayList<String> actual = new ArrayList<String>();
 		actual = scraper.scrapeCollage("ramen");
 		assertArrayEquals(expected.toArray(), actual.toArray());

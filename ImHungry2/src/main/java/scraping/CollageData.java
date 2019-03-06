@@ -43,7 +43,7 @@ public class CollageData extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		String extra = request.getParameter("extra");
-		if(extra == null) {
+		if(extra == null || extra.equals("")) {
 			extra = "poo";
 		}
 		String query = request.getParameter("query").trim();
