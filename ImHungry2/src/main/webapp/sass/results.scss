@@ -113,5 +113,18 @@ body {
 		height: 500px;
 		overflow-y: scroll;
 		border: 2px solid green;
+		
+		.recipeCard{
+			margin-bottom: 3%;
+		}
+		.recipeCard:nth-child(even){
+			background-color: #B8B8B8;
+
+		}
+		.recipeCard:nth-child(odd){
+			background-color: #787878;
+			
+		}
 	}
 }
+@import "card"

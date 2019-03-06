@@ -29,6 +29,7 @@
 
 	function toResults(){
 		var foodName = document.querySelector("#searchBar").value;
+		var numResultsToDisplay = document.querySelector("#numResults").value;
 		sessionStorage.setItem("foodName", foodName);
 		if (foodName == ""){
 			alert("Please Enter Food");
