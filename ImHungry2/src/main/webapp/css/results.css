@@ -11,37 +11,25 @@ body {
 
 /* line 10, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv {
-  height: 400px;
+  height: 300px;
   width: 100%;
   display: flex;
 }
 
 /* line 15, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #collageDiv {
-  margin-top: 3%;
-  margin-left: 6%;
-  width: 60%;
-  display: flex;
-  flex-wrap: wrap;
-  height: 300px;
-  justify-content: space-around;
+  width: 70%;
 }
 
-/* line 23, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
-#topDiv #collageDiv .collageImg {
-  max-width: 180px;
-  max-height: 50% !important;
-}
-
-/* line 29, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 19, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv {
   display: flex;
-  width: 30%;
+  width: 28%;
   flex-direction: column;
   align-items: flex-end;
 }
 
-/* line 35, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 25, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv .button {
   padding: 3px 5px;
   width: 40%;
@@ -51,7 +39,7 @@ body {
   border-radius: 2px;
 }
 
-/* line 43, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 33, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv #dropdown {
   margin-top: 4%;
   content: " ";
@@ -61,18 +49,18 @@ body {
   background-color: white;
 }
 
-/* line 51, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 41, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv #dropdown #dropAction {
   float: right;
   margin-right: 5%;
 }
 
-/* line 56, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 46, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv #dropdown #dropText {
   float: left;
 }
 
-/* line 60, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 50, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv #dropdownContent {
   display: flex;
   width: 40%;
@@ -80,48 +68,48 @@ body {
   visibility: hidden;
 }
 
-/* line 65, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 55, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv #dropdownContent ul {
   background-color: white;
   width: 100%;
   list-style-type: none;
 }
 
-/* line 69, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 59, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv #dropdownContent ul li {
   align-self: flex-start;
 }
 
-/* line 72, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 62, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #buttonDiv #dropdownContent ul li:hover {
   background-color: rgba(129, 207, 224, 0.7);
 }
 
-/* line 82, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 72, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #titleDiv {
   text-align: center;
 }
 
-/* line 85, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 75, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #titleDiv h1 {
   font-size: 2.7em;
 }
 
-/* line 90, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 80, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #listTitleDiv {
   display: flex;
   justify-content: space-evenly;
   padding-top: 3%;
 }
 
-/* line 94, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 84, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #listTitleDiv .name {
   width: 50%;
   text-align: center;
   font-size: 2.2em;
 }
 
-/* line 100, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 90, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #resultDiv {
   display: flex;
   width: 100%;
@@ -129,7 +117,7 @@ body {
   border: 1px solid red;
 }
 
-/* line 105, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 95, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #resultDiv #restaurantDiv {
   width: 50%;
   height: 500px;
@@ -137,47 +125,12 @@ body {
   border: 2px solid black;
 }
 
-/* line 111, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 101, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #resultDiv #recipeDiv {
   width: 50%;
   height: 500px;
   overflow-y: scroll;
   border: 2px solid green;
-}
-
-/* line 117, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
-#resultDiv #recipeDiv .recipeCard {
-  margin-bottom: 3%;
-}
-
-/* line 120, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
-#resultDiv #recipeDiv .recipeCard:nth-child(even) {
-  background-color: #B8B8B8;
-}
-
-/* line 124, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
-#resultDiv #recipeDiv .recipeCard:nth-child(odd) {
-  background-color: #787878;
-}
-
-/* line 3, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
-.recipeCard {
-  width: 400px;
-  height: 100px;
-}
-
-/* line 7, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
-.recipeCard p:nth-child(2) {
-  float: left;
-  position: relative;
-  top: 60%;
-}
-
-/* line 12, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
-.recipeCard p:nth-child(3) {
-  float: right;
-  position: relative;
-  top: 60%;
 }
 
 /*# sourceMappingURL=../css/results.map */

@@ -10,7 +10,7 @@
 <body onload = "loadPage()">
 	<div id = "topDiv">
 		<div id ="collageDiv">
-		
+			pictures go here
 		</div>
 		<div id ="buttonDiv">
 			<div id = "dropdown">
@@ -47,20 +47,11 @@
 		
 	
 	function loadPage(){
-		var foodName = sessionStorage.getItem("foodName");
+		//var foodName = sessionStorage.getItem("foodName");
 		document.querySelector("#foodname").innerHTML = foodName;
-		var query = "";
-		var num = 0;
-		<%HttpSession session2 = request.getSession();
-		String query = (String) session2.getAttribute("query");
-		int num = Integer.valueOf((String) session2.getAttribute("numResults"));%>
-		query = '<%=query%>';
-		num =<%=num%>;
-		getCollage(query);
-		getRecipes(query, num);
 	}
 	function toManageList(){
-		window.location.href = "listMgmt.jsp";
+		
 	}
 	function toSearchPage(){
 		
@@ -78,27 +69,6 @@
 			document.querySelector("#dropText").innerHTML = list[i].innerHTML;
 			document.querySelector("#dropdownContent").style.visibility = "hidden";
 		}
-	}
-	
-	function getCollage(toSend) {
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			document.getElementById("collageDiv").innerHTML = this.responseText;
-		}
-		xhttp.open("POST", "collageData?query=" + toSend, true);
-		xhttp.send();
-		console.log("collage Data sent to backend");
-	}
-
-	function getRecipes(toSend, numResults) {
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			document.getElementById("recipeDiv").innerHTML = this.responseText;
-		}
-		xhttp.open("POST", "recipeData?query=" + toSend + "&numResults="
-				+ numResults, true);
-		xhttp.send();
-		console.log("recipe data sent to Backend");
 	}
 	
 	</script>
