@@ -13,3 +13,5 @@ ImHungry14/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 ImHungry2/src/main/webapp/WEB-INF/web.xml
 ImHungry2/.settings/org.eclipse.wst.ws.service.policy.prefs
 ImHungry2/.settings/org.eclipse.wst.common.component
+ImHungry2/pom.xml
+*.prefs
