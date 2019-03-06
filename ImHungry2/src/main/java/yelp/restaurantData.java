@@ -40,7 +40,7 @@ public class restaurantData extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("In yelp servlet init");
+		//init
 	}
 
 	/**
@@ -57,7 +57,19 @@ public class restaurantData extends HttpServlet {
 		String foodName = request.getParameter("query");                       // term
         int numResultsToShow = Integer.parseInt(request.getParameter("numResults").trim());		 //limit
 		
-        ArrayList<Restaurant>restaurantArray = getRestaurants(foodName, numResultsToShow);
+        ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
+		try {
+			restaurantArray = getRestaurants(foodName, numResultsToShow);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(int i=0; i<restaurantArray.size(); i++) {
         	Restaurant r = restaurantArray.get(i);
         	out.println("<div>" +
@@ -80,10 +92,13 @@ public class restaurantData extends HttpServlet {
 	 * price of the restaurants that show up when the user searches for food. 
 	 * 
 	 * Returns an array list of Restaurants
+	 * @throws JSONException 
+	 * @throws InterruptedException 
+	 * @throws ApiException 
 	 * 
 	 */
 
-	public ArrayList<Restaurant> getRestaurants(String foodName, int numResultsToShow) throws ServletException, IOException {
+	public ArrayList<Restaurant> getRestaurants(String foodName, int numResultsToShow) throws ServletException, IOException, JSONException, ApiException, InterruptedException {
 		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>(); 
 
 		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
@@ -98,7 +113,7 @@ public class restaurantData extends HttpServlet {
                 .addHeader("authorization", "Bearer " + API_KEY_YELP)
                 .build();
 
-        try {
+        
         	Response APIresponse = client.newCall(APIrequest).execute();
 
         	JSONObject jsonObject = new JSONObject(APIresponse.body().string().trim());       // parser
@@ -124,46 +139,49 @@ public class restaurantData extends HttpServlet {
                 	System.out.println("name: " + rname);
                 	
                 	//URL
-                	if(!myResponse.getJSONObject(i).has("url") && myResponse.getJSONObject(i).isNull("url")) {
-                		rwebsite = "No URL available";
-                	}
-                	else {
-                		if(myResponse.getJSONObject(i).getString("url").equals("")) {
-                			rphone = "No URL available";
-                		}
-                		else {
+//                	if( (!myResponse.getJSONObject(i).has("url") && myResponse.getJSONObject(i).isNull("url") ) 
+//                			|| myResponse.getJSONObject(i).getString("url").equals("")) {
+//                		rwebsite = "No URL available";
+//                	}
+//                	else {
+//                		if(myResponse.getJSONObject(i).getString("url").equals("")) {
+//                			rphone = "No URL available";
+//                		}
+//                		else {
                 			rwebsite = myResponse.getJSONObject(i).getString("url");
-                		}
+                		//}
                 		
-                	}
+                	//}
                 	System.out.println("website: " + rwebsite);
                 	
                 	//PHONE NUMBER
-                	if(!myResponse.getJSONObject(i).has("display_phone") && myResponse.getJSONObject(i).isNull("display_phone")) {
+                	if(  (!myResponse.getJSONObject(i).has("display_phone") && myResponse.getJSONObject(i).isNull("display_phone")) 
+                			|| myResponse.getJSONObject(i).getString("display_phone").equals("")  ) {
                 		rphone = "No phone number available";
                 	}
-                	else {
-                		if(myResponse.getJSONObject(i).getString("display_phone").equals("")) {
-                			rphone = "No phone number available";
-                		}
+//                	else {
+//                		if(myResponse.getJSONObject(i).getString("display_phone").equals("")) {
+//                			rphone = "No phone number available";
+//                		}
                 		else {
                 			rphone = myResponse.getJSONObject(i).getString("display_phone");
-                		}
+                		//}
                 		
                 	}
                 	System.out.println("phoneNum: " + rphone);
                 	
                 	//PRICE
-                	if(!myResponse.getJSONObject(i).has("price") && myResponse.getJSONObject(i).isNull("price")) {
+                	if( (!myResponse.getJSONObject(i).has("price") && myResponse.getJSONObject(i).isNull("price") ) 
+                			|| myResponse.getJSONObject(i).getString("price").equals("")) {
                 		rpricing = "No price available";
                 	}
-                	else {
-                		if(myResponse.getJSONObject(i).getString("price").equals("")) {
-                			rphone = "No price available";
-                		}
+//                	else {
+//                		if(myResponse.getJSONObject(i).getString("price").equals("")) {
+//                			rphone = "No price available";
+//                		}
                 		else {
                 			rpricing = myResponse.getJSONObject(i).getString("price");
-                		}
+                		//}
                 		
                 	}
                 	System.out.println("pricing: " + rpricing);
@@ -192,16 +210,7 @@ public class restaurantData extends HttpServlet {
             }
             
 
-        }
-        catch (IOException e) {
-        	System.out.println("IO Exception in restauarant Data!!!!");
-//            e.printStackTrace();
-        } catch (JSONException e) {
-        	System.out.println("JSON Exception in restauarant Data!!!!");
-        	System.out.println("Hello error: " + e.getMessage());
-        	System.out.println();
-			
-		}
+        
         
         return restaurantArray;
 		
@@ -215,8 +224,11 @@ public class restaurantData extends HttpServlet {
 	 * it takes to get from Tommy Trojan to the restaurant.
 	 * 
 	 * Returns the driving time in minutes.
+	 * @throws ApiException 
+	 * @throws InterruptedException 
+	 * @throws IOException 
 	 */
-	private int getDrivingTime(String restaurantAddress) {
+	private int getDrivingTime(String restaurantAddress) throws ApiException, InterruptedException, IOException {
 		String API_KEY_GOOGLE = "AIzaSyAozhhiSQVAAlrlAwnFRuYOVWX2bGkRUqk";
 		long routeMin = 0;
 		//set up key
@@ -225,7 +237,7 @@ public class restaurantData extends HttpServlet {
 			    .build();
 	   	String formatAddress = restaurantAddress.replace(" ", "+");
 	   	System.out.println("Formatted address: " + formatAddress);
-	   	try {
+
 			DirectionsResult request =  DirectionsApi.getDirections(gcontext, "Tommy+Trojan", formatAddress).await();
 			
 			long routeSeconds = request.routes[0].legs[0].duration.inSeconds;
@@ -235,17 +247,8 @@ public class restaurantData extends HttpServlet {
 			System.out.println("Route in Minutes: " + routeMin);
 			
 			
-			
-		} catch (ApiException e) {
-			System.out.println("API Exception");
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			System.out.println("IE Exception");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("IO Exception");
-			e.printStackTrace();
-		}
+	
+		 
 	   		
 
 		return Math.toIntExact(routeMin);
