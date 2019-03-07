@@ -19,7 +19,18 @@ body {
   padding-left: 2%;
 }
 
-/* line 19, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 18, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+#container #infoDiv a {
+  text-decoration: none;
+  color: black;
+}
+
+/* line 22, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+#container #infoDiv .website {
+  margin-bottom: 30px;
+}
+
+/* line 27, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv {
   flex-basis: 30%;
   padding-top: 2%;
@@ -28,7 +39,7 @@ body {
   align-items: center;
 }
 
-/* line 26, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 34, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv .button {
   padding: 3px 5px;
   width: 40%;
@@ -38,7 +49,7 @@ body {
   border-radius: 2px;
 }
 
-/* line 34, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 42, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv .menu {
   width: 40%;
 }

@@ -58,7 +58,6 @@ function loadRecipeTitle() {
 
 function toPrintVersion(){
 	document.querySelector("#buttonDiv").style.visibility = "hidden";
-	document.querySelector("#dropdownContent").style.visibility = "hidden";
 }
 function toAddtoList() {
 	var list = document.getElementById("listOptions");
