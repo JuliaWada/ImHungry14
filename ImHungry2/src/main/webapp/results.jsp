@@ -60,8 +60,6 @@
 		%>
 		query = "<%=query%>";
 		num = <%=num%>;
-		console.log("hello poo");
-		console.log("is it null?" + num);
 		getCollage(query, num);
 		getRecipes(query, num);
 		getRestaurants(query, num);
@@ -121,6 +119,7 @@
 	
 	function toRecipePage(query){
 		var xhttp = new XMLHttpRequest();
+		alert("hello");
 		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
 		xhttp.send();
 	}
