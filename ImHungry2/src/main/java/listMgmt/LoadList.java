@@ -63,7 +63,7 @@ public class LoadList extends HttpServlet {
 						"<p> Cook Time: " + recipeToDisplay.getCookTime() + "</p>" +
 					"</div>" +
 					"<div class =\"buttons\">" +
-						"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button>" +
+						"<button class=\"removeButton\" onclick=\"removeFromList(this)\" name=\"" + recipeToDisplay.getName() + "\">Remove from List</button>" +
 						"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 						"				 <option value = \"0\"> </option>\r\n" + 
 						"				 <option value=\"1\">Favorites</option>\r\n" + 
@@ -87,8 +87,13 @@ public class LoadList extends HttpServlet {
 						"        						<p>" + restaurantToDisplay.getPricing() + "</p>\r\n" + 
 						"        					</div>\r\n" + 
 						"        			 </div>" +
+<<<<<<< HEAD
 					"<div class =\"buttons\">" +
 						"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button>" +
+=======
+					"<divclass =\"buttons\">" +
+						"<button class=\"removeButton\" onclick=\"removeFromList(this)\" name=\"" + restaurantToDisplay.getName() + "\">Remove From List</button>" +
+>>>>>>> julia
 					"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 					"				 <option value = \"0\"> </option>\r\n" + 
 					"				 <option value=\"1\">Favorites</option>\r\n" + 

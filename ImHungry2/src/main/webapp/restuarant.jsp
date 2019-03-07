@@ -15,13 +15,13 @@
 		<div id ="buttonDiv">
 			<button onclick = "toPrintVersion()" class = "button">Printable Version</button>
 			<button onclick = "toResults()" class = "button">Back to Results</button>
-			<button onclick = "toAddtoList()" class = "button">Add to List</button>
 			<select class = "menu" id="listOptions">
 				 <option value = "0"> </option>
 				 <option value="1">Favorites</option>
    				 <option value="2">To Explore</option>
    				 <option value="3">Do Not Show</option>
 			</select>
+			<button onclick = "toAddtoList()" class = "button">Add to List</button>
 		</div>
 	</div>
 	<script>
