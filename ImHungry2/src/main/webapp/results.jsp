@@ -104,21 +104,12 @@
 	}
 	
 	function toRecipePage(query){
-<<<<<<< HEAD
-		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
-		xhttp.send();
-=======
->>>>>>> julia
 		var actual = query.querySelector(".recipeTitle").textContent;
 		console.log(actual);
 		window.location.href = "recipe.jsp?title=" + actual;
 	}
 	
 	function toRestaurantPage(query){
-		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "restaurantData?query=" + query + "&action=page", false);
-		xhttp.send();
 		var actual = query.querySelector(".restName").textContent;
 		window.location.href = "restuarant.jsp?title=" + actual;
 	}
