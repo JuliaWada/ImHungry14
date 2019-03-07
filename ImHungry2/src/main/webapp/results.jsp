@@ -56,10 +56,13 @@
 		var num = 0;
 		<%HttpSession session2 = request.getSession();
 		String query = (String) session2.getAttribute("query");
-		int num = Integer.valueOf((String) session2.getAttribute("numResults"));%>
-		query = '<%=query%>';
-		num =<%=num%>;
-		getCollage(query);
+		int num = Integer.valueOf((String) session2.getAttribute("numResults"));
+		%>
+		query = "<%=query%>";
+		num = <%=num%>;
+		console.log("hello poo");
+		console.log("is it null?" + num);
+		getCollage(query, num);
 		getRecipes(query, num);
 		getRestaurants(query, num);
 	}
@@ -84,12 +87,12 @@
 		}
 	}
 	
-	function getCollage(toSend) {
+	function getCollage(toSend, num) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			document.getElementById("collageDiv").innerHTML = this.responseText;
 		}
-		xhttp.open("POST", "collageData?query=" + toSend, true);
+		xhttp.open("POST", "collageData?query=" + toSend + "&numResults=" + num, true);
 		xhttp.send();
 		console.log("collage Data sent to backend");
 	}
@@ -99,8 +102,8 @@
 		xhttp.onreadystatechange = function() {
 			document.getElementById("recipeDiv").innerHTML = this.responseText;
 		}
-		xhttp.open("POST", "recipeData?query=" + toSend + "&numResults="
-				+ numResults, true);
+		xhttp.open("POST", "recipeData?query=" + toSend + "&numResults=" 
+				+ numResults + "&action=results", true);
 		xhttp.send();
 		console.log("recipe data sent to Backend");
 	}
@@ -110,12 +113,23 @@
 		xhttp.onreadystatechange = function() {
 			document.getElementById("restaurantDiv").innerHTML = this.responseText;
 		}
-		xhttp.open("POST", "restaurantData?query=" + toSend + "&numResults=" + numResults, true);
+		xhttp.open("POST", "restaurantData?query=" + toSend + "&numResults=" + numResults + "&action=results", true);
 		xhttp.send();
 		console.log("restaurant data sent to BACKEND!");
 
 	}
 	
+	function toRecipePage(query){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
+		xhttp.send();
+	}
+	
+	function toRestaurantPage(query){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "restaurantData?query=" + query + "&action=page", false);
+		xhttp.send();
+	}
 	
 	
 	</script>
