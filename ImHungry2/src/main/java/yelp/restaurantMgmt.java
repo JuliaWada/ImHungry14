@@ -36,7 +36,7 @@ public class restaurantMgmt extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		String query = request.getParameter("query").trim();
-		displayPage(request, response, out, query);
+//		displayPage(request, response, out, query);
 	}
 	
 	void displayPage(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String query) {

@@ -57,7 +57,7 @@ public class LoadList extends HttpServlet {
 			if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
 				recipeToDisplay = (Recipe)grabbedList.get(i);
 				out.println("<div class = \"row\">" + 
-						"<div class=\"recipeCard\">" + 
+						"<div class=\"recipeCard\" onclick = \"toRecipePage(this)\">" + 
 						"<p class=\"name\">" + recipeToDisplay.getName() + "</p>" + 
 						"<p> Prep Time: " + recipeToDisplay.getPrepTime() + "</p>" +
 						"<p> Cook Time: " + recipeToDisplay.getCookTime() + "</p>" +
@@ -77,11 +77,16 @@ public class LoadList extends HttpServlet {
 			} else {
 				restaurantToDisplay = (Restaurant)grabbedList.get(i); 
 				out.println("<div class =\"row\">" + 
-						"<div class =\"restaurantCard\">" +
-						"<p class=\"name\">" + restaurantToDisplay.getName() + "</p>" + 
-						"<p> Prep Time: " + restaurantToDisplay.getAddress() + "</p>" +
-						"<p> Cook Time: " + restaurantToDisplay.getPricing() + "</p>" +
-					"</div>" +
+						"<div class =\"restaurantCard\" onclick = \"toRestaurantPage(this)\" \"id=\"restaurant\">\r\n" + 
+						"        					<div class =\"information\">\r\n" + 
+						"		    					<p class = \"restName\">" + restaurantToDisplay.getName() + "</p>\r\n" + 
+						"		    					<p>" + restaurantToDisplay.getAddress() + "</p>\r\n" + 
+						"		    					<p>" + restaurantToDisplay.getMinsAway() + " minutes away </p>\r\n" + 
+						"		    				</div>\r\n" + 
+						"        					<div class =\"priceDiv\">\r\n" + 
+						"        						<p>" + restaurantToDisplay.getPricing() + "</p>\r\n" + 
+						"        					</div>\r\n" + 
+						"        			 </div>" +
 					"<divclass =\"buttons\">" +
 						"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button>" +
 					"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 

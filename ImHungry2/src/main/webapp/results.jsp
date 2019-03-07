@@ -9,7 +9,7 @@
 <body onload = "loadPage()">
 	<div id = "topDiv">
 		<div id ="collageDiv">
-		
+
 		</div>
 		<div id ="buttonDiv">
 			<select class = "menu" id="listOptions">
@@ -32,15 +32,15 @@
 	<div id= "resultDiv">
 		<span id = "restuarantName" class = "name">Restaurants</span>
 		<div id ="restaurantDiv">
-			
+
 		</div>
 		<span id = "recipeName" class = "name">Recipes</span>
 		<div id ="recipeDiv">
-		
+
 		</div>
 	</div>
 	<script>
-		
+
 	var pageLoaded = false;
 	function loadPage(){
 		pageLoaded = true;
@@ -54,10 +54,10 @@
 		query = "<%=query%>";
 		num = <%=num%>;
 		getCollage(query, num);
-		//getRecipes(query, num);
+		getRecipes(query, num);
 		getRestaurants(query, num);
 	}
-	
+
 	function toManageList(){
 		var list = document.getElementById("listOptions");
 		var option = list.options[list.selectedIndex].text;
@@ -69,8 +69,8 @@
 	function toSearchPage(){
 		window.location.href = "index.jsp";
 	}
-	
-	
+
+
 	function getCollage(toSend, num) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -81,17 +81,17 @@
 		console.log("collage Data sent to backend");
 	}
 
-	/* function getRecipes(toSend, numResults) {
+	function getRecipes(toSend, numResults) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			document.getElementById("recipeDiv").innerHTML = this.responseText;
 		}
-		xhttp.open("POST", "recipeData?query=" + toSend + "&numResults=" 
+		xhttp.open("POST", "recipeData?query=" + toSend + "&numResults="
 				+ numResults + "&action=results", true);
 		xhttp.send();
 		console.log("recipe data sent to Backend");
-	} */
-	
+	}
+
 	function getRestaurants(toSend, numResults) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -102,19 +102,19 @@
 		console.log("restaurant data sent to BACKEND!");
 
 	}
-	
+
 	function toRecipePage(query){
 		var actual = query.querySelector(".recipeTitle").textContent;
 		console.log(actual);
 		window.location.href = "recipe.jsp?title=" + actual;
 	}
-	
+
 	function toRestaurantPage(query){
 		var actual = query.querySelector(".restName").textContent;
 		window.location.href = "restuarant.jsp?title=" + actual;
 	}
-	
-	
+
+
 	</script>
 </body>
 </html>

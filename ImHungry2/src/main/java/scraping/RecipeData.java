@@ -22,7 +22,7 @@ import org.apache.commons.text.StringEscapeUtils;
 @WebServlet("/recipeData")
 public class RecipeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,16 +30,16 @@ public class RecipeData extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    
+
     /**
-     * 
+     *
      */
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Inside of RecipeData");
-		
+
 		PrintWriter out = response.getWriter();
-		
+
 		response.setContentType("text/html");
 		String action = request.getParameter("action");
 		String query = request.getParameter("query").trim();
@@ -57,10 +57,10 @@ public class RecipeData extends HttpServlet {
 			displayPage(request, response, out, query);
 		}
 	}
-    
+
     /**
      * This grabs the necessary data to display the cards on the results page
-     * 
+     *
      * @param request
      * @param response
      * @param out
@@ -75,9 +75,13 @@ public class RecipeData extends HttpServlet {
 		recipeResults = scraper.scrapeRecipeLinks(query, numResults);
 		for(int i = 0; i < recipeResults.size(); i++) {
 			Recipe toFormat = recipeResults.get(i);
-			//TODO remove this and put in the actual code 
+			//TODO remove this and put in the actual code
 			//for now making sure everything works
+<<<<<<< HEAD
 			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe" + i + "\">" +  
+=======
+			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe" + i + "\">" +
+>>>>>>> julia
 							"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 							"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 							"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +
@@ -108,7 +112,7 @@ public class RecipeData extends HttpServlet {
 //    	Map<String, Recipe> stored = (Map<String, Recipe>) session.getAttribute("recipeList");
 //
 //    	for(String key : stored.keySet()) {
-//    		
+//
 //    	}
     	ArrayList<Recipe> stored = (ArrayList<Recipe>) session.getAttribute("recipeList");
     	Recipe toDisplay = new Recipe();
@@ -120,12 +124,12 @@ public class RecipeData extends HttpServlet {
     	System.out.println(toDisplay.getImageURL());
     	ArrayList<String> ingredients = toDisplay.getIngredients();
     	ArrayList<String> instructions = toDisplay.getInstructions();
-    	out.print("<h1>" + toDisplay.getName() + "</h1>" + 
-    				"<img src=\"" + StringEscapeUtils.unescapeJava(toDisplay.getImageURL()) + "\">" + 
+    	out.print("<h1>" + toDisplay.getName() + "</h1>" +
+    				"<img src=\"" + StringEscapeUtils.unescapeJava(toDisplay.getImageURL()) + "\">" +
     				"<p>Prep Time: <span id=\"prepTime\">" + toDisplay.getPrepTime() + "</span></p>" +
     				"<br>" +
-    				"<p>Cook Time: <span id=\"cookTime\">" + toDisplay.getCookTime() + "</span></p>" + 
-    				"<br>" + 
+    				"<p>Cook Time: <span id=\"cookTime\">" + toDisplay.getCookTime() + "</span></p>" +
+    				"<br>" +
     				"<h3>Ingredients:</h3>" +
     				"<ul id=\"ingredientsList\">"
     			);
