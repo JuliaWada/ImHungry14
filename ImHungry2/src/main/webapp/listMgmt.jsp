@@ -76,7 +76,7 @@
 	
 	function removeFromList(currentButton) {
 		console.log(currentButton.innerHTML);
-		var title = $(currentButton).siblings('.name').text();
+		var title = currentButton.name;
 		console.log(title);
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -87,7 +87,7 @@
 	}
 	
 	function moveToList(currentButton) {
-		var title = $(currentButton).siblings('.name').text();
+		var title = currentButton.name;
 		var list = document.getElementById('moveListOptions');
 		var option = list.options[list.selectedIndex].text;
 		console.log(title);
@@ -96,13 +96,18 @@
 		xhttp.onreadystatechange = function() {
 			reloadList();
 		}
-		xhttp.open("POST", "listMgmtData?action=move&listName=" + name + "&itemName=" + title + "&secondList=" + option, true);
+		xhttp.open("POST", "MoveToListData?action=move&listName=" + name + "&itemName=" + title + "&secondList=" + option, true);
 		xhttp.send();
 	}
 	function toRecipePage(query){
 		var actual = query.querySelector(".name").textContent;
 		console.log(actual);
 		window.location.href = "recipe.jsp?title=" + actual;
+	}
+	
+	function toRestaurantPage(query){
+		var actual = query.querySelector(".restName").textContent;
+		window.location.href = "restuarant.jsp?title=" + actual;
 	}
 	</script>
 	<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
