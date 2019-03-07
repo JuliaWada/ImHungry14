@@ -58,6 +58,8 @@
 		int num = Integer.valueOf((String) session2.getAttribute("numResults"));%>
 		query = "<%=query%>";
 		num = <%=num%>;
+		console.log("hello poo");
+		console.log("is it null?" + num);
 		getCollage(query, num);
 		getRecipes(query, num);
 		getRestaurants(query, num);
@@ -116,16 +118,9 @@
 	}
 	
 	function toRecipePage(query){
-<<<<<<< HEAD
-		var xhttp = new XMLHttpRequest();
-		alert("hello");
-		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
-		xhttp.send();
-=======
 		var actual = query.querySelector(".recipeTitle").textContent;
 		console.log(actual);
 		window.location.href = "recipe.jsp?title=" + actual;
->>>>>>> julia
 	}
 	
 	function toRestaurantPage(query){
