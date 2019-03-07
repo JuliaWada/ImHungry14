@@ -116,15 +116,19 @@
 	}
 	
 	var recipeCards = document.getElementsByClassName("recipeCard");
+	console.log(recipeCards);
 	for(let i = 0; i < recipeCards.length; i++){
 		recipeCards[i].onclick = function(){
-			
+			console.log("Got card: " + i);
+			console.log(recipeCards[i].text);
 		}
 	}
 	var restaurantCards = document.getElementsByClassName("restaurantCard");
+	console.log(restaurantCards);
 	for(let i = 0; i < restaurantCards.length; i++){
 		restaurantCards[i].onclick = function(){
-			
+			console.log("Got card: " + i);
+			console.log(restaurantCards[i].text);
 		}
 	}
 	

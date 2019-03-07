@@ -16,6 +16,24 @@
   	<description></description>
   	<servlet-class>yelp.restaurantData</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddToListData</servlet-name>
+  	<display-name>AddToListData</display-name>
+  	<description></description>
+  	<servlet-class>listMgmt.AddToListData</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LoadList</servlet-name>
+  	<display-name>LoadList</display-name>
+  	<description></description>
+  	<servlet-class>listMgmt.LoadList</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>MoveToListData</servlet-name>
+  	<display-name>MoveToListData</display-name>
+  	<description></description>
+  	<servlet-class>listMgmt.MoveToListData</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>YelpResults</servlet-name>
   	<url-pattern>/YelpResults</url-pattern>
@@ -23,5 +41,17 @@
   <servlet-mapping>
   	<servlet-name>restaurantData</servlet-name>
   	<url-pattern>/restaurantData</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddToListData</servlet-name>
+  	<url-pattern>/AddToListData</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoadList</servlet-name>
+  	<url-pattern>/LoadList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MoveToListData</servlet-name>
+  	<url-pattern>/MoveToListData</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.text.StringEscapeUtils;
 
+import yelp.Restaurant;
+
 /**
  * Servlet implementation class CollageData
  */
@@ -47,13 +49,21 @@ public class CollageData extends HttpServlet {
 			extra = "poo";
 		}
 		String query = request.getParameter("query").trim();
+		System.out.println("Original query: " + query);
 		String numResults = request.getParameter("numResults");
+		System.out.println("Original numResults: " + numResults);
 //		System.out.println("Inside of Collage Data: " + query);
 		if(extra.equals("settingVariables")) {
 			System.out.println("Setting session");
-			HttpSession session2 = request.getSession();
+			HttpSession session2 = request.getSession(true);
 			session2.setAttribute("query", query);
+			System.out.println("Query: " + session2.getAttribute("query"));
 			session2.setAttribute("numResults", numResults);
+			System.out.println("NumResults: " + session2.getAttribute("numResults"));
+			ArrayList<Recipe> recipes = new ArrayList<>();
+			ArrayList<Restaurant> restaurants = new ArrayList<>();
+			session2.setAttribute("recipeList", recipes);
+			session2.setAttribute("restaurantList", restaurants);
 		} else {
 			CollageScraper scraper = new CollageScraper();
 			ArrayList<String> collageResults = scraper.scrapeCollage(query);

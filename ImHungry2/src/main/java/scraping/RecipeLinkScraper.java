@@ -118,7 +118,7 @@ public class RecipeLinkScraper {
 			for(Element instruct : instructionResults) {
 				String toCheck = instruct.text();
 				if(!toCheck.equals("")) {
-					String finalInstruction = instruct.text().replace(" Watch now.", "");
+					String finalInstruction = instruct.text().replace(" Watch Now", "");
 					instructions.add(finalInstruction);
 				}
 			}
