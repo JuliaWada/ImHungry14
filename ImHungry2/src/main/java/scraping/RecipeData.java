@@ -5,9 +5,7 @@ package scraping;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -79,11 +77,8 @@ public class RecipeData extends HttpServlet {
 			Recipe toFormat = recipeResults.get(i);
 			//TODO remove this and put in the actual code 
 			//for now making sure everything works
-<<<<<<< HEAD
-			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage( "+toFormat.getName()+")\" id=\"recipe" + i + "\">" +  
-=======
 			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe" + i + "\">" +  
->>>>>>> julia
+
 							"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 							"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 							"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.*;
 
@@ -20,6 +21,7 @@ import com.google.maps.model.DirectionsResult;
 
 import okhttp3.*;
 import okhttp3.Request.Builder;
+import scraping.Recipe;
 import yelp.Restaurant;
 
 /**
@@ -61,9 +63,9 @@ public class restaurantData extends HttpServlet {
 		}
 		for(int i=0; i<restaurantArray.size(); i++) {
         	Restaurant r = restaurantArray.get(i);
-        	out.println("<div class =\"restaurantCard\" onclick = \"toRestaurantPage("+r.getName()+")\" \"id=\"restaurant" + i + "\">" +
+        	out.println("<div class =\"restaurantCard\" onclick = \"toRestaurantPage(this)\" \"id=\"restaurant" + i + "\">" +
         					"<div class =\"information\">" +
-		    					"<p>" + r.getName() + "</p>" +
+		    					"<p class = \"restName\">" + r.getName() + "</p>" +
 		    					"<p>" + r.getAddress() + "</p>" +
 		    					"<p>" + r.getMinsAway() + " minutes away </p>" +
 		    				"</div>"+
@@ -72,9 +74,12 @@ public class restaurantData extends HttpServlet {
         					"</div>"+
         			 	"</div>");
         }
-
-
+		HttpSession session2 = request.getSession();
+		ArrayList<Restaurant> stored = (ArrayList<Restaurant>) session2.getAttribute("restaurantList");
+		for(int i=0; i<restaurantArray.size(); i++) {
+			stored.add(restaurantArray.get(i));
 		}
+	}
 	/**
 	 * 
 	 * Inputs are an array list of restaurants, request, and response

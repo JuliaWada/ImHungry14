@@ -21,17 +21,12 @@
 			<button onclick = "toPrintVersion()" class = "button">Printable Version</button>
 			<button onclick = "toResults()" class = "button">Back to Results</button>
 			<button onclick = "toAddtoList()" class = "button">Add to List</button>
-			<div id = "dropdown">
-				<div id = "dropText"></div>
-				<span id = "dropAction">&#9660</span>
-			</div>
-			<div id = "dropdownContent">
-				<ul>
-					<li>Favorites</li>
-					<li>To Explore</li>
-					<li>Do Not Show</li>
-				</ul>
-			</div>
+			<select class = "menu" id="listOptions">
+				 <option value = "0"> </option>
+				 <option value="1">Favorites</option>
+   				 <option value="2">To Explore</option>
+   				 <option value="3">Do Not Show</option>
+			</select>
 		</div>
 	</div>
 	<script>
@@ -44,17 +39,16 @@
 	function toResults(){
 		window.location.href = "results.jsp";
 	}
-	document.querySelector("#dropAction").onclick = function(){
-		document.querySelector("#dropdownContent").style.visibility = "visible";
+	
+	function toAddtoList(){
+		var list = document.getElementById("listOptions");
+		var option = list.options[list.selectedIndex].text;
+		if(option != ""){
+			
+		}
+		
 	}
 	
-	var list = document.getElementsByTagName("li");
-	for(let i = 0; i < list.length; i++){
-		list[i].onclick = function(){
-			document.querySelector("#dropText").innerHTML = list[i].innerHTML;
-			document.querySelector("#dropdownContent").style.visibility = "hidden";
-		}
-	}
 	</script>
 </body>
 </html>

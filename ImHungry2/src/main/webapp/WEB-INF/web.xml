@@ -34,6 +34,12 @@
   	<description></description>
   	<servlet-class>listMgmt.MoveToListData</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>restaurantMgmt</servlet-name>
+  	<display-name>restaurantMgmt</display-name>
+  	<description></description>
+  	<servlet-class>yelp.restaurantMgmt</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>YelpResults</servlet-name>
   	<url-pattern>/YelpResults</url-pattern>
@@ -53,5 +59,9 @@
   <servlet-mapping>
   	<servlet-name>MoveToListData</servlet-name>
   	<url-pattern>/MoveToListData</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>restaurantMgmt</servlet-name>
+  	<url-pattern>/restaurantMgmt</url-pattern>
   </servlet-mapping>
 </web-app>

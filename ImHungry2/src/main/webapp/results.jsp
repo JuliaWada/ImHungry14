@@ -12,17 +12,12 @@
 		
 		</div>
 		<div id ="buttonDiv">
-			<div id = "dropdown">
-				<div id = "dropText"></div>
-				<span id = "dropAction">&#9660</span>
-			</div>
-			<div id = "dropdownContent">
-				<ul>
-					<li>Favorites</li>
-					<li>To Explore</li>
-					<li>Do Not Show</li>
-				</ul>
-			</div>
+			<select class = "menu" id="listOptions">
+				 <option value = "0"> </option>
+				 <option value="1">Favorites</option>
+   				 <option value="2">To Explore</option>
+   				 <option value="3">Do Not Show</option>
+			</select>
 			<button id = "Lbutton" onclick = "toManageList()" class = "button">Manage List</button>
 			<button id = "RTSbutton" onclick = "toSearchPage()" class = "button">Return to Search</button>
 		</div>
@@ -59,29 +54,22 @@
 		query = "<%=query%>";
 		num = <%=num%>;
 		getCollage(query, num);
-		getRecipes(query, num);
+		//getRecipes(query, num);
 		getRestaurants(query, num);
 	}
+	
 	function toManageList(){
-		window.location.href = "listMgmt.jsp";
+		var list = document.getElementById("listOptions");
+		var option = list.options[list.selectedIndex].text;
+		if(option != "") {
+			var url = "listMgmt.jsp?name=" + option;
+			window.location.href = url;
+		}
 	}
 	function toSearchPage(){
-		
 		window.location.href = "index.jsp";
 	}
 	
-	document.querySelector("#dropAction").onclick = function(){
-		document.querySelector("#dropdownContent").style.visibility = "visible";
-	}
-	
-	
-	var list = document.getElementsByTagName("li");
-	for(let i = 0; i < list.length; i++){
-		list[i].onclick = function(){
-			document.querySelector("#dropText").innerHTML = list[i].innerHTML;
-			document.querySelector("#dropdownContent").style.visibility = "hidden";
-		}
-	}
 	
 	function getCollage(toSend, num) {
 		var xhttp = new XMLHttpRequest();
@@ -93,7 +81,7 @@
 		console.log("collage Data sent to backend");
 	}
 
-	function getRecipes(toSend, numResults) {
+	/* function getRecipes(toSend, numResults) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			document.getElementById("recipeDiv").innerHTML = this.responseText;
@@ -102,7 +90,7 @@
 				+ numResults + "&action=results", true);
 		xhttp.send();
 		console.log("recipe data sent to Backend");
-	}
+	} */
 	
 	function getRestaurants(toSend, numResults) {
 		var xhttp = new XMLHttpRequest();
@@ -116,22 +104,20 @@
 	}
 	
 	function toRecipePage(query){
-<<<<<<< HEAD
 		var xhttp = new XMLHttpRequest();
-		alert("hello");
 		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
 		xhttp.send();
-=======
 		var actual = query.querySelector(".recipeTitle").textContent;
 		console.log(actual);
 		window.location.href = "recipe.jsp?title=" + actual;
->>>>>>> julia
 	}
 	
 	function toRestaurantPage(query){
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "restaurantData?query=" + query + "&action=page", false);
 		xhttp.send();
+		var actual = query.querySelector(".restName").textContent;
+		window.location.href = "restuarant.jsp?title=" + actual;
 	}
 	
 	
