@@ -37,22 +37,11 @@ public class restaurantData extends HttpServlet {
     }
 
 	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
-	public void init(ServletConfig config) throws ServletException {
-		//init
-	}
-
-	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println();
-		System.out.println("in yelp servlet service");
-		System.out.println();
-		
+
 		PrintWriter out = response.getWriter();
-		//ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
 		
 		String foodName = request.getParameter("query");                       // term
         int numResultsToShow = Integer.parseInt(request.getParameter("numResults").trim());		 //limit
@@ -117,105 +106,112 @@ public class restaurantData extends HttpServlet {
         	Response APIresponse = client.newCall(APIrequest).execute();
 
         	JSONObject jsonObject = new JSONObject(APIresponse.body().string().trim());       // parser
-            JSONArray myResponse = (JSONArray)jsonObject.get("businesses");
-            int numYelpResults = (int)jsonObject.get("total");
-
-
-            System.out.println();
-            System.out.println();
-
-            System.out.println("Total Num of Results:");
-            System.out.println(numYelpResults);
-            System.out.println();
-            
-            //Perhaps API might return nothing! Should maybe add an error check to see if entire JSON object is null
-            if(myResponse.length() != 0) {
-            	
-            	for(int i=0; i<numResultsToShow; i++) {
-                	String rwebsite = "", rphone = "", rpricing = "";
-                	
-                	//NAME
-                	String rname = myResponse.getJSONObject(i).getString("name");
-                	System.out.println("name: " + rname);
-                	
-                	//URL
-//                	if( (!myResponse.getJSONObject(i).has("url") && myResponse.getJSONObject(i).isNull("url") ) 
-//                			|| myResponse.getJSONObject(i).getString("url").equals("")) {
-//                		rwebsite = "No URL available";
-//                	}
-//                	else {
-//                		if(myResponse.getJSONObject(i).getString("url").equals("")) {
-//                			rphone = "No URL available";
-//                		}
-//                		else {
-                			rwebsite = myResponse.getJSONObject(i).getString("url");
-                		//}
-                		
-                	//}
-                	System.out.println("website: " + rwebsite);
-                	
-                	//PHONE NUMBER
-                	if(  (!myResponse.getJSONObject(i).has("display_phone") && myResponse.getJSONObject(i).isNull("display_phone")) 
-                			|| myResponse.getJSONObject(i).getString("display_phone").equals("")  ) {
-                		rphone = "No phone number available";
-                	}
-//                	else {
-//                		if(myResponse.getJSONObject(i).getString("display_phone").equals("")) {
-//                			rphone = "No phone number available";
-//                		}
-                		else {
-                			rphone = myResponse.getJSONObject(i).getString("display_phone");
-                		//}
-                		
-                	}
-                	System.out.println("phoneNum: " + rphone);
-                	
-                	//PRICE
-                	if( (!myResponse.getJSONObject(i).has("price") && myResponse.getJSONObject(i).isNull("price") ) 
-                			|| myResponse.getJSONObject(i).getString("price").equals("")) {
-                		rpricing = "No price available";
-                	}
-//                	else {
-//                		if(myResponse.getJSONObject(i).getString("price").equals("")) {
-//                			rphone = "No price available";
-//                		}
-                		else {
-                			rpricing = myResponse.getJSONObject(i).getString("price");
-                		//}
-                		
-                	}
-                	System.out.println("pricing: " + rpricing);
-                	
-                	String raddress = "";
-     
-                	//LOCATION
-                    JSONObject location = (JSONObject) myResponse.getJSONObject(i).get("location");
-                    JSONArray address = (JSONArray) location.get("display_address");
-                    for(int j=0; j<address.length(); j++) {
-                    	raddress += address.get(j) + " ";
-                    	System.out.println(address.get(j));
-                    }
-                    raddress = raddress.trim();
-                    System.out.println("address: " + raddress);
-                    int rminaway = getDrivingTime(raddress);
-                    System.out.println("minsAway: " + rminaway);
-                    
-                    Restaurant r = new Restaurant(rname, rwebsite, raddress, rphone, rpricing, rminaway);
-                    restaurantArray.add(r);
-                }
-
-                System.out.println();
-                System.out.println();
-            	
-            }
+        	
+        	//ArrayList<Restaurant> jsonParse = new ArrayList<Restaurant>();
+        	restaurantArray = jsonResponse(restaurantArray, jsonObject, numResultsToShow);
+        	
             
 
-        
         
         return restaurantArray;
 		
 	}
 	
+	public ArrayList<Restaurant> jsonResponse(ArrayList<Restaurant> restaurantArray, JSONObject jsonObject, int numResultsToShow) throws JSONException, ApiException, InterruptedException, IOException {
+		JSONArray myResponse = (JSONArray)jsonObject.get("businesses");
+        int numYelpResults = (int)jsonObject.get("total");
+
+
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Total Num of Results:");
+        System.out.println(numYelpResults);
+        System.out.println();
+        
+        //Perhaps API might return nothing! Should maybe add an error check to see if entire JSON object is null
+        if(myResponse.length() != 0) {
+        	
+        	for(int i=0; i<numResultsToShow; i++) {
+            	String rwebsite = "", rphone = "", rpricing = "";
+            	
+            	//NAME
+            	String rname = myResponse.getJSONObject(i).getString("name");
+            	System.out.println("name: " + rname);
+            	
+            	//URL
+//            	if( (!myResponse.getJSONObject(i).has("url") && myResponse.getJSONObject(i).isNull("url") ) 
+//            			|| myResponse.getJSONObject(i).getString("url").equals("")) {
+//            		rwebsite = "No URL available";
+//            	}
+//            	else {
+//            		if(myResponse.getJSONObject(i).getString("url").equals("")) {
+//            			rphone = "No URL available";
+//            		}
+//            		else {
+            			rwebsite = myResponse.getJSONObject(i).getString("url");
+            		//}
+            		
+            	//}
+            	System.out.println("website: " + rwebsite);
+            	
+            	//PHONE NUMBER
+            	if(  (!myResponse.getJSONObject(i).has("display_phone") /*&& myResponse.getJSONObject(i).isNull("display_phone")*/) 
+            			|| myResponse.getJSONObject(i).getString("display_phone").equals("")  ) {
+            		rphone = "No phone number available";
+            	}
+//            	else {
+//            		if(myResponse.getJSONObject(i).getString("display_phone").equals("")) {
+//            			rphone = "No phone number available";
+//            		}
+            		else {
+            			rphone = myResponse.getJSONObject(i).getString("display_phone");
+            		//}
+            		
+            	}
+            	System.out.println("phoneNum: " + rphone);
+            	
+            	//PRICE
+            	if( (!myResponse.getJSONObject(i).has("price") /*&& myResponse.getJSONObject(i).isNull("price")*/ ) 
+            			|| myResponse.getJSONObject(i).getString("price").equals("")) {
+            		rpricing = "No price available";
+            	}
+//            	else {
+//            		if(myResponse.getJSONObject(i).getString("price").equals("")) {
+//            			rphone = "No price available";
+//            		}
+            		else {
+            			rpricing = myResponse.getJSONObject(i).getString("price");
+            		//}
+            		
+            	}
+            	System.out.println("pricing: " + rpricing);
+            	
+            	String raddress = "";
+ 
+            	//LOCATION
+                JSONObject location = (JSONObject) myResponse.getJSONObject(i).get("location");
+                JSONArray address = (JSONArray) location.get("display_address");
+                for(int j=0; j<address.length(); j++) {
+                	raddress += address.get(j) + " ";
+                	System.out.println(address.get(j));
+                }
+                raddress = raddress.trim();
+                System.out.println("address: " + raddress);
+                int rminaway = getDrivingTime(raddress);
+                System.out.println("minsAway: " + rminaway);
+                
+                Restaurant r = new Restaurant(rname, rwebsite, raddress, rphone, rpricing, rminaway);
+                restaurantArray.add(r);
+            }
+
+            System.out.println();
+            System.out.println();
+        	
+        }
+        return restaurantArray;
+	}
+
 	/**
 	 * 
 	 * Input is a restaurantAddress.
@@ -247,10 +243,6 @@ public class restaurantData extends HttpServlet {
 			System.out.println("Route in Minutes: " + routeMin);
 			
 			
-	
-		 
-	   		
-
 		return Math.toIntExact(routeMin);
 		
 	}
