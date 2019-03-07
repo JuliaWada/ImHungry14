@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +35,7 @@
 		<div class = "name">Recipes</div>
 	</div>
 	<div id= "resultDiv">
-		<span id = "restuarantName" class = "name">Restuarants</span>
+		<span id = "restuarantName" class = "name">Restaurants</span>
 		<div id ="restaurantDiv">
 			
 		</div>
@@ -56,8 +55,7 @@
 		var num = 0;
 		<%HttpSession session2 = request.getSession();
 		String query = (String) session2.getAttribute("query");
-		int num = Integer.valueOf((String) session2.getAttribute("numResults"));
-		%>
+		int num = Integer.valueOf((String) session2.getAttribute("numResults"));%>
 		query = "<%=query%>";
 		num = <%=num%>;
 		getCollage(query, num);
@@ -118,10 +116,16 @@
 	}
 	
 	function toRecipePage(query){
+<<<<<<< HEAD
 		var xhttp = new XMLHttpRequest();
 		alert("hello");
 		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
 		xhttp.send();
+=======
+		var actual = query.querySelector(".recipeTitle").textContent;
+		console.log(actual);
+		window.location.href = "recipe.jsp?title=" + actual;
+>>>>>>> julia
 	}
 	
 	function toRestaurantPage(query){

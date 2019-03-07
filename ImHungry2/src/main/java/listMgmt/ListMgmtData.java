@@ -1,6 +1,7 @@
 package listMgmt;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import scraping.Recipe;
 import yelp.Restaurant;
@@ -32,6 +32,8 @@ public class ListMgmtData extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * grabs the necessary variables from the Session 
+	 * then it calls the decider function to decide what action to take in regards to List management
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -48,6 +50,22 @@ public class ListMgmtData extends HttpServlet {
 		ResultList toAdd = decider(action, fromFront, item, type, listName, recipeList, restaurantList);
 	}
 	
+	/**
+	 * This function decides whether or not to add or remove something from a list
+	 * Action is defined in the service request to get the right action and decide what is happening
+	 * It then calls the appropriate function for the action specified
+	 * remove -> removeFromList
+	 * add -> addToList
+	 * @param action
+	 * @param fromFront
+	 * @param item
+	 * @param type
+	 * @param listName
+	 * @param recipeList
+	 * @param restaurantList
+	 * @return
+	 * @throws IOException
+	 */
 	public ResultList decider(String action, ResultList fromFront, String item, String type, String listName, ArrayList<Recipe> recipeList, ArrayList<Restaurant> restaurantList) throws IOException {
 		ResultList addToSession = new ResultList();
 		ArrayList<Object> grabbedList = fromFront.getCards();
@@ -62,7 +80,8 @@ public class ListMgmtData extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * It removes the item from the List and returns the final list to be readded to the session
+	 * it must match the name to do so 
 	 * @param grabbedList
 	 * @param listName
 	 * @param item
@@ -74,13 +93,13 @@ public class ListMgmtData extends HttpServlet {
 		Recipe recipeToRemove;
 		Restaurant restaurantToRemove;
 		for(int i=0; i<grabbedList.size(); i++) {
-			System.out.println("getting item: " + i);
+//			System.out.println("getting item: " + i);
 			if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
 				recipeToRemove = (Recipe)grabbedList.get(i);
-				System.out.println(recipeToRemove.getName());
+//				System.out.println(recipeToRemove.getName());
 				if(recipeToRemove.getName().equals(item)) {
 					fromFront.removeCard(item);
-					System.out.println("Removed it");
+//					System.out.println("Removed it");
 				}
 			}
 			else {
@@ -96,7 +115,9 @@ public class ListMgmtData extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * It adds an item to the defined ResultList, which can be one of the three predefined lists
+	 * Each item needs to be determined if it is a recipe or restaurant, it searches the session and gets the full object to put into the memory
+	 * It then returns the final list to be added to the session
 	 * @param grabbedList
 	 * @param item
 	 * @param type
@@ -107,7 +128,7 @@ public class ListMgmtData extends HttpServlet {
 	public ResultList addToList(ArrayList<Object> grabbedList, String listName, String item, String type,
 			ArrayList<Recipe> recipeList, ArrayList<Restaurant>restaurantList) {
 		ResultList toReturn = new ResultList();
-		System.out.println("Inside of add");
+//		System.out.println("Inside of add");
 		if(type.equals("recipe")) {
 			Recipe toAdd = new Recipe();
 			for(int i=0; i<recipeList.size(); i++) {
@@ -125,7 +146,7 @@ public class ListMgmtData extends HttpServlet {
 			}
 			grabbedList.add(toAdd);			
 		}
-		System.out.println("Adding new list size: " + grabbedList.size());
+//		System.out.println("Adding new list size: " + grabbedList.size());
 		toReturn.setCards(grabbedList);
 		toReturn.setName(listName);
 		return toReturn;

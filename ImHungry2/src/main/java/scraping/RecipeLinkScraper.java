@@ -95,9 +95,15 @@ public class RecipeLinkScraper {
 			prepTime = prepTime.replace("h", "hour");
 			prepTime = prepTime.replaceAll("m", "mins");			
 			System.out.println("Prep Time: " + prepTime);
+			if(prepTime.equals("")) {
+				prepTime = "N/A";
+			}
 			cookTime = doc.select("[itemprop='cookTime'] > span").text().trim();
 			cookTime = cookTime.replace("h", "hour");
 			cookTime = cookTime.replaceAll("m", "mins");
+			if(cookTime.equals("")) {
+				cookTime = "N/A";
+			}
 			System.out.println("Cook Time: " + cookTime);
 			image = doc.select("img.rec-photo").attr("src");
 			System.out.println("Image URL: " + image);
@@ -136,7 +142,7 @@ public class RecipeLinkScraper {
     	//if the string has the hour in it
     	int finalTime = 0;
     	if(time.equals("")) {
-    		return -1;
+    		return 1000;
     	}
     	String replaced = time.replace(" m", "");
     	String[] split = replaced.split(" h ");

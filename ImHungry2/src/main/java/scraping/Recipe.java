@@ -52,7 +52,7 @@ public class Recipe extends Result implements Comparable<Recipe>{
 	}
 	
 	public ArrayList<String> getInstructions() {
-		return this.getIngredients();
+		return this.instructions;
 	}
 	
 	//setters
