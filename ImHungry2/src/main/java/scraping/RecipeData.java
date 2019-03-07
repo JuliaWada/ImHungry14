@@ -78,7 +78,7 @@ public class RecipeData extends HttpServlet {
 			//TODO remove this and put in the actual code
 			//for now making sure everything works
 			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe" + i + "\">" +
-							"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" +
+							"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 							"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 							"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +
 							"</div>"

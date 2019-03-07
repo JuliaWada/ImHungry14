@@ -90,7 +90,7 @@
 				+ numResults + "&action=results", true);
 		xhttp.send();
 		console.log("recipe data sent to Backend");
-	} 
+	}
 
 	function getRestaurants(toSend, numResults) {
 		var xhttp = new XMLHttpRequest();
