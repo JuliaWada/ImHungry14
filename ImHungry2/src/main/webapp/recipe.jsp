@@ -52,7 +52,9 @@ function loadRecipeTitle() {
 	xhttp.onreadystatechange = function () {
 		document.getElementById("infoDiv").innerHTML = this.responseText;
 	}
-	xhttp.open("POST", "recipeData?query=" + name + "&action=page", true);
+	var clean = encodeURIComponent(name);
+	console.log(clean);
+	xhttp.open("POST", "recipeData?query=" + clean + "&action=page", true);
 	xhttp.send();
 }
 
@@ -68,7 +70,9 @@ function toAddtoList() {
 		xhttp.onreadystatechange = function () {
 			console.log("Successfully added");
 		}
-		xhttp.open("POST", "listMgmtData?action=add&type=recipe&itemName=" + name + "&listName=" + option, true);
+		var clean = encodeURIComponent(name);
+		console.log(clean);
+		xhttp.open("POST", "listMgmtData?action=add&type=recipe&itemName=" + clean + "&listName=" + option, true);
 		xhttp.send();
 	}
 }

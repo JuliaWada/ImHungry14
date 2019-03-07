@@ -70,7 +70,7 @@ public class LoadList extends HttpServlet {
 						"   				 <option value=\"2\">To Explore</option>\r\n" + 
 						"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
 						"			</select>" +
-						"<button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button>" +
+						"<button class=\"moveButton\" onclick=\"moveToList(this)\" name=\"" + recipeToDisplay.getName() + "\">Move to List</button>" +
 					"</div>" +
 				"</div>"
 				+ "");
@@ -95,7 +95,7 @@ public class LoadList extends HttpServlet {
 					"   				 <option value=\"2\">To Explore</option>\r\n" + 
 					"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
 					"			</select>" +
-						"<button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button>" +
+						"<button class=\"moveButton\" onclick=\"moveToList(this)\" name=\"" + restaurantToDisplay.getName() + "\">Move to List</button>" +
 					"</div>" +
 				"</div>"
 				+ "");

@@ -19,6 +19,7 @@ import scraping.Recipe;
 import scraping.RecipeData;
 import scraping.RecipeLinkScraper;
 import yelp.Restaurant;
+import yelp.restaurantMgmt;
 
 public class ServletTestCase extends Mockito {
 	
@@ -232,31 +233,67 @@ public class ServletTestCase extends Mockito {
 		printWriter.flush();
 		System.out.println("Stringwriter: " + stringWriter.toString());
 		System.out.flush();
-		assertEquals("<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+		assertEquals("<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\" name=\"Ramen Coleslaw\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 
 				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
-				"<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">copy1</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\" name=\"Ramen Coleslaw\">Move to List</button></div></div>\r\n" + 
+				"<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">copy1</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\" name=\"copy1\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 
 				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
-				"<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">copy2</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\" name=\"copy1\">Move to List</button></div></div>\r\n" + 
+				"<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">copy2</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\" name=\"copy2\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 
 				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
-				"<div class =\"row\"><div class =\"restaurantCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">Ramen Kenjo</p><p> Prep Time: address</p><p> Cook Time: $$$</p></div><divclass =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\" name=\"copy2\">Move to List</button></div></div>\r\n" + 
+				"<div class =\"row\"><div class =\"restaurantCard\" onclick = \"toRestaurantPage(this)\" \"id=\"restaurant\">\r\n" + 
+				"        					<div class =\"information\">\r\n" + 
+				"		    					<p class = \"restName\">Ramen Kenjo</p>\r\n" + 
+				"		    					<p>address</p>\r\n" + 
+				"		    					<p>15 minutes away </p>\r\n" + 
+				"		    				</div>\r\n" + 
+				"        					<div class =\"priceDiv\">\r\n" + 
+				"        						<p>$$$</p>\r\n" + 
+				"        					</div>\r\n" + 
+				"        			 </div><divclass =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\" name=\"Ramen Kenjo\">Remove From List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 
 				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n", stringWriter.toString());
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\" name=\"Ramen Kenjo\">Move to List</button></div></div>\r\n", stringWriter.toString());
 	}
-
+	
+	@Test
+	public void testRestaurantDisplayPage() throws ServletException, IOException {
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		HttpSession session = mock(HttpSession.class);
+		when(request.getParameter("action")).thenReturn("page");
+		when(request.getParameter("query")).thenReturn("Ramen Kenjo");
+		when(request.getSession()).thenReturn(session);
+		ArrayList<Restaurant> restaurants = new ArrayList<>();
+		
+		Restaurant toDisplay = new Restaurant("Ramen Kenjo", "website", "address", "phoneNum",
+				"$$", 15);
+		restaurants.add(toDisplay);
+		when(session.getAttribute("restaurantList")).thenReturn(restaurants);
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(stringWriter);
+		when(response.getWriter()).thenReturn(printWriter);
+        when(response.getContentType()).thenReturn("text/html");
+        
+        new yelp.restaurantMgmt().service(request, response);
+        verify(request, atLeast(1)).getParameter("query");
+		printWriter.flush();
+		System.out.println("Stringwriter: " + stringWriter.toString());
+		System.out.flush();
+		assertEquals("<h1>Ramen Kenjo</h1><p> Phone Number: phoneNum</p><a class =\"website\" href =website> Website: website</a><a href = \"https://www.google.com/maps/dir/Tommy+Trojan/address\"> Address: address</p>"
+				, stringWriter.toString());
+	}
 
 }
