@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.text.StringEscapeUtils;
 
+import listMgmt.ResultList;
 import yelp.Restaurant;
 
 /**
@@ -36,34 +39,48 @@ public class CollageData extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * activated by a xhttp request from the front end
+	 * If it has the variable extra defined as "Setting session" then it will set up the session by loading the necessary data into it.
+	 * This means it will set the attributes for the search term, num of wanted results, the total memory for every restaurant, and recipe, and the 3 predefined lists
+	 * If it doesn't have the varialbe extra defined then it will get the Collage by calling the CollageScraper class to return the required links
+	 * It then takes those strings and makes it so that they sent back as html to the front end with the degrees defined to satisfy the collage requirement
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Random random = new Random();
 		int num = 0;
-//		System.out.println("Inside of collage data");
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		String extra = request.getParameter("extra");
 		if(extra == null || extra.equals("")) {
-			extra = "poo";
+			extra = "getCollage";
 		}
 		String query = request.getParameter("query").trim();
 		System.out.println("Original query: " + query);
 		String numResults = request.getParameter("numResults");
 		System.out.println("Original numResults: " + numResults);
-//		System.out.println("Inside of Collage Data: " + query);
-		if(extra.equals("settingVariables")) {
+		if(extra.equals("settingVariables")) { //setting the search term/query, num of wanted results, 
 			System.out.println("Setting session");
 			HttpSession session2 = request.getSession(true);
 			session2.setAttribute("query", query);
 			System.out.println("Query: " + session2.getAttribute("query"));
 			session2.setAttribute("numResults", numResults);
 			System.out.println("NumResults: " + session2.getAttribute("numResults"));
-			ArrayList<Recipe> recipes = new ArrayList<>();
-			ArrayList<Restaurant> restaurants = new ArrayList<>();
+			Map< String, Recipe> recipes =  new HashMap< String,Recipe>();
+			Map<String, Restaurant> restaurants = new HashMap<String, Restaurant>();
 			session2.setAttribute("recipeList", recipes);
 			session2.setAttribute("restaurantList", restaurants);
+			
+			// 3 predefined lists
+			ResultList favorites = new ResultList();
+			favorites.setName("Favorites");
+			session2.setAttribute("Favorites", favorites);
+			ResultList toExplore = new ResultList();
+			toExplore.setName("To Explore");
+			session2.setAttribute("To Explore", toExplore);
+			ResultList doNotShow = new ResultList();
+			doNotShow.setName("Do Not Show");
+			session2.setAttribute("Do Not Show", doNotShow);
+			
 		} else {
 			CollageScraper scraper = new CollageScraper();
 			ArrayList<String> collageResults = scraper.scrapeCollage(query);

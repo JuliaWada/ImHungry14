@@ -5,6 +5,7 @@ package scraping;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,6 +59,7 @@ public class RecipeData extends HttpServlet {
 	}
     
     /**
+     * This grabs the necessary data to display the cards on the results page
      * 
      * @param request
      * @param response
@@ -75,7 +77,7 @@ public class RecipeData extends HttpServlet {
 			Recipe toFormat = recipeResults.get(i);
 			//TODO remove this and put in the actual code 
 			//for now making sure everything works
-			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(\""+toFormat.getName().trim()+"\")\" id=\"recipe" + i + "\">" +  
+			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage()\" id=\"recipe" + i + "\">" +  
 							"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 							"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 							"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +
@@ -83,15 +85,15 @@ public class RecipeData extends HttpServlet {
 							);
 		}
 		HttpSession session2 = request.getSession();
-		ArrayList<Recipe> stored = (ArrayList<Recipe>) session2.getAttribute("recipeList");
+		Map<String, Recipe> stored = (Map<String, Recipe>) session2.getAttribute("recipeList");
 		for(int i=0; i<recipeResults.size(); i++) {
-			stored.add(recipeResults.get(i));
+			stored.put(recipeResults.get(i).getName(), recipeResults.get(i));
 		}
 		session2.setAttribute("recipeList", stored);
     }
 
     /**
-     * 
+     * This grabs the necessary information and formats it to be sent to the front end for the recipe page
      * @param request
      * @param response
      * @param out
@@ -99,7 +101,7 @@ public class RecipeData extends HttpServlet {
      */
     public void displayPage(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String query) {
     	HttpSession session = request.getSession();
-    	ArrayList<Recipe> stored = (ArrayList<Recipe>) session.getAttribute("recipeList");
+    	Map<String, Recipe> stored = (Map<String, Recipe>) session.getAttribute("recipeList");
     	Recipe toDisplay = new Recipe();
     	for(int i=0; i<stored.size(); i++) {
     		if(stored.get(i).getName().equals(query)) {

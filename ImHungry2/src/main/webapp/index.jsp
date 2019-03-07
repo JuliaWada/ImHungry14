@@ -39,6 +39,7 @@
 		}
 
 	}
+	
 	 document.querySelector("#numResults").onmouseenter = function(){
 		document.querySelector("#hoverMessage").style.visibility = "visible";
 	}

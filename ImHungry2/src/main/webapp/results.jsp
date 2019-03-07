@@ -35,7 +35,7 @@
 		<div class = "name">Recipes</div>
 	</div>
 	<div id= "resultDiv">
-		<span id = "restuarantName" class = "name">Restuarants</span>
+		<span id = "restuarantName" class = "name">Restaurants</span>
 		<div id ="restaurantDiv">
 			
 		</div>
@@ -55,8 +55,7 @@
 		var num = 0;
 		<%HttpSession session2 = request.getSession();
 		String query = (String) session2.getAttribute("query");
-		int num = Integer.valueOf((String) session2.getAttribute("numResults"));
-		%>
+		int num = Integer.valueOf((String) session2.getAttribute("numResults"));%>
 		query = "<%=query%>";
 		num = <%=num%>;
 		console.log("hello poo");
@@ -120,6 +119,7 @@
 	
 	function toRecipePage(query){
 		var xhttp = new XMLHttpRequest();
+		console.log("Got into here");
 		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
 		xhttp.send();
 	}
