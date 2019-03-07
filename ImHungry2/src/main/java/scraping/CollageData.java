@@ -65,8 +65,14 @@ public class CollageData extends HttpServlet {
 			System.out.println("Query: " + session2.getAttribute("query"));
 			session2.setAttribute("numResults", numResults);
 			System.out.println("NumResults: " + session2.getAttribute("numResults"));
-			Map< String, Recipe> recipes =  new HashMap< String,Recipe>();
-			Map<String, Restaurant> restaurants = new HashMap<String, Restaurant>();
+			
+			Map< String, Recipe> recipesMap =  new HashMap< String,Recipe>();
+			Map<String, Restaurant> restaurantsMap = new HashMap<String, Restaurant>();
+			session2.setAttribute("recipeMap", recipesMap);
+			session2.setAttribute("restaurantMap", restaurantsMap);
+			//for current search results
+			ArrayList<Recipe> recipes = new ArrayList<>();
+			ArrayList<Restaurant> restaurants = new ArrayList<>();
 			session2.setAttribute("recipeList", recipes);
 			session2.setAttribute("restaurantList", restaurants);
 			

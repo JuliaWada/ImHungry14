@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 /**
  * Servlet implementation class RecipeData
  */
@@ -77,7 +79,7 @@ public class RecipeData extends HttpServlet {
 			Recipe toFormat = recipeResults.get(i);
 			//TODO remove this and put in the actual code 
 			//for now making sure everything works
-			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage()\" id=\"recipe" + i + "\">" +  
+			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe" + i + "\">" +  
 							"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 							"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 							"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +
@@ -85,9 +87,13 @@ public class RecipeData extends HttpServlet {
 							);
 		}
 		HttpSession session2 = request.getSession();
-		Map<String, Recipe> stored = (Map<String, Recipe>) session2.getAttribute("recipeList");
-		for(int i=0; i<recipeResults.size(); i++) {
-			stored.put(recipeResults.get(i).getName(), recipeResults.get(i));
+////		Map<String, Recipe> stored = (Map<String, Recipe>) session2.getAttribute("recipeList");
+//		for(int i=0; i<recipeResults.size(); i++) {
+//			stored.put(recipeResults.get(i).getName(), recipeResults.get(i));
+//		}
+    	ArrayList<Recipe> stored = (ArrayList<Recipe>) session2.getAttribute("recipeList");
+    	for(int i=0; i<recipeResults.size(); i++) {
+			stored.add(recipeResults.get(i));
 		}
 		session2.setAttribute("recipeList", stored);
     }
@@ -101,17 +107,23 @@ public class RecipeData extends HttpServlet {
      */
     public void displayPage(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String query) {
     	HttpSession session = request.getSession();
-    	Map<String, Recipe> stored = (Map<String, Recipe>) session.getAttribute("recipeList");
+//    	Map<String, Recipe> stored = (Map<String, Recipe>) session.getAttribute("recipeList");
+//
+//    	for(String key : stored.keySet()) {
+//    		
+//    	}
+    	ArrayList<Recipe> stored = (ArrayList<Recipe>) session.getAttribute("recipeList");
     	Recipe toDisplay = new Recipe();
     	for(int i=0; i<stored.size(); i++) {
     		if(stored.get(i).getName().equals(query)) {
     			toDisplay = stored.get(i);
     		}
     	}
+    	System.out.println(toDisplay.getImageURL());
     	ArrayList<String> ingredients = toDisplay.getIngredients();
     	ArrayList<String> instructions = toDisplay.getInstructions();
     	out.print("<h1>" + toDisplay.getName() + "</h1>" + 
-    				"<img src=\"" + toDisplay.getImageURL() + ">" + 
+    				"<img src=\"" + StringEscapeUtils.unescapeJava(toDisplay.getImageURL()) + "\">" + 
     				"<p>Prep Time: <span id=\"prepTime\">" + toDisplay.getPrepTime() + "</span></p>" +
     				"<br>" +
     				"<p>Cook Time: <span id=\"cookTime\">" + toDisplay.getCookTime() + "</span></p>" + 
@@ -130,7 +142,7 @@ public class RecipeData extends HttpServlet {
     			"<ul id=\"instructionsList\">" );
     	for(int i=0; i<instructions.size(); i++) {
     		out.print(
-    				"<li>" + instructions.get(i) + "</li>"
+    				"<li>" + (i+1) + ") " + instructions.get(i) + "</li>"
     				);
     	}
     	out.println("</ul>");

@@ -88,11 +88,11 @@ public class ServletTestCase extends Mockito {
 		printWriter.flush();
 		System.out.println("Stringwriter: " + stringWriter.toString());
 		System.out.flush();
-		assertEquals("<div class =\"recipeCard\" id=\"recipe0\"><p class=\"recipeTitle\">Ramen Cabbage Salad</p><p> Prep Time: </p><p> Cook Time: </p></div>\r\n" +     
-		"<div class =\"recipeCard\" id=\"recipe1\"><p class=\"recipeTitle\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div>\r\n" +
-		"<div class =\"recipeCard\" id=\"recipe2\"><p class=\"recipeTitle\">Broccoli and Ramen Noodle Salad</p><p> Prep Time: 15 mins</p><p> Cook Time: </p></div>\r\n" +
-		"<div class =\"recipeCard\" id=\"recipe3\"><p class=\"recipeTitle\">Ramen Slaw</p><p> Prep Time: 15 mins</p><p> Cook Time: </p></div>\r\n" +
-		"<div class =\"recipeCard\" id=\"recipe4\"><p class=\"recipeTitle\">Ramen Burger</p><p> Prep Time: 20 mins</p><p> Cook Time: 20 mins</p></div>\r\n",
+		assertEquals("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe0\"><p class=\"recipeTitle\">Ramen Cabbage Salad</p><p> Prep Time: </p><p> Cook Time: </p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe1\"><p class=\"recipeTitle\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe2\"><p class=\"recipeTitle\">Broccoli and Ramen Noodle Salad</p><p> Prep Time: 15 mins</p><p> Cook Time: </p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe3\"><p class=\"recipeTitle\">Ramen Slaw</p><p> Prep Time: 15 mins</p><p> Cook Time: </p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe4\"><p class=\"recipeTitle\">Ramen Burger</p><p> Prep Time: 20 mins</p><p> Cook Time: 20 mins</p></div>\r\n",
 		stringWriter.toString());
 	}
 	

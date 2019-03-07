@@ -118,10 +118,9 @@
 	}
 	
 	function toRecipePage(query){
-		var xhttp = new XMLHttpRequest();
-		console.log("Got into here");
-		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
-		xhttp.send();
+		var actual = query.querySelector(".recipeTitle").textContent;
+		console.log(actual);
+		window.location.href = "recipe.jsp?title=" + actual;
 	}
 	
 	function toRestaurantPage(query){
