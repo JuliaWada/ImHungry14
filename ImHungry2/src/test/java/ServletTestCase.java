@@ -88,12 +88,12 @@ public class ServletTestCase extends Mockito {
 		printWriter.flush();
 		System.out.println("Stringwriter: " + stringWriter.toString());
 		System.out.flush();
-		assertEquals("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe0\"><p class=\"recipeTitle\">Ramen Cabbage Salad</p><p> Prep Time: </p><p> Cook Time: </p></div>\r\n" + 
-				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe1\"><p class=\"recipeTitle\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div>\r\n" + 
-				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe2\"><p class=\"recipeTitle\">Broccoli and Ramen Noodle Salad</p><p> Prep Time: 15 mins</p><p> Cook Time: </p></div>\r\n" + 
-				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe3\"><p class=\"recipeTitle\">Ramen Slaw</p><p> Prep Time: 15 mins</p><p> Cook Time: </p></div>\r\n" + 
-				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe4\"><p class=\"recipeTitle\">Ramen Burger</p><p> Prep Time: 20 mins</p><p> Cook Time: 20 mins</p></div>\r\n",
-		stringWriter.toString());
+		assertEquals("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe0\"><p class=\"recipeTitle\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe1\"><p class=\"recipeTitle\">Broccoli and Ramen Noodle Salad</p><p> Prep Time: 15 mins</p><p> Cook Time: N/A</p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe2\"><p class=\"recipeTitle\">Ramen Slaw</p><p> Prep Time: 15 mins</p><p> Cook Time: N/A</p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe3\"><p class=\"recipeTitle\">Ramen Burger</p><p> Prep Time: 20 mins</p><p> Cook Time: 20 mins</p></div>\r\n" + 
+				"<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe4\"><p class=\"recipeTitle\">Ramen Cabbage Salad</p><p> Prep Time: N/A</p><p> Cook Time: N/A</p></div>\r\n"
+				, stringWriter.toString());
 	}
 	
 	@Test
@@ -135,8 +135,8 @@ public class ServletTestCase extends Mockito {
 		printWriter.flush();
 		System.out.println("Stringwriter: " + stringWriter.toString());
 		System.out.flush();
-		assertEquals("<h1>Ramen Coleslaw</h1><img src=\"https://images.media-allrecipes.com/userphotos/560x315/4445089.jpg><p>Prep Time: <span id=\"prepTime\">15 mins</span></p><br><p>Cook Time: <span id=\"cookTime\">10 mins</span></p><br><h3>Ingredients:</h3><ul id=\"ingredientsList\"><li>2 tablespoons vegetable oil</li><li>3 tablespoons white wine vinegar</li><li>2 tablespoons white sugar</li><li>1 (3 ounce) package chicken flavored ramen noodles, crushed, seasoning packet reserved</li><li>1/2 teaspoon salt</li><li>1/2 teaspoon ground black pepper</li><li>2 tablespoons sesame seeds</li><li>1/4 cup sliced almonds</li><li>1/2 medium head cabbage, shredded</li><li>5 green onions, chopped</li></ul>\r\n" + 
-				"<br><h3>Instructions:</h3><ul id=\"instructionsList\"><li>2 tablespoons vegetable oil</li><li>3 tablespoons white wine vinegar</li><li>2 tablespoons white sugar</li><li>1 (3 ounce) package chicken flavored ramen noodles, crushed, seasoning packet reserved</li><li>1/2 teaspoon salt</li><li>1/2 teaspoon ground black pepper</li><li>2 tablespoons sesame seeds</li><li>1/4 cup sliced almonds</li><li>1/2 medium head cabbage, shredded</li><li>5 green onions, chopped</li></ul>\r\n"
+		assertEquals("<h1>Ramen Coleslaw</h1><img src=\"https://images.media-allrecipes.com/userphotos/560x315/4445089.jpg\"><p>Prep Time: <span id=\"prepTime\">15 mins</span></p><br><p>Cook Time: <span id=\"cookTime\">10 mins</span></p><br><h3>Ingredients:</h3><ul id=\"ingredientsList\"><li>2 tablespoons vegetable oil</li><li>3 tablespoons white wine vinegar</li><li>2 tablespoons white sugar</li><li>1 (3 ounce) package chicken flavored ramen noodles, crushed, seasoning packet reserved</li><li>1/2 teaspoon salt</li><li>1/2 teaspoon ground black pepper</li><li>2 tablespoons sesame seeds</li><li>1/4 cup sliced almonds</li><li>1/2 medium head cabbage, shredded</li><li>5 green onions, chopped</li></ul>\r\n" + 
+				"<br><h3>Instructions:</h3><ul id=\"instructionsList\"><li>1) Preheat oven to 350 degrees F (175 degrees C).</li><li>2) In a medium bowl, whisk together the oil, vinegar, sugar, ramen noodle spice mix, salt and pepper to create a dressing.</li><li>3) Place sesame seeds and almonds in a single layer on a medium baking sheet. Bake in the preheated oven 10 minutes, or until lightly brown.</li><li>4) In a large salad bowl, combine the cabbage, green onions and crushed ramen noodles. Pour dressing over the cabbage, and toss to coat evenly. Top with toasted sesame seeds and almonds.</li></ul>\r\n"
 				, stringWriter.toString());
 	}
 	
@@ -232,25 +232,25 @@ public class ServletTestCase extends Mockito {
 		printWriter.flush();
 		System.out.println("Stringwriter: " + stringWriter.toString());
 		System.out.flush();
-		assertEquals("<div class = \"row\"><div class=\"recipeCard\"><p class=\"name\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+		assertEquals("<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 
 				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
 				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
-				"<div class = \"row\"><div class=\"recipeCard\"><p class=\"name\">copy1</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">copy1</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 
 				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
 				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
-				"<div class = \"row\"><div class=\"recipeCard\"><p class=\"name\">copy2</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"<div class = \"row\"><div class=\"recipeCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">copy2</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 
 				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
 				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
-				"<div class =\"row\"><div class =\"restaurantCard\"><p class=\"name\">Ramen Kenjo</p><p> Prep Time: address</p><p> Cook Time: $$$</p></div><divclass =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"<div class =\"row\"><div class =\"restaurantCard\" onclick = \"toRecipePage(this)\"><p class=\"name\">Ramen Kenjo</p><p> Prep Time: address</p><p> Cook Time: $$$</p></div><divclass =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 				"				 <option value = \"0\"> </option>\r\n" + 
 				"				 <option value=\"1\">Favorites</option>\r\n" + 
 				"   				 <option value=\"2\">To Explore</option>\r\n" + 

@@ -60,7 +60,7 @@ public class RecipeTestCase {
 	@Test
 	public void testTimeConversionEmpty() {
 		RecipeLinkScraper scraper = new RecipeLinkScraper();
-		int expected = -1;
+		int expected = 1000;
 		int actual = scraper.convertTime("");
 		assertEquals(expected, actual);
 	}
