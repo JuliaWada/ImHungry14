@@ -1,12 +1,14 @@
 package scraper;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
-import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.apache.commons.text.StringEscapeUtils;
+
 
 public class CollageScraper {
 
