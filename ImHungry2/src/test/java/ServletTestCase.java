@@ -169,12 +169,12 @@ public class ServletTestCase extends Mockito {
 //		
 ////		recipeData.displayResults(request, response, printWriter, "ramen", 5);
 //		recipeData.service(request, response);
-		scraper.scrapeRecipeLinks("ramnen", 5);
+		scraper.scrapeRecipeLinks("ramen", 5);
 		
 	}
 	
 	@Test
-	public void testLoadListData() throws IOException {
+	public void testLoadListData() throws IOException, ServletException {
 		ResultList testList = new ResultList();
 		ResultList secondTestList = new ResultList();
 		testList.setName("resultList");
@@ -214,21 +214,48 @@ public class ServletTestCase extends Mockito {
 		secondTestList.setCards(secondTestCards);
 		assertEquals(4, testList.getCards().size());
 		assertEquals(2, secondTestList.getCards().size());
+		//servlet initiation
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
 		HttpSession session = mock(HttpSession.class);
-		when(request.getParameter("listName")).thenReturn("Favorites");
+		when(request.getParameter("listName")).thenReturn("testList");
 		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("testList")).thenReturn(testList);
+
 		
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 		when(response.getWriter()).thenReturn(printWriter);
         when(response.getContentType()).thenReturn("text/html");
-        
-        verify(request, atLeast(1)).getParameter("query");
-        printWriter.flush();
-        assertTrue(stringWriter.toString().contains("cake"));
-        assertEquals("text/html", response.getContentType());
+        new listMgmt.LoadList().service(request, response);
+        verify(request, atLeast(1)).getParameter("listName");
+		printWriter.flush();
+		System.out.println("Stringwriter: " + stringWriter.toString());
+		System.out.flush();
+		assertEquals("<div class = \"row\"><div class=\"recipeCard\"><p class=\"name\">Ramen Coleslaw</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"				 <option value = \"0\"> </option>\r\n" + 
+				"				 <option value=\"1\">Favorites</option>\r\n" + 
+				"   				 <option value=\"2\">To Explore</option>\r\n" + 
+				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
+				"<div class = \"row\"><div class=\"recipeCard\"><p class=\"name\">copy1</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"				 <option value = \"0\"> </option>\r\n" + 
+				"				 <option value=\"1\">Favorites</option>\r\n" + 
+				"   				 <option value=\"2\">To Explore</option>\r\n" + 
+				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
+				"<div class = \"row\"><div class=\"recipeCard\"><p class=\"name\">copy2</p><p> Prep Time: 15 mins</p><p> Cook Time: 10 mins</p></div><div class =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"				 <option value = \"0\"> </option>\r\n" + 
+				"				 <option value=\"1\">Favorites</option>\r\n" + 
+				"   				 <option value=\"2\">To Explore</option>\r\n" + 
+				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>\r\n" + 
+				"<div class =\"row\"><div class =\"restaurantCard\"><p class=\"name\">Ramen Kenjo</p><p> Prep Time: address</p><p> Cook Time: $$$</p></div><divclass =\"buttons\"><button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button><select class = \"menu\" id=\"moveListOptions\">\r\n" + 
+				"				 <option value = \"0\"> </option>\r\n" + 
+				"				 <option value=\"1\">Favorites</option>\r\n" + 
+				"   				 <option value=\"2\">To Explore</option>\r\n" + 
+				"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
+				"			</select><button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button></div></div>", stringWriter.toString());
 	}
 
 
