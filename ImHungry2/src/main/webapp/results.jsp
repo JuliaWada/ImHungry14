@@ -104,9 +104,12 @@
 	}
 	
 	function toRecipePage(query){
+<<<<<<< HEAD
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "recipeData?query=" + query + "&action=page", false);
 		xhttp.send();
+=======
+>>>>>>> julia
 		var actual = query.querySelector(".recipeTitle").textContent;
 		console.log(actual);
 		window.location.href = "recipe.jsp?title=" + actual;
