@@ -72,13 +72,15 @@ public class restaurantData extends HttpServlet {
 		}
 		for(int i=0; i<restaurantArray.size(); i++) {
         	Restaurant r = restaurantArray.get(i);
-        	out.println("<div>" +
-        					"<p>" + r.getName() + "</p>" +
-        					"<p>" + r.getAddress() + "</p>" +
-        					"<p>" + r.getPricing() + "</p>" +
-        					"<p>" + r.getMinsAway() + " minutes away </p>" +
-        					"<p>" + r.getPhoneNum() + "</p>" +
-        					"<p>" + r.getWebsite()+ "</p>" +
+        	out.println("<div class =\"restaurantCard\" \"id=\"restaurant" + i + "\">" +
+        					"<div class =\"information\">" +
+		    					"<p>" + r.getName() + "</p>" +
+		    					"<p>" + r.getAddress() + "</p>" +
+		    					"<p>" + r.getMinsAway() + " minutes away </p>" +
+		    				"</div>"+
+        					"<div class =\"priceDiv\">" +
+        						"<p>" + r.getPricing() + "</p>" +
+        					"</div>"+
         			 	"</div>");
         }
 

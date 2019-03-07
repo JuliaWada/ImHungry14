@@ -140,21 +140,20 @@ body {
   align-items: center;
   width: 50%;
   /* height: 500px; */
-  overflow-y: scroll;
 }
 
 /* line 115, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
-#resultDiv #restaurantDiv .recipeCard {
+#resultDiv #restaurantDiv .restaurantCard {
   margin-top: 3%;
 }
 
 /* line 118, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
-#resultDiv #restaurantDiv .recipeCard:nth-child(even) {
+#resultDiv #restaurantDiv .restaurantCard:nth-child(even) {
   background-color: #B8B8B8;
 }
 
 /* line 122, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
-#resultDiv #restaurantDiv .recipeCard:nth-child(odd) {
+#resultDiv #restaurantDiv .restaurantCard:nth-child(odd) {
   background-color: #787878;
 }
 
@@ -162,78 +161,110 @@ body {
 #resultDiv #recipeDiv {
   width: 50%;
   /* height: 500px; */
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* line 135, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 134, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #resultDiv #recipeDiv .recipeCard {
   margin-top: 3%;
 }
 
-/* line 138, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 137, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #resultDiv #recipeDiv .recipeCard:nth-child(even) {
   background-color: #B8B8B8;
 }
 
-/* line 142, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 141, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #resultDiv #recipeDiv .recipeCard:nth-child(odd) {
   background-color: #787878;
 }
 
-/* line 149, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 148, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 .recipeCard {
   width: 400px;
   height: 100px;
 }
 
-/* line 153, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 152, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 .recipeCard p:nth-child(2) {
   float: left;
   position: relative;
   top: 60px;
 }
 
-/* line 158, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 157, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 .recipeCard p:nth-child(3) {
   float: right;
   position: relative;
   top: 60px;
 }
 
+/* line 165, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+.restaurantCard {
+  width: 400px;
+  height: 100px;
+  display: flex;
+}
+
+/* line 170, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+.restaurantCard .information {
+  height: 100px;
+  flex: 1 1 80%;
+}
+
+/* line 173, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+.restaurantCard .information p:nth-child(2) {
+  margin-bottom: 8px;
+}
+
+/* line 176, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+.restaurantCard .information p:nth-child(1) {
+  margin-bottom: 8px;
+}
+
+/* line 181, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+.restaurantCard .priceDiv {
+  height: 100px;
+  flex: 1 1 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 2px solid black;
+}
+
 @media (max-width: 767px) {
-  /* line 171, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 192, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #listTitleDiv {
     visibility: hidden;
   }
-  /* line 176, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 197, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #topDiv {
     height: 200px;
   }
-  /* line 178, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 199, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #topDiv #collageDiv {
     height: 150px;
   }
-  /* line 181, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 202, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #topDiv #collageDiv .collageImg {
     max-width: 80px;
     max-height: 35%;
   }
-  /* line 189, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 210, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv {
     flex-direction: column;
   }
-  /* line 191, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 212, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv #restaurantDiv {
     width: 100%;
   }
-  /* line 194, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 215, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv #recipeDiv {
     width: 100%;
   }
-  /* line 197, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 218, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv #restuarantName, #resultDiv #recipeName {
     display: block;
     font-size: 1.8em;

@@ -47,8 +47,9 @@
 	</div>
 	<script>
 		
-	
+	var pageLoaded = false;
 	function loadPage(){
+		pageLoaded = true;
 		var foodName = sessionStorage.getItem("foodName");
 		document.querySelector("#foodname").innerHTML = foodName;
 		var query = "";
@@ -115,18 +116,7 @@
 
 	}
 	
-	var recipeCards = document.getElementsByClassName("recipeCard");
-	for(let i = 0; i < recipeCards.length; i++){
-		recipeCards[i].onclick = function(){
-			
-		}
-	}
-	var restaurantCards = document.getElementsByClassName("restaurantCard");
-	for(let i = 0; i < restaurantCards.length; i++){
-		restaurantCards[i].onclick = function(){
-			
-		}
-	}
+	
 	
 	</script>
 </body>
