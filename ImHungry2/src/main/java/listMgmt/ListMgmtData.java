@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import scraping.Recipe;
+import scraping.Result;
 import yelp.Restaurant;
 
 /**
@@ -37,6 +38,7 @@ public class ListMgmtData extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Inside of ListMgmtData");
 		HttpSession session2 = request.getSession();
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action").trim();
@@ -73,7 +75,7 @@ public class ListMgmtData extends HttpServlet {
 			addToSession = removeFromList(grabbedList, listName, item, fromFront);
 		} 
 		else if(action.equals("add")) {
-			
+			System.out.println("Adding to List: " + item);
 			addToSession = addToList(grabbedList, listName, item, type, recipeList, restaurantList);
 		}
 		return addToSession;
@@ -128,25 +130,34 @@ public class ListMgmtData extends HttpServlet {
 	public ResultList addToList(ArrayList<Object> grabbedList, String listName, String item, String type,
 			ArrayList<Recipe> recipeList, ArrayList<Restaurant>restaurantList) {
 		ResultList toReturn = new ResultList();
-//		System.out.println("Inside of add");
-		if(type.equals("recipe")) {
-			Recipe toAdd = new Recipe();
-			for(int i=0; i<recipeList.size(); i++) {
-				if(recipeList.get(i).getName().equals(item)) {
-					toAdd = recipeList.get(i);
-				}
-			}
-			grabbedList.add(toAdd);
-		} else {
-			Restaurant toAdd = new Restaurant();
-			for(int i=0; i<restaurantList.size(); i++) {
-				if(restaurantList.get(i).getName().equals(item)) {
-					toAdd = restaurantList.get(i);
-				}
-			}
-			grabbedList.add(toAdd);			
+		System.out.println("Adding old list size: " + grabbedList.size());
+		boolean exists = false;
+		for(int i=0; i<grabbedList.size(); i++ ) {
+			if(((Result) grabbedList.get(i)).getName().equals(item)) {
+				exists = true;
+			}					
 		}
-//		System.out.println("Adding new list size: " + grabbedList.size());
+		if(!exists) {
+			System.out.println("Inside of add");
+			if(type.equals("recipe")) {
+				Recipe toAdd = new Recipe();
+				for(int i=0; i<recipeList.size(); i++) {
+					if(recipeList.get(i).getName().equals(item)) {
+						toAdd = recipeList.get(i);
+					}
+				}
+				grabbedList.add(toAdd);
+			} else {
+				Restaurant toAdd = new Restaurant();
+				for(int i=0; i<restaurantList.size(); i++) {
+					if(restaurantList.get(i).getName().equals(item)) {
+						toAdd = restaurantList.get(i);
+					}
+				}
+				grabbedList.add(toAdd);			
+			}
+		}
+		System.out.println("Adding new list size: " + grabbedList.size());
 		toReturn.setCards(grabbedList);
 		toReturn.setName(listName);
 		return toReturn;
