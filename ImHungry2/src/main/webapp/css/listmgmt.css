@@ -87,12 +87,12 @@ body h1 {
 }
 
 /* line 77, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
-#container #cardDiv .row:nth-child(even) .recipeCard {
+#container #cardDiv .row:nth-child(even) .recipeCard, #container #cardDiv .row:nth-child(even) .restaurantCard {
   background-color: #B8B8B8;
 }
 
 /* line 82, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
-#container #cardDiv .row:nth-child(odd) .recipeCard {
+#container #cardDiv .row:nth-child(odd) .recipeCard, #container #cardDiv .row:nth-child(odd) .restaurantCard {
   background-color: #787878;
 }
 

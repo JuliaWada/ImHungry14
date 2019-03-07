@@ -77,12 +77,9 @@ public class RecipeData extends HttpServlet {
 			Recipe toFormat = recipeResults.get(i);
 			//TODO remove this and put in the actual code
 			//for now making sure everything works
-<<<<<<< HEAD
+
 			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe" + i + "\">" +  
-=======
-			out.println("<div class =\"recipeCard\" onclick = \"toRecipePage(this)\" id=\"recipe" + i + "\">" +
->>>>>>> julia
-							"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
+			"<p class=\"recipeTitle\">" + toFormat.getName() + "</p>" + 
 							"<p> Prep Time: " + toFormat.getPrepTime() + "</p>" +
 							"<p> Cook Time: " + toFormat.getCookTime() + "</p>" +
 							"</div>"
