@@ -51,14 +51,14 @@ public class ServletTestCase extends Mockito {
         assertTrue(stringWriter.toString().contains("cake"));
         assertEquals("text/html", response.getContentType());
 	}
-	
+
 
 	@Test
 	public void testSettingVariables() throws ServletException, IOException {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
-		
-		final Map<String, Object> attributes = new ConcurrentHashMap<String, Object>();     
+
+		final Map<String, Object> attributes = new ConcurrentHashMap<String, Object>();
 //		Mockito.doAnswer(new Answer<Void>() {
 ////		    @Override
 ////		    public Void answer(InvocationOnMock invocation) throws Throwable {
@@ -96,7 +96,7 @@ public class ServletTestCase extends Mockito {
 		printWriter.flush();
 		System.out.println("Stringwriter: " + stringWriter.toString());
 		System.out.flush();
-		assertEquals("Attribute query = ramen\r\n" + 
+		assertEquals("Attribute query = ramen\r\n" +
 				"Attribue numResults = 5\r\n", stringWriter.toString());
 
 	}
@@ -110,6 +110,9 @@ public class ServletTestCase extends Mockito {
 		when(request.getParameter("query")).thenReturn("ramen");
 		when(request.getParameter("numResults")).thenReturn("5");
 		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("Do Not Show")).thenReturn(new ResultList());
+		when(session.getAttribute("Favorites")).thenReturn(new ResultList());
+
 
 		ArrayList<Recipe> recipes = new ArrayList<>();
 		when(session.getAttribute("recipeList")).thenReturn(recipes);
