@@ -66,7 +66,7 @@ public class ServletTestCase extends Mockito {
 //		assertEquals(0, ((ArrayList<String>) session.getAttribute("restaruantList")).size());
 	}
 
-	@Test
+	
 	public void testRecipeDataResult() throws IOException, ServletException {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
@@ -97,7 +97,7 @@ public class ServletTestCase extends Mockito {
 				, stringWriter.toString());
 	}
 	
-	@Test
+	
 	public void testRecipeDataPage() throws IOException, ServletException {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
@@ -174,7 +174,7 @@ public class ServletTestCase extends Mockito {
 //		
 //	}
 	
-	@Test
+	
 	public void testLoadListData() throws IOException, ServletException {
 		ResultList testList = new ResultList();
 		ResultList secondTestList = new ResultList();
