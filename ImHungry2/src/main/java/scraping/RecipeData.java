@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.text.StringEscapeUtils;
 
+import listMgmt.ResultList;
+
 
 /**
  * Servlet implementation class RecipeData
@@ -50,8 +52,10 @@ public class RecipeData extends HttpServlet {
 			System.out.println("Num of Results: " + numResults);
 
 			HttpSession session = request.getSession();
-			ArrayList<Object> doNotShowList = (ArrayList<Object>) session.getAttribute("Do Not Show");
-			ArrayList<Object> favorites = (ArrayList<Object>) session.getAttribute("Favorites");
+			ResultList doNotShow = (ResultList) session.getAttribute("Do Not Show");
+			ArrayList<Object> doNotShowList = doNotShow.getCards();
+			ResultList favs = (ResultList) session.getAttribute("Favorites");
+			ArrayList<Object> favorites = favs.getCards();
 
 			displayResults(request, response, out, query, numResults, doNotShowList, favorites);
 
