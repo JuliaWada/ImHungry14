@@ -47,12 +47,7 @@ public class RecipeData extends HttpServlet {
 			int numResults = Integer.parseInt(request.getParameter("numResults").trim());
 			System.out.println("Query: " + query);
 			System.out.println("Num of Results: " + numResults);
-			try {
 				displayResults(request, response, out, query, numResults);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		} else if (action.equals("page")) {
 			displayPage(request, response, out, query);
 		}
@@ -69,7 +64,7 @@ public class RecipeData extends HttpServlet {
      * @throws IOException
      * @throws InterruptedException
      */
-    public void displayResults(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String query, int numResults) throws IOException, InterruptedException{
+    public void displayResults(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String query, int numResults) throws IOException{
     	RecipeLinkScraper scraper = new RecipeLinkScraper();
 		ArrayList<Recipe> recipeResults;
 		recipeResults = scraper.scrapeRecipeLinks(query, numResults);

@@ -23,7 +23,7 @@ public class RecipeLinkScraper {
      * @throws InterruptedException 
      * @throws IOException 
      */
-    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) throws InterruptedException, IOException {
+    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) throws IOException {
     	ArrayList<Recipe> toReturn = new ArrayList<Recipe>();
     	ArrayList<String> recipeLinks = new ArrayList<String>();
     	Document doc = null;
@@ -49,7 +49,13 @@ public class RecipeLinkScraper {
 	    			System.out.println("***************Start***************");
 	    			System.out.println("Link " + i + ": " + recipeLinks.get(i));
 	    			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
-	    			TimeUnit.SECONDS.sleep(1);
+	    			
+	    			long start = System.currentTimeMillis();
+	    			long goal = 1300;
+	    			long curr = System.currentTimeMillis();
+	    			while(curr - start < goal) {
+	    				curr = System.currentTimeMillis();
+	    			}
 	    			toReturn.add(toAdd);
 	    		}
     		}
@@ -72,7 +78,7 @@ public class RecipeLinkScraper {
      * @throws IOException 
      */
     
-    public Recipe scrapeRecipeDetails(String url) throws InterruptedException, IOException {
+    public Recipe scrapeRecipeDetails(String url) throws IOException {
     	String html = "";
     	String title = "";
 		String prepTime = "";
