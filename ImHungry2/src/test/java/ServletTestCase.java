@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import listMgmt.ResultList;
 import scraping.CollageData;
@@ -47,26 +51,57 @@ public class ServletTestCase extends Mockito {
         assertTrue(stringWriter.toString().contains("cake"));
         assertEquals("text/html", response.getContentType());
 	}
+	
 
 	@Test
 	public void testSettingVariables() throws ServletException, IOException {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
+		
+		final Map<String, Object> attributes = new ConcurrentHashMap<String, Object>();     
+//		Mockito.doAnswer(new Answer<Void>() {
+////		    @Override
+////		    public Void answer(InvocationOnMock invocation) throws Throwable {
+////		        String key = invocation.getArgumentAt(0, String.class);
+////		        Object value = invocation.getArgumentAt(1, Object.class);
+////		        attributes.put(key, value);
+////		        System.out.println("put attribute key="+key+", value="+value);
+////		        return null;
+////		    }
+////		}).when(request).setAttribute(Mockito.anyString(), Mockito.anyObject());
+////		Mockito.doAnswer(new Answer<Object>() {
+////		    @Override
+////		    public Object answer(InvocationOnMock invocation) throws Throwable {
+////		        String key = invocation.getArgumentAt(0, String.class);
+////		        Object value = attributes.get(key);
+////		        System.out.println("get attribute value for key="+key+" : "+value);
+////		        return value;
+////		    }
+//		}).when(request).getAttribute(Mockito.anyString());
+
 		HttpSession session = mock(HttpSession.class);
 		when(request.getParameter("extra")).thenReturn("settingVariables");
 		when(request.getParameter("query")).thenReturn("ramen");
 		when(request.getParameter("numResults")).thenReturn("5");
 		when(request.getSession(true)).thenReturn(session);
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(stringWriter);
+		when(response.getWriter()).thenReturn(printWriter);
+        when(response.getContentType()).thenReturn("text/html");
+        when(session.getAttribute("query")).thenReturn("ramen");
+        when(session.getAttribute("numResults")).thenReturn("5");
 
 		new scraping.CollageData().service(request, response);
+		verify(request, atLeast(1)).getParameter("query");
+		printWriter.flush();
+		System.out.println("Stringwriter: " + stringWriter.toString());
+		System.out.flush();
+		assertEquals("Attribute query = ramen\r\n" + 
+				"Attribue numResults = 5\r\n", stringWriter.toString());
 
-//		assertEquals("ramen", session.getAttribute("query"));
-//		assertEquals("5", session.getAttribute("numResults"));
-//		assertEquals(0, ((ArrayList<String>) session.getAttribute("recipeList")).size());
-//		assertEquals(0, ((ArrayList<String>) session.getAttribute("restaruantList")).size());
 	}
 
-
+	@Test
 	public void testRecipeDataResult() throws IOException, ServletException {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
@@ -97,7 +132,7 @@ public class ServletTestCase extends Mockito {
 				, stringWriter.toString());
 	}
 
-
+	@Test
 	public void testRecipeDataPage() throws IOException, ServletException {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
