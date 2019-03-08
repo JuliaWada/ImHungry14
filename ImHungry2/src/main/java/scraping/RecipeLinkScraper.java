@@ -89,7 +89,12 @@ public class RecipeLinkScraper {
 		ArrayList<String> instructions = new ArrayList<String>();
 		//opening the links grabbed and adding new things to it 
 		Document doc = null;
-
+			long start = System.currentTimeMillis();
+			long goal = 1000;
+			long curr = System.currentTimeMillis();
+			while(curr - start < goal) {
+				curr = System.currentTimeMillis();
+			}
 			doc = Jsoup.connect(url).userAgent(USER_AGENT).get();
 			title = doc.select("h1#recipe-main-content").text();
 			System.out.println("Title: " + title);
