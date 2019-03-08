@@ -19,7 +19,18 @@ body {
   padding-left: 2%;
 }
 
-/* line 19, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 18, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+#container #infoDiv a {
+  text-decoration: none;
+  color: black;
+}
+
+/* line 22, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+#container #infoDiv .website {
+  margin-bottom: 30px;
+}
+
+/* line 27, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv {
   flex-basis: 30%;
   padding-top: 2%;
@@ -28,7 +39,7 @@ body {
   align-items: center;
 }
 
-/* line 26, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 34, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv .button {
   padding: 3px 5px;
   width: 40%;
@@ -38,50 +49,9 @@ body {
   border-radius: 2px;
 }
 
-/* line 34, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #buttonDiv #dropdown {
-  margin-top: 4%;
-  width: 40%;
-  padding: 3px 0px 3px 1px;
-  margin-bottom: 0;
-  border: 1px solid black;
-  background-color: white;
-}
-
 /* line 42, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #buttonDiv #dropdown #dropAction {
-  float: right;
-  margin-right: 5%;
-}
-
-/* line 47, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #buttonDiv #dropdown #dropText {
-  float: left;
-}
-
-/* line 51, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #buttonDiv #dropdownContent {
+#container #buttonDiv .menu {
   width: 40%;
-  visibility: hidden;
-  margin-top: 0;
-}
-
-/* line 56, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #buttonDiv #dropdownContent ul {
-  margin-top: 0;
-  background-color: white;
-  width: 100%;
-  list-style-type: none;
-}
-
-/* line 61, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #buttonDiv #dropdownContent ul li {
-  align-self: flex-start;
-}
-
-/* line 64, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #buttonDiv #dropdownContent ul li:hover {
-  background-color: rgba(129, 207, 224, 0.7);
 }
 
 /*# sourceMappingURL=../css/restaurant.map */

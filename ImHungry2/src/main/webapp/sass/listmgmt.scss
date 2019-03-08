@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+body{
+	background-color: #f5f5f5;
+	
+	h1{
+		padding-left: 4%;
+		padding-top: 2%;
+	}
+}
+
+#container{
+	display: flex;
+	width: 100%;
+	#cardDiv{
+		width: 80%;
+		display:flex;
+		flex-direction:column;
+		
+		.remove{
+			background-color: black;
+			color: grey;
+			border-radius: 50%;
+			text-align: center;
+			font-size: 30px;
+			width: 30px;
+			height: 40px; 
+		}
+	}
+	#buttonDiv{
+		display: flex;
+		width: 20%;
+		flex-direction: column;
+		align-items: center;
+	}
+	.button{
+		padding: 3px 5px;
+		width: 145px;  
+		font-size: 20px;
+		margin-bottom: 6%;
+		background-color: white;
+		border-radius: 2px;
+	}
+	
+	.menu{
+		width: 145px;
+	}
+	
+	#cardDiv{
+		.row {
+			display: flex;
+			padding-left: 5%;
+			margin-top: 1%;
+			
+			.buttons{
+				display: flex;
+				flex-direction: column;
+				padding-left: 5%;
+				
+				button{
+					padding: 3px 5px;
+					width: 145px;  
+					font-size: 20px;
+					margin-bottom: 6%;
+					background-color: white;
+					border-radius: 2px;
+				}
+			}
+		}
+		
+		.row:nth-child(even){
+			.recipeCard{
+				background-color: #B8B8B8; 
+			}
+		}
+		.row:nth-child(odd){
+			.recipeCard{
+				background-color: #787878;
+			}
+		}
+	}
+}
+.recipeCard{
+	
+	width: 400px;
+	height: 100px;
+	p:nth-child(2){
+		float: left;
+		position: relative;
+		top: 60px;
+	}
+	p:nth-child(3){ 
+		float: right;
+		position: relative;
+		top: 60px;
+	}
+}
+
+
+.restaurantCard{
+	width: 400px;
+	height: 100px;
+	display: flex;
+	
+	.information{
+		height: 100px;
+		flex: 1 1 80%;
+		 p:nth-child(2){ 
+			margin-bottom: 8px;
+		}
+		p:nth-child(1){ 
+			margin-bottom: 8px;
+		}  
+	}
+	
+	.priceDiv{
+		height: 100px;
+		flex: 1 1 20%; 
+		display: flex;
+		align-items:center;
+		justify-content: center;
+		border-left: 2px solid black;
+	}
+}

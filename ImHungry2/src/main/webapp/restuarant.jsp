@@ -7,54 +7,69 @@
 <meta charset="UTF-8">
 <title>I'm Hungry</title>
 </head>
-<body>
+<body onload = "loadPage()">
 	<div id ="container">
 		<div id = "infoDiv">
-			<h1>Ramen Kenjo</h1>
-			<p>Phone Number: <span id = "phoneNumber">(213)-536-5922</span></p>
-			<br>
-			<p >Website: <span id ="url">https://www.uscvillage.com/ramen</span></p>
-			<br>
-			<p>Address: <span id ="address">929 W Jefferson Blvd, Los Angeles, CA 90007</span></p>
+			
 		</div>
 		<div id ="buttonDiv">
 			<button onclick = "toPrintVersion()" class = "button">Printable Version</button>
 			<button onclick = "toResults()" class = "button">Back to Results</button>
+			<select class = "menu" id="listOptions">
+				 <option value = "0"> </option>
+				 <option value="1">Favorites</option>
+   				 <option value="2">To Explore</option>
+   				 <option value="3">Do Not Show</option>
+			</select>
 			<button onclick = "toAddtoList()" class = "button">Add to List</button>
-			<div id = "dropdown">
-				<div id = "dropText"></div>
-				<span id = "dropAction">&#9660</span>
-			</div>
-			<div id = "dropdownContent">
-				<ul>
-					<li>Favorites</li>
-					<li>To Explore</li>
-					<li>Do Not Show</li>
-				</ul>
-			</div>
 		</div>
 	</div>
 	<script>
+	var name;
+	function loadPage() {
+		var url = window.location.href;
+		var split = url.split("?");
+		var args = split[1];
+		console.log(args);
+		split = args.split("=");
+		name = split[1];
+		name = name.replace(/%20/g, " ");
+		console.log(name);
+		
+		var xhttp = new XMLHttpRequest();
+
+		xhttp.onreadystatechange = function () {
+			document.getElementById("infoDiv").innerHTML = this.responseText;
+		}
+		xhttp.open("POST", "restaurantMgmt?query=" + encodeURIComponent(name), true);
+		xhttp.send();
+	}
 	
 	function toPrintVersion(){
 		document.querySelector("#buttonDiv").style.visibility = "hidden";
-		document.querySelector("#dropdownContent").style.visibility = "hidden";
 	}
 	
 	function toResults(){
 		window.location.href = "results.jsp";
 	}
-	document.querySelector("#dropAction").onclick = function(){
-		document.querySelector("#dropdownContent").style.visibility = "visible";
+	
+	function toAddtoList(){
+		var list = document.getElementById("listOptions");
+		var option = list.options[list.selectedIndex].text;
+		if(option != "") {
+			console.log("Adding " + name + " to list ");
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				console.log("Successfully added");
+			}
+			var clean = encodeURIComponent(name);
+			console.log(clean);
+			xhttp.open("POST", "listMgmtData?action=add&type=restaurant&itemName=" + clean + "&listName=" + option, true);
+			xhttp.send();
+		}
+		
 	}
 	
-	var list = document.getElementsByTagName("li");
-	for(let i = 0; i < list.length; i++){
-		list[i].onclick = function(){
-			document.querySelector("#dropText").innerHTML = list[i].innerHTML;
-			document.querySelector("#dropdownContent").style.visibility = "hidden";
-		}
-	}
 	</script>
 </body>
 </html>

@@ -14,6 +14,14 @@ body {
 	#infoDiv{
 		flex-basis: 70%;
 		padding-left: 2%;
+		
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		.website{
+			margin-bottom: 30px;
+		}
 	}
 	
 	#buttonDiv{
@@ -31,41 +39,9 @@ body {
 			background-color: white;
 			border-radius: 2px;
 		}
-		#dropdown{
-			margin-top: 4%;
+		.menu{
 			width: 40%;
-			padding: 3px 0px 3px 1px;
-			margin-bottom: 0;
-			border: 1px solid black;
-			background-color: white;
-			
-			#dropAction{
-				float: right;
-				margin-right: 5%;
-			}
-			
-			#dropText{
-				float: left;
-			}
 		}
-		#dropdownContent{
-			width: 40%;
-			visibility: hidden;
-			margin-top: 0;
-			
-			ul{
-				margin-top: 0;
-				background-color: white;
-				width: 100%;
-				list-style-type: none;
-				li{
-					align-self: flex-start;
-					
-					&:hover{
-						background-color: rgba(129, 207, 224, .7);
-					}
-				}
-			}
-		}
+		
 	}
 }
