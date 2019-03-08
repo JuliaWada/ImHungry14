@@ -51,7 +51,7 @@ public class CollageData extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		String extra = request.getParameter("extra");
-		if(extra.equals("")) {
+		if(extra == null) {
 			extra = "getCollage";
 		}
 		String query = request.getParameter("query").trim();
@@ -63,8 +63,8 @@ public class CollageData extends HttpServlet {
 			HttpSession session2 = request.getSession(true);
 			session2.setAttribute("query", query);
 			System.out.println("Collage Query: " + session2.getAttribute("query"));
-			session2.setAttribute(" Collage numResults", numResults);
-			System.out.println("NumResults: " + session2.getAttribute("numResults"));
+			session2.setAttribute("numResults", numResults);
+			System.out.println("Collage NumResults: " + session2.getAttribute("numResults"));
 			
 			//for current search results
 			ArrayList<Recipe> recipes = new ArrayList<>();

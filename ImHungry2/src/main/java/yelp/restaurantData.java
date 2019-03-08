@@ -19,6 +19,7 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.DirectionsResult;
 
+import listMgmt.ResultList;
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import scraping.Recipe;
@@ -62,8 +63,10 @@ public class restaurantData extends HttpServlet {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		ArrayList<Object> doNotShowList = (ArrayList<Object>) session.getAttribute("Do Not Show");
-		ArrayList<Object> favorites = (ArrayList<Object>) session.getAttribute("Favorites");
+		ResultList doNotShow = (ResultList) session.getAttribute("Do Not Show");
+		ArrayList<Object> doNotShowList = doNotShow.getCards();
+		ResultList favs = (ResultList) session.getAttribute("Favorites");
+		ArrayList<Object> favorites = favs.getCards();
 		
 		
 		restaurantArray = checkDoNotShow(restaurantArray, doNotShowList);
