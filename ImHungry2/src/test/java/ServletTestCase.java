@@ -32,7 +32,7 @@ public class ServletTestCase extends Mockito {
 		HttpServletRequest request = mock(HttpServletRequest.class);
 	    HttpServletResponse response = mock(HttpServletResponse.class);
 
-	    when(request.getParameter("extra")).thenReturn("");
+	    when(request.getParameter("extra")).thenReturn(null);
 	    when(request.getParameter("query")).thenReturn("cake");
 
 	    StringWriter stringWriter = new StringWriter();
