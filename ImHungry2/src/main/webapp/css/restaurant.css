@@ -20,17 +20,25 @@ body {
 }
 
 /* line 18, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #infoDiv a {
-  text-decoration: none;
-  color: black;
+#container #infoDiv img {
+  width: 200px;
 }
 
 /* line 22, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
-#container #infoDiv .website {
-  margin-bottom: 30px;
+#container #infoDiv a {
+  text-decoration: none;
+  color: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-/* line 27, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 30, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+#container #infoDiv #webDiv {
+  width: 450px;
+  word-wrap: break-word;
+}
+
+/* line 36, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv {
   flex-basis: 30%;
   padding-top: 2%;
@@ -39,7 +47,7 @@ body {
   align-items: center;
 }
 
-/* line 34, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 43, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv .button {
   padding: 3px 5px;
   width: 40%;
@@ -49,9 +57,25 @@ body {
   border-radius: 2px;
 }
 
-/* line 42, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+/* line 51, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
 #container #buttonDiv .menu {
   width: 40%;
+}
+
+/* line 57, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+#container #instructionsList {
+  list-style-type: none;
+}
+
+@media (max-width: 500px) {
+  /* line 63, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+  .button {
+    font-size: 10px !important;
+  }
+  /* line 66, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/restaurant.scss */
+  #webDiv {
+    width: 250px !important;
+  }
 }
 
 /*# sourceMappingURL=../css/restaurant.map */

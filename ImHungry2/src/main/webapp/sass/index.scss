@@ -18,6 +18,7 @@ body {
 		width: 50px;
 		text-align: center;
 	}
+	
 	#titleDiv {
 	font-size: 40px;
 		h1 {
@@ -29,6 +30,7 @@ body {
 	#searchDiv{
 	padding-left: 24%;
 	margin-top: 0;
+	
 		#hoverMessage {
 			padding-left: 21.5%;
 			visibility: hidden;
@@ -80,6 +82,10 @@ body {
 		}
 		#searchDiv{
 			padding-left: 10%;
+			
+			#hoverMessage{
+				padding-left: 50%;
+			}
 		}
 	}
 }

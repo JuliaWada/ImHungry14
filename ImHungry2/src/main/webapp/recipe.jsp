@@ -33,6 +33,7 @@
 			</select>
 			<br>
 		<button onclick ="toAddtoList()" class = "button">Add to List</button>
+	</div>	
 </div>
 <script>
 var name;

@@ -15,12 +15,21 @@ body {
 		flex-basis: 70%;
 		padding-left: 2%;
 		
+		img{
+			width: 200px;
+		}
+		
 		a{
 			text-decoration: none;
 			color: black;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		
 		}
-		.website{
-			margin-bottom: 30px;
+		
+		#webDiv{
+			width: 450px;
+			word-wrap: break-word;
 		}
 	}
 	
@@ -43,5 +52,18 @@ body {
 			width: 40%;
 		}
 		
+	}
+	
+	#instructionsList{
+		list-style-type: none;
+	}
+}
+
+@media(max-width: 500px){
+	.button{
+		font-size: 10px !important;
+	}
+	#webDiv{
+		width: 250px !important;
 	}
 }

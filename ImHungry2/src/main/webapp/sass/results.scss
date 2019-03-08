@@ -21,8 +21,8 @@ body {
 		height: 300px;
 		justify-content: space-around;
 		.collageImg{
-			max-width: 180px;
-			max-height: 50%;
+			width: 150px;
+			height: 50%;
 		}
 	}
 	
@@ -68,12 +68,12 @@ body {
 	}
 }
 #resultDiv{
-	
+	display: flex;
+	width: 100%;
 	#restuarantName, #recipeName{
 		display: none;
 	}
-	display: flex;
-	width: 100%;
+	
 	/*height: 500px;*/
 	#restaurantDiv{
 		display: flex;
@@ -166,19 +166,26 @@ body {
 	
 	#topDiv{
 		height: 200px;
+		
 		#collageDiv{
 			height: 150px;
 			
 			.collageImg{
-				max-width: 80px;
-				max-height: 35%;
+				width: 80px;
+				height: 30%;
 			}
 			
+		}
+		#buttonDiv{
+			.button{
+				font-size: 10px;
+			}
 		}
 	}
 	
 	#resultDiv{
 		flex-direction: column;
+		align-items: center;
 		#restaurantDiv{
 			width: 100%;
 		}
@@ -190,5 +197,6 @@ body {
 			font-size: 1.8em;
 			font-weight: bold;
 		}
+		
 	}
 }

@@ -87,8 +87,11 @@ public class LoadList extends HttpServlet {
 						"        						<p>" + restaurantToDisplay.getPricing() + "</p>\r\n" + 
 						"        					</div>\r\n" + 
 						"        			 </div>" +
-					"<divclass =\"buttons\">" +
+
+
+					"<div class =\"buttons\">" +
 						"<button class=\"removeButton\" onclick=\"removeFromList(this)\" name=\"" + restaurantToDisplay.getName() + "\">Remove From List</button>" +
+
 					"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
 					"				 <option value = \"0\"> </option>\r\n" + 
 					"				 <option value=\"1\">Favorites</option>\r\n" + 

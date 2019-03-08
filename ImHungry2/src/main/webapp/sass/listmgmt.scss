@@ -22,15 +22,6 @@ body{
 		display:flex;
 		flex-direction:column;
 		
-		.remove{
-			background-color: black;
-			color: grey;
-			border-radius: 50%;
-			text-align: center;
-			font-size: 30px;
-			width: 30px;
-			height: 40px; 
-		}
 	}
 	#buttonDiv{
 		display: flex;
@@ -74,12 +65,12 @@ body{
 		}
 		
 		.row:nth-child(even){
-			.recipeCard{
+			.recipeCard, .restaurantCard{
 				background-color: #B8B8B8; 
 			}
 		}
 		.row:nth-child(odd){
-			.recipeCard{
+			.recipeCard, .restaurantCard{
 				background-color: #787878;
 			}
 		}
@@ -125,5 +116,19 @@ body{
 		align-items:center;
 		justify-content: center;
 		border-left: 2px solid black;
+	}
+}
+
+@media(max-width: 700px){
+ 	#cardDiv{
+		.row {
+			display: flex;
+			flex-direction: column;
+			
+			.buttons{
+				flex-direction: row !important;
+				padding-left: 0% !important;
+			}
+		}
 	}
 }

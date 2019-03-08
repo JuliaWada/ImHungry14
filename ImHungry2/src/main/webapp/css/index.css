@@ -23,24 +23,24 @@ body {
   text-align: center;
 }
 
-/* line 21, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 22, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #titleDiv {
   font-size: 40px;
 }
 
-/* line 23, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 24, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #titleDiv h1 {
   padding: 0;
   margin: 0;
 }
 
-/* line 29, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 30, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #searchDiv {
   padding-left: 24%;
   margin-top: 0;
 }
 
-/* line 32, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 34, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #searchDiv #hoverMessage {
   padding-left: 21.5%;
   visibility: hidden;
@@ -49,30 +49,30 @@ body {
   height: 25%;
 }
 
-/* line 38, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 40, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #searchDiv #hoverMessage img {
   height: auto;
   width: 100%;
 }
 
-/* line 45, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 47, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #searchDiv #formDiv #searchBar {
   padding: 1% 20% 1% 0%;
 }
 
-/* line 49, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 51, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #searchDiv #formDiv #numResults {
   margin-left: 5%;
   padding: 1%;
 }
 
-/* line 53, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 55, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container #searchDiv #formDiv input {
   font-size: 20px;
   color: black;
 }
 
-/* line 61, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+/* line 63, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
 #container button {
   color: purple;
   font-weight: bold;
@@ -86,13 +86,17 @@ body {
 }
 
 @media (max-width: 767px) {
-  /* line 78, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+  /* line 80, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
   #container #titleDiv {
     font-size: 30px;
   }
-  /* line 81, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+  /* line 83, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
   #container #searchDiv {
     padding-left: 10%;
+  }
+  /* line 86, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/index.scss */
+  #container #searchDiv #hoverMessage {
+    padding-left: 50%;
   }
 }
 

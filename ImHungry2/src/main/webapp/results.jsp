@@ -19,7 +19,7 @@
    				 <option value="3">Do Not Show</option>
 			</select>
 			<button id = "Lbutton" onclick = "toManageList()" class = "button">Manage List</button>
-			<button id = "RTSbutton" onclick = "toSearchPage()" class = "button">Return to Search</button>
+			<button id = "RTSbutton" onclick = "toSearchPage()" class = "button">Return to Search Page</button>
 		</div>
 	</div>
 	<div id ="titleDiv">
@@ -80,7 +80,7 @@
 		xhttp.send();
 		console.log("collage Data sent to backend");
 	}
-
+ 
 	function getRecipes(toSend, numResults) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -91,7 +91,7 @@
 		xhttp.send();
 		console.log("recipe data sent to Backend");
 	}
-
+  
 	function getRestaurants(toSend, numResults) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
