@@ -6,12 +6,16 @@ import scraping.Result;
 
 public class ResultList {
 	String name = "";
-	ArrayList<Object> cards;
+	ArrayList<Object> cards = new ArrayList<>();
 	
 	public ResultList(String name, ArrayList<Object> cards) {
 		super();
 		this.name = name;
 		this.cards = cards;
+	}
+
+	public ResultList() {
+		
 	}
 
 	public String getName() {
@@ -42,9 +46,10 @@ public class ResultList {
 				System.out.println("Removed: " + ((Result)cards.get(i)).getName());
 				cards.remove(i);
 				System.out.println("Remove " + name + " - new list size: " + cards.size());
-				return;
+				break;
 			}
 		}
+		return;
 	}
 	//moving a card should be getting the item adding it to another
 	//and deleting it from the original list

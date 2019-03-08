@@ -35,19 +35,23 @@ public class RecipeLinkScraper {
     			doc = Jsoup.connect("https://www.allrecipes.com/search/results/?wt=" + query + "&sort=re&page=" + currPage).userAgent(USER_AGENT).get();
         		Elements linkResults = doc.select("div.fixed-recipe-card__info > a");
         		System.out.println("linkResults: " + linkResults.size());
-        		for(int j=0; j<linkResults.size(); j++) {
-        			recipeLinks.add(linkResults.get(j).attr("href"));
+        		if(linkResults.size() > 1) {
+        			for(int j=0; j<linkResults.size(); j++) {
+            			recipeLinks.add(linkResults.get(j).attr("href"));
+            		}
+            		System.out.println("Page number: " + currPage);
+            		currPage++;
+        			break;
         		}
-        		System.out.println("Page number: " + currPage);
-        		currPage++;
     		}
-    		
-    		for(int i =0; i<numResults; i++) {
-    			System.out.println("***************Start***************");
-    			System.out.println("Link " + i + ": " + recipeLinks.get(i));
-    			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
-    			TimeUnit.SECONDS.sleep(1);
-    			toReturn.add(toAdd);
+    		if(recipeLinks.size() > 0) {
+	    		for(int i =0; i<numResults; i++) {
+	    			System.out.println("***************Start***************");
+	    			System.out.println("Link " + i + ": " + recipeLinks.get(i));
+	    			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
+	    			TimeUnit.SECONDS.sleep(1);
+	    			toReturn.add(toAdd);
+	    		}
     		}
     	Collections.sort(toReturn);
     	return toReturn;
@@ -91,9 +95,15 @@ public class RecipeLinkScraper {
 			prepTime = prepTime.replace("h", "hour");
 			prepTime = prepTime.replaceAll("m", "mins");			
 			System.out.println("Prep Time: " + prepTime);
+			if(prepTime.equals("")) {
+				prepTime = "N/A";
+			}
 			cookTime = doc.select("[itemprop='cookTime'] > span").text().trim();
 			cookTime = cookTime.replace("h", "hour");
 			cookTime = cookTime.replaceAll("m", "mins");
+			if(cookTime.equals("")) {
+				cookTime = "N/A";
+			}
 			System.out.println("Cook Time: " + cookTime);
 			image = doc.select("img.rec-photo").attr("src");
 			System.out.println("Image URL: " + image);
@@ -114,7 +124,7 @@ public class RecipeLinkScraper {
 			for(Element instruct : instructionResults) {
 				String toCheck = instruct.text();
 				if(!toCheck.equals("")) {
-					String finalInstruction = instruct.text().replace(" Watch now.", "");
+					String finalInstruction = instruct.text().replace(" Watch Now", "");
 					instructions.add(finalInstruction);
 				}
 			}
@@ -132,7 +142,7 @@ public class RecipeLinkScraper {
     	//if the string has the hour in it
     	int finalTime = 0;
     	if(time.equals("")) {
-    		return -1;
+    		return 1000;
     	}
     	String replaced = time.replace(" m", "");
     	String[] split = replaced.split(" h ");

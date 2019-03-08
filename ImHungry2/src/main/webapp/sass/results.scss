@@ -22,7 +22,7 @@ body {
 		justify-content: space-around;
 		.collageImg{
 			max-width: 180px;
-			max-height: 50% !important;
+			max-height: 50%;
 		}
 	}
 	
@@ -31,7 +31,11 @@ body {
 		width: 30%;
 		flex-direction: column;
 		align-items: flex-end;
+		justify-content: space-evenly;
 		
+		.menu{
+			width: 40%;
+		}
 		.button{
 			padding: 3px 5px;
 			width: 40%;
@@ -40,41 +44,7 @@ body {
 			background-color: white;
 			border-radius: 2px;
 		}
-		 #dropdown{
-			margin-top: 4%;
-			content: " ";
-			width: 40%;
-			padding: 3px 0px 3px 1px;
-			border: 1px solid black;
-			background-color: white;
-			
-			#dropAction{
-				float: right;
-				margin-right: 5%;
-			}
-			
-			#dropText{
-				float: left;
-			}
-		}
-		#dropdownContent{
-			display: flex;
-			width: 40%;
-			margin-bottom: 15px;
-			visibility: hidden;
-			ul{
-				background-color: white;
-				width: 100%;
-				list-style-type: none;
-				li{
-					align-self: flex-start;
-					
-					&:hover{
-						background-color: rgba(129, 207, 224, .7);
-					}
-				}
-			}
-		}
+		 
 	} 
 	
 }
@@ -98,24 +68,41 @@ body {
 	}
 }
 #resultDiv{
+	
+	#restuarantName, #recipeName{
+		display: none;
+	}
 	display: flex;
 	width: 100%;
-	height: 500px;
-	border: 1px solid red;
+	/*height: 500px;*/
 	#restaurantDiv{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		width: 50%;
-		height: 500px;
-		overflow-y: scroll;
-		border: 2px solid black;
+		/* height: 500px; */
+
+		.restaurantCard{
+			margin-top: 3%;
+		}
+		.restaurantCard:nth-child(even){
+			background-color: #B8B8B8;
+
+		}
+		.restaurantCard:nth-child(odd){
+			background-color: #787878;
+			
+		}
 	}
 	#recipeDiv{
 		width: 50%;
-		height: 500px;
-		overflow-y: scroll;
-		border: 2px solid green;
+		/* height: 500px; */
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		
 		.recipeCard{
-			margin-bottom: 3%;
+			margin-top: 3%;
 		}
 		.recipeCard:nth-child(even){
 			background-color: #B8B8B8;
@@ -127,4 +114,81 @@ body {
 		}
 	}
 }
-@import "card"
+
+.recipeCard{
+	
+	width: 400px;
+	height: 100px;
+	p:nth-child(2){
+		float: left;
+		position: relative;
+		top: 60px;
+	}
+	p:nth-child(3){ 
+		float: right;
+		position: relative;
+		top: 60px;
+	}
+}
+
+
+.restaurantCard{
+	width: 400px;
+	height: 100px;
+	display: flex;
+	
+	.information{
+		height: 100px;
+		flex: 1 1 80%;
+		 p:nth-child(2){ 
+			margin-bottom: 8px;
+		}
+		p:nth-child(1){ 
+			margin-bottom: 8px;
+		}  
+	}
+	
+	.priceDiv{
+		height: 100px;
+		flex: 1 1 20%; 
+		display: flex;
+		align-items:center;
+		justify-content: center;
+		border-left: 2px solid black;
+	}
+}
+
+@media(max-width: 767px){
+	#listTitleDiv{
+		visibility: hidden;
+	}
+	
+	
+	#topDiv{
+		height: 200px;
+		#collageDiv{
+			height: 150px;
+			
+			.collageImg{
+				max-width: 80px;
+				max-height: 35%;
+			}
+			
+		}
+	}
+	
+	#resultDiv{
+		flex-direction: column;
+		#restaurantDiv{
+			width: 100%;
+		}
+		#recipeDiv{
+			width: 100%;
+		}
+		#restuarantName, #recipeName{
+			display: block;
+			font-size: 1.8em;
+			font-weight: bold;
+		}
+	}
+}

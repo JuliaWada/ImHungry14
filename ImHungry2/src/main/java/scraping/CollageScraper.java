@@ -36,8 +36,8 @@ public ArrayList<String> scrapeCollage (String query) throws IOException {
             	splitAgain = split[j].split(",\"");
             	if(j != 0) {
             		splitAgain[j] = StringEscapeUtils.escapeJava(splitAgain[j]);
-            		System.out.println(splitAgain[0]);
-            		toReturn.add(StringEscapeUtils.escapeJava(splitAgain[0]));
+            		System.out.println("Unescaping: " + splitAgain[0]);
+            		toReturn.add(StringEscapeUtils.unescapeJava(splitAgain[0]));
             	}            	
             }
             

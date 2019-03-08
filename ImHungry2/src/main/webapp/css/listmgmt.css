@@ -96,24 +96,57 @@ body h1 {
   background-color: #787878;
 }
 
-/* line 3, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
+/* line 88, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
 .recipeCard {
   width: 400px;
   height: 100px;
 }
 
-/* line 7, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
+/* line 92, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
 .recipeCard p:nth-child(2) {
   float: left;
   position: relative;
-  top: 60%;
+  top: 60px;
 }
 
-/* line 12, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/_card.scss */
+/* line 97, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
 .recipeCard p:nth-child(3) {
   float: right;
   position: relative;
-  top: 60%;
+  top: 60px;
+}
+
+/* line 105, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
+.restaurantCard {
+  width: 400px;
+  height: 100px;
+  display: flex;
+}
+
+/* line 110, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
+.restaurantCard .information {
+  height: 100px;
+  flex: 1 1 80%;
+}
+
+/* line 113, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
+.restaurantCard .information p:nth-child(2) {
+  margin-bottom: 8px;
+}
+
+/* line 116, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
+.restaurantCard .information p:nth-child(1) {
+  margin-bottom: 8px;
+}
+
+/* line 121, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/listmgmt.scss */
+.restaurantCard .priceDiv {
+  height: 100px;
+  flex: 1 1 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 2px solid black;
 }
 
 /*# sourceMappingURL=../css/listmgmt.map */

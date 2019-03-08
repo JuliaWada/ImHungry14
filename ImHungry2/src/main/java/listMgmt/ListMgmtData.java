@@ -1,6 +1,7 @@
 package listMgmt;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -32,219 +33,134 @@ public class ListMgmtData extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * grabs the necessary variables from the Session 
+	 * then it calls the decider function to decide what action to take in regards to List management
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
+		System.out.println("Inside of ListMgmtData");
 		HttpSession session2 = request.getSession();
 		PrintWriter out = response.getWriter();
-		System.out.println("Inside of ListMgmtData");
 		String action = request.getParameter("action").trim();
 		String listName = request.getParameter("listName").trim();
-		if(action.equals("loadList")) {
-			//Creating Data for now because I don't want to mess with results page
-			ArrayList<String> instructions = new ArrayList<String>();
-			instructions.add("1) Get cookie dough");
-			instructions.add("2) Eat the cookie dough with chocolate chips");
-			ArrayList<String> ingredients = new ArrayList<String>();
-			ingredients.add("cookie dough");
-			ingredients.add("chocoloate chips");
-			Recipe r1 = new Recipe("Cookie dough " + listName , "pie", "15 min", 0, "30 mins", ingredients, instructions);
-			Recipe r2 = new Recipe("Chocolate chips " + listName, "chocolate", "20 mins", 0, "45 mins", ingredients, instructions);
-			ArrayList<Object> toAdd = new ArrayList<Object>();
-			toAdd.add(r1);
-			toAdd.add(r2);
-			ResultList favorites = new ResultList("Favorites", toAdd);
-			ResultList doNotShow = new ResultList("Do Not Show", toAdd);
-			ResultList toExplore = new ResultList("To Explore", toAdd);
-			session2.setAttribute("Favorites", favorites);
-			session2.setAttribute("To Explore", toExplore);
-			session2.setAttribute("Do Not Show", doNotShow);
-			ResultList fromFront = (ResultList)session2.getAttribute(listName);
-			ArrayList<Object> grabbedList = fromFront.getCards();
-	//End of creating testing data
-			System.out.println("Grabbed list: " + fromFront.getName());
-			Recipe recipeToDisplay;
-			Restaurant restaurantToDisplay;
-			for(int i=0; i<grabbedList.size(); i++) {
-				System.out.println("What type of class is " + i + ": " + grabbedList.get(i).getClass().getName());
-				if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
-					recipeToDisplay = (Recipe)grabbedList.get(i);
-					out.println("<div class = \"row\">" + 
-									"<div class=\"recipeCard\">" + 
-										"<p class=\"name\">" + recipeToDisplay.getName() + "</p>" + 
-										"<p> Prep Time: " + recipeToDisplay.getPrepTime() + "</p>" +
-										"<p> Cook Time: " + recipeToDisplay.getCookTime() + "</p>" +
-									"</div>" +
-									"<div class =\"buttons\">" +
-										"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button>" +
-										"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
-										"				 <option value = \"0\"> </option>\r\n" + 
-										"				 <option value=\"1\">Favorites</option>\r\n" + 
-										"   				 <option value=\"2\">To Explore</option>\r\n" + 
-										"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-										"			</select>" +
-										"<button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button>" +
-									"</div>" +
-								"</div>"
-					+ "");
-				} else {
-					restaurantToDisplay = (Restaurant)grabbedList.get(i); 
-					out.println("<div class =\"row\">" + 
-									"<div class =\"restaurantCard\">" +
-										"<p class=\"name\">" + restaurantToDisplay.getName() + "</p>" + 
-										"<p> Prep Time: " + restaurantToDisplay.getAddress() + "</p>" +
-										"<p> Cook Time: " + restaurantToDisplay.getPricing() + "</p>" +
-									"</div>" +
-									"<divclass =\"buttons\">" +
-										"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button>" +
-									"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
-									"				 <option value = \"0\"> </option>\r\n" + 
-									"				 <option value=\"1\">Favorites</option>\r\n" + 
-									"   				 <option value=\"2\">To Explore</option>\r\n" + 
-									"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-									"			</select>" +
-										"<button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button>" +
-									"</div>" +
-								"</div>"
-					+ "");
-				}
-			}
-		}
-		else if(action.equals("remove")) {
-			ResultList fromFront = (ResultList)session2.getAttribute(listName);
-			ArrayList<Object> grabbedList = fromFront.getCards();
-			String item = request.getParameter("itemName");
-			System.out.println("Item to be removed: " + item);
-			Recipe recipeToRemove;
-			Restaurant restaurantToRemove;
-			for(int i=0; i<grabbedList.size(); i++) {
-				System.out.println("getting item: " + i);
-				if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
-					recipeToRemove = (Recipe)grabbedList.get(i);
-					System.out.println(recipeToRemove.getName());
-					if(recipeToRemove.getName().equals(item)) {
-						fromFront.removeCard(item);
-						System.out.println("Removed it");
-					}
-				}
-				else {
-					restaurantToRemove = (Restaurant)grabbedList.get(i);
-					if(restaurantToRemove.getName().equals(item)) {
-						fromFront.removeCard(item);
-					}
-				}
-			}
-			ArrayList<Object> removed = fromFront.getCards();
-			System.out.println("Size of new list: " + removed.size());
+		ResultList fromFront = (ResultList)session2.getAttribute(listName);
+		String item = request.getParameter("itemName");
+		String type = request.getParameter("type");
+		ArrayList<Object> grabbedList = fromFront.getCards();
+		ArrayList<Recipe> recipeList = (ArrayList<Recipe>) session2.getAttribute("recipeList");
+		ArrayList<Restaurant> restaurantList = (ArrayList<Restaurant>) session2.getAttribute("restaurantList");
+		ResultList toAdd = decider(action, fromFront, item, type, listName, recipeList, restaurantList);
+	}
 	
-			session2.setAttribute(listName, fromFront);
-			out.println("Done");
+	/**
+	 * This function decides whether or not to add or remove something from a list
+	 * Action is defined in the service request to get the right action and decide what is happening
+	 * It then calls the appropriate function for the action specified
+	 * remove -> removeFromList
+	 * add -> addToList
+	 * @param action
+	 * @param fromFront
+	 * @param item
+	 * @param type
+	 * @param listName
+	 * @param recipeList
+	 * @param restaurantList
+	 * @return
+	 * @throws IOException
+	 */
+	public ResultList decider(String action, ResultList fromFront, String item, String type, String listName, ArrayList<Recipe> recipeList, ArrayList<Restaurant> restaurantList) throws IOException {
+		ResultList addToSession = new ResultList();
+		ArrayList<Object> grabbedList = fromFront.getCards();
+		if(action.equals("remove")) {
+			addToSession = removeFromList(grabbedList, listName, item, fromFront);
 		} 
-		else if(action.equals("move")) {
-			ResultList fromFront = (ResultList)session2.getAttribute(listName);
-			ArrayList<Object> grabbedList = fromFront.getCards();
-			
-			String secondListName = request.getParameter("secondList");
-			String item = request.getParameter("itemName");
-			System.out.println("Inside of move");
-			System.out.println("Second list: " + secondListName);
-			Recipe recipeToMove;
-			Restaurant restaurantToMove;
-			ResultList secondList = (ResultList)session2.getAttribute(secondListName);
-			//need to grab the object that is being moved
-			for(int i=0; i<grabbedList.size(); i++) {
-				System.out.println("What type of class is " + i + ": " + grabbedList.get(i).getClass().getName());
-				if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
-					recipeToMove = (Recipe)grabbedList.get(i);
+		else if(action.equals("add")) {
+			System.out.println("Adding to List: " + item);
+			addToSession = addToList(grabbedList, listName, item, type, recipeList, restaurantList);
+		}
+		return addToSession;
+	}
+	
+	/**
+	 * It removes the item from the List and returns the final list to be readded to the session
+	 * it must match the name to do so 
+	 * @param grabbedList
+	 * @param listName
+	 * @param item
+	 * @param fromFront
+	 * @return
+	 */
+	public ResultList removeFromList(ArrayList<Object> grabbedList, String listName,  String item, ResultList fromFront) {
+		System.out.println("Item to be removed: " + item);
+		Recipe recipeToRemove;
+		Restaurant restaurantToRemove;
+		for(int i=0; i<grabbedList.size(); i++) {
+//			System.out.println("getting item: " + i);
+			if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
+				recipeToRemove = (Recipe)grabbedList.get(i);
+//				System.out.println(recipeToRemove.getName());
+				if(recipeToRemove.getName().equals(item)) {
 					fromFront.removeCard(item);
-					secondList.addCard(recipeToMove);
-					System.out.println("^^^^firstList size: " + fromFront.getCards().size());
-					System.out.println("****secondlist size: " + secondList.getCards().size());
-					System.out.println("Item name: " + recipeToMove.getName());
-					System.out.println("moved recipe");
-				} else {
-					restaurantToMove = (Restaurant)grabbedList.get(i);
-					fromFront.removeCard(item);
-					secondList.addCard(restaurantToMove);
-					System.out.println("moved restaurant");
+//					System.out.println("Removed it");
 				}
 			}
-			session2.setAttribute(listName, fromFront);
-			session2.setAttribute(secondListName, secondList);
-			out.println("done");
-			//add to the next list
-			//remove from the other and reload
-		}
-		else if(action.equals("reloadList")) {
-			ResultList fromFront = (ResultList)session2.getAttribute(listName);
-			ArrayList<Object> grabbedList = fromFront.getCards();
-	//End of creating testing data
-			System.out.println("Grabbed list: " + fromFront.getName());
-			Recipe recipeToDisplay;
-			Restaurant restaurantToDisplay;
-			for(int i=0; i<grabbedList.size(); i++) {
-				System.out.println("What type of class is " + i + ": " + grabbedList.get(i).getClass().getName());
-				if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
-					recipeToDisplay = (Recipe)grabbedList.get(i);
-					out.println("<div>" + 
-									"<div>" + 
-										"<p class=\"name\">" + recipeToDisplay.getName() + "</p>" + 
-										"<p> Prep Time: " + recipeToDisplay.getPrepTime() + "</p>" +
-										"<p> Cook Time: " + recipeToDisplay.getCookTime() + "</p>" +
-										"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
-												"				 <option value = \"0\"> </option>\r\n" + 
-												"				 <option value=\"1\">Favorites</option>\r\n" + 
-												"   				 <option value=\"2\">To Explore</option>\r\n" + 
-												"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-												"			</select>" +
-										"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove from List</button>" +
-										"<button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button>" +
-									"</div>" +
-								"</div>"
-					+ "");
-				} else {
-					restaurantToDisplay = (Restaurant)grabbedList.get(i); 
-					out.println("<div>" + 
-									"<div>" +
-										"<p class=\"name\">" + restaurantToDisplay.getName() + "</p>" + 
-										"<p> Prep Time: " + restaurantToDisplay.getAddress() + "</p>" +
-										"<p> Cook Time: " + restaurantToDisplay.getPricing() + "</p>" +
-									"</div>" +
-									"<div>" +
-									"<select class = \"menu\" id=\"moveListOptions\">\r\n" + 
-									"				 <option value = \"0\"> </option>\r\n" + 
-									"				 <option value=\"1\">Favorites</option>\r\n" + 
-									"   				 <option value=\"2\">To Explore</option>\r\n" + 
-									"   				 <option value=\"3\">Do Not Show</option>\r\n" + 
-									"			</select>" + 
-										"<button class=\"removeButton\" onclick=\"removeFromList(this)\">Remove From List</button>" +
-										"<button class=\"moveButton\" onclick=\"moveToList(this)\">Move to List</button>" +
-									"</div>" +
-								"</div>"
-					+ "");
+			else {
+				restaurantToRemove = (Restaurant)grabbedList.get(i);
+				if(restaurantToRemove.getName().equals(item)) {
+					fromFront.removeCard(item);
 				}
 			}
 		}
-		System.out.println("List name: " + listName);
-		
+		ArrayList<Object> removed = fromFront.getCards();
+		System.out.println("Size of new list: " + removed.size());
+		return fromFront;
 	}
-
+	
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * It adds an item to the defined ResultList, which can be one of the three predefined lists
+	 * Each item needs to be determined if it is a recipe or restaurant, it searches the session and gets the full object to put into the memory
+	 * It then returns the final list to be added to the session
+	 * @param grabbedList
+	 * @param item
+	 * @param type
+	 * @param recipeList
+	 * @param restaurantList
+	 * @return 
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public ResultList addToList(ArrayList<Object> grabbedList, String listName, String item, String type,
+			ArrayList<Recipe> recipeList, ArrayList<Restaurant>restaurantList) {
+		ResultList toReturn = new ResultList();
+		System.out.println("Adding old list size: " + grabbedList.size());
+		boolean exists = false;
+		for(int i=0; i<grabbedList.size(); i++ ) {
+			if(((Result) grabbedList.get(i)).getName().equals(item)) {
+				exists = true;
+			}					
+		}
+		if(!exists) {
+			System.out.println("Inside of add");
+			if(type.equals("recipe")) {
+				Recipe toAdd = new Recipe();
+				for(int i=0; i<recipeList.size(); i++) {
+					if(recipeList.get(i).getName().equals(item)) {
+						toAdd = recipeList.get(i);
+					}
+				}
+				grabbedList.add(toAdd);
+			} else {
+				Restaurant toAdd = new Restaurant();
+				for(int i=0; i<restaurantList.size(); i++) {
+					if(restaurantList.get(i).getName().equals(item)) {
+						toAdd = restaurantList.get(i);
+					}
+				}
+				grabbedList.add(toAdd);			
+			}
+		}
+		System.out.println("Adding new list size: " + grabbedList.size());
+		toReturn.setCards(grabbedList);
+		toReturn.setName(listName);
+		return toReturn;
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+	
 }

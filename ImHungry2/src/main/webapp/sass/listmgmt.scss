@@ -75,7 +75,7 @@ body{
 		
 		.row:nth-child(even){
 			.recipeCard{
-				background-color: #B8B8B8;
+				background-color: #B8B8B8; 
 			}
 		}
 		.row:nth-child(odd){
@@ -85,5 +85,45 @@ body{
 		}
 	}
 }
+.recipeCard{
+	
+	width: 400px;
+	height: 100px;
+	p:nth-child(2){
+		float: left;
+		position: relative;
+		top: 60px;
+	}
+	p:nth-child(3){ 
+		float: right;
+		position: relative;
+		top: 60px;
+	}
+}
 
-@import "card";
+
+.restaurantCard{
+	width: 400px;
+	height: 100px;
+	display: flex;
+	
+	.information{
+		height: 100px;
+		flex: 1 1 80%;
+		 p:nth-child(2){ 
+			margin-bottom: 8px;
+		}
+		p:nth-child(1){ 
+			margin-bottom: 8px;
+		}  
+	}
+	
+	.priceDiv{
+		height: 100px;
+		flex: 1 1 20%; 
+		display: flex;
+		align-items:center;
+		justify-content: center;
+		border-left: 2px solid black;
+	}
+}
