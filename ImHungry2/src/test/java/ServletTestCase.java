@@ -75,6 +75,9 @@ public class ServletTestCase extends Mockito {
 		when(request.getParameter("query")).thenReturn("ramen");
 		when(request.getParameter("numResults")).thenReturn("5");
 		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("Do Not Show")).thenReturn(new ArrayList<Object>());
+		when(session.getAttribute("Favorites")).thenReturn(new ArrayList<Object>());
+
 		
 		ArrayList<Recipe> recipes = new ArrayList<>();
 		when(session.getAttribute("recipeList")).thenReturn(recipes);

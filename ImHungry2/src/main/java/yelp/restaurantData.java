@@ -99,7 +99,7 @@ public class restaurantData extends HttpServlet {
 	 * the "Do Not Show" list. It then deletes any restaurant in the restaurant Array.
 	 * 
 	 * 
-	 * @return restaurantArray with restaurants in list deleted
+	 * @return restaurantArray 
 	 */
 	public ArrayList<Restaurant> checkDoNotShow(ArrayList<Restaurant> restaurantArray, ArrayList<Object> doNotShowList) {
 		ArrayList<Restaurant> editedArray = new ArrayList<Restaurant>();

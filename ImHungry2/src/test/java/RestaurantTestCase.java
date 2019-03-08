@@ -257,9 +257,11 @@ public class RestaurantTestCase {
 		
 		restaurantData yelpAPI = new restaurantData();
 		restaurantArray = yelpAPI.getRestaurants("ramen", 2);
-		yelpAPI.checkDoNotShow(restaurantArray, doNotShowList);
+		resultList = yelpAPI.checkDoNotShow(restaurantArray, doNotShowList);
 		
-		assertEquals(resultList.size(), 0);
+		assertEquals(resultList.size(), 2);
+		assertEquals(resultList.get(0).getName(), "Ramen Kenjo");
+		assertEquals(resultList.get(1).getName(), "Momota Ramen House");
 
 	}
 	
@@ -280,7 +282,7 @@ public class RestaurantTestCase {
 		doNotShowList.add(restaurantResult);
 		
 		restaurantData yelpAPI = new restaurantData();
-		yelpAPI.checkDoNotShow(restaurantArray, doNotShowList);
+		resultList = yelpAPI.checkDoNotShow(restaurantArray, doNotShowList);
 		
 		assertEquals(resultList.size(), 0);
 		
@@ -818,7 +820,7 @@ public class RestaurantTestCase {
 		favorites.add(restaurantResult);
 		
 		restaurantData yelpAPI = new restaurantData();
-		yelpAPI.checkFavorites(restaurantArray, favorites);
+		resultList = yelpAPI.checkFavorites(restaurantArray, favorites);
 		
 		assertEquals(resultList.size(), 0);
 		
