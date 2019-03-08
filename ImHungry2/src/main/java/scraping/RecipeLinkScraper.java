@@ -29,6 +29,7 @@ public class RecipeLinkScraper {
     	Document doc = null;
     	int currPage = 1;
     	int numResultsNeeded = (int)Math.ceil(numResults/20.0);
+    	System.out.println("Num Results Needed: " + numResultsNeeded);
 
     		//getting the links from the search page
     		for(int i = 0; i<numResultsNeeded; i++) {
@@ -41,7 +42,6 @@ public class RecipeLinkScraper {
             		}
             		System.out.println("Page number: " + currPage);
             		currPage++;
-        			break;
         		}
     		}
     		if(recipeLinks.size() > 0) {
