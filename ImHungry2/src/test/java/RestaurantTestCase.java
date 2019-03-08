@@ -8,10 +8,7 @@ import javax.servlet.ServletException;
 
 import yelp.*;
 import org.json.*;
-//
-//import org.json.JSONException;
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
+
 import org.junit.Test;
 
 import com.google.maps.errors.ApiException;
@@ -34,10 +31,8 @@ public class RestaurantTestCase {
 		restaurantResult.setMinsAway(7);
 		expectedList.add(restaurantResult);
 		
-		
 		restaurantData yelpAPI = new restaurantData();
 		ArrayList<Restaurant> actualList = yelpAPI.getRestaurants("ramen", 1);
-
 		
 		assertEquals(expectedList.size(), actualList.size());
 		assertEquals(expectedList.get(0).getAddress(), actualList.get(0).getAddress());
@@ -115,7 +110,7 @@ public class RestaurantTestCase {
 	
 	@Test
 	public void testErrors() throws IOException, JSONException, ApiException, InterruptedException {
-		//create hard-coded json
+			//create hard-coded json
 		
 		    JSONObject testJsonObject = new JSONObject(); //Json object - { }
 		    testJsonObject.put("total", 666);
@@ -124,18 +119,9 @@ public class RestaurantTestCase {
 		    
 		    JSONObject body = new JSONObject();
 		    body.put("name", "Grace's Shack");
-		    //messages.put(body);
-		    
-		    //JSONObject URL = new JSONObject();
 		    body.put("url", "myurl");
-		    //messages.put(URL);
-		    
-		    //JSONObject pricing = new JSONObject();
 		    body.put("price", "");
-		    //messages.put(body);
 
-		    
-		    //JSONObject location = new JSONObject();
 		    JSONObject display_address = new JSONObject();
 		    JSONArray addressName = new JSONArray();
 		    addressName.put("1234 Cool St");
@@ -145,20 +131,12 @@ public class RestaurantTestCase {
 		    
 		    messages.put(body);
 		    
-		    
-		    
 		    testJsonObject.put("businesses", messages);
-		   
-		    //Files.write(Paths.get("customjson.json"), testJsonObject.toString().getBytes());
 		   
 		    ArrayList<Restaurant> resultList = new ArrayList<Restaurant>();
 		    restaurantData yelpAPI = new restaurantData();
 			resultList = yelpAPI.jsonResponse(resultList, testJsonObject, 1);
 			
-	
-			//assertEquals(resultList.size(), actualList.size());
-			//assertEquals(resultList.get(0).getAddress(), );
-			//assertEquals(resultList.get(0).getMinsAway(), actualList.get(0).getMinsAway());
 			assertEquals(resultList.get(0).getName(), "Grace's Shack");
 			assertEquals(resultList.get(0).getPhoneNum(), "No phone number available");
 			assertEquals(resultList.get(0).getPricing(), "No price available");
@@ -170,7 +148,7 @@ public class RestaurantTestCase {
 	
 	@Test
 	public void testPhoneBranches() throws IOException, JSONException, ApiException, InterruptedException {
-		//create hard-coded json
+			//create hard-coded json
 		
 		    JSONObject testJsonObject = new JSONObject(); //Json object - { }
 		    testJsonObject.put("total", 666);
@@ -179,18 +157,8 @@ public class RestaurantTestCase {
 		    
 		    JSONObject body = new JSONObject();
 		    body.put("name", "Grace's Shack");
-		    //messages.put(body);
-		    
-		    //JSONObject URL = new JSONObject();
 		    body.put("url", "myurl");
-		    //messages.put(URL);
 		    
-		    //JSONObject pricing = new JSONObject();
-		   
-		    //messages.put(body);
-
-		    
-		    //JSONObject location = new JSONObject();
 		    JSONObject display_address = new JSONObject();
 		    JSONArray addressName = new JSONArray();
 		    addressName.put("1234 Cool St");
@@ -200,27 +168,17 @@ public class RestaurantTestCase {
 		    
 		    messages.put(body);
 		    
-		    
-		    
 		    testJsonObject.put("businesses", messages);
-		   
-		    //Files.write(Paths.get("customjson.json"), testJsonObject.toString().getBytes());
 		   
 		    ArrayList<Restaurant> resultList = new ArrayList<Restaurant>();
 		    restaurantData yelpAPI = new restaurantData();
 			resultList = yelpAPI.jsonResponse(resultList, testJsonObject, 1);
 			
-	
-			//assertEquals(resultList.size(), actualList.size());
-			//assertEquals(resultList.get(0).getAddress(), );
-			//assertEquals(resultList.get(0).getMinsAway(), actualList.get(0).getMinsAway());
 			assertEquals(resultList.get(0).getName(), "Grace's Shack");
 			assertEquals(resultList.get(0).getPhoneNum(), "No phone number available");
 			assertEquals(resultList.get(0).getPricing(), "No price available");
 			assertEquals(resultList.get(0).getWebsite(), "myurl");
 		    
-		    
-	
 	}
 	
 	@Test
@@ -248,8 +206,6 @@ public class RestaurantTestCase {
 		assertEquals(resultList.get(0).getName(), "Momota Ramen House");
 		assertEquals(resultList.get(1).getName(), "Ebaes");
 
-		 
-	    
 	}
 	
 	@Test
@@ -489,7 +445,6 @@ public class RestaurantTestCase {
 		assertEquals(resultList.get(0).getName(), "Momota Ramen House");
 		assertEquals(resultList.get(1).getName(), "Orange Sekai Ramen");
 		assertEquals(resultList.get(2).getName(), "G-gle");
-
 		
 	}
 	
@@ -674,7 +629,6 @@ public class RestaurantTestCase {
 		assertEquals(resultList.get(2).getName(), "Ebaes");
 		assertEquals(resultList.get(3).getName(), "Orange Sekai Ramen");
 		assertEquals(resultList.get(4).getName(), "G-gle");
-		
 		
 	}
 	
