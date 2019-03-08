@@ -51,7 +51,7 @@ public class RecipeLinkScraper {
 	    			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
 	    			
 	    			long start = System.currentTimeMillis();
-	    			long goal = 1300;
+	    			long goal = 2300;
 	    			long curr = System.currentTimeMillis();
 	    			while(curr - start < goal) {
 	    				curr = System.currentTimeMillis();
