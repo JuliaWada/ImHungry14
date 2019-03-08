@@ -214,12 +214,12 @@ public class RestaurantTestCase {
 //		
 //		assertEquals(resultList.size(), 30);
 //	}
-	
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testIndexOutOfBoundsException() {
-	    ArrayList<Restaurant> emptyList = new ArrayList();
-	    Object o = emptyList.get(0);
-	}
+//	
+//	@Test(expected = IndexOutOfBoundsException.class)
+//	public void testIndexOutOfBoundsException() {
+//	    ArrayList<Restaurant> emptyList = new ArrayList();
+//	    Object o = emptyList.get(0);
+//	}
 
 	
 
