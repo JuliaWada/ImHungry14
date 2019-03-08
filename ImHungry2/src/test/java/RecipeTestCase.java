@@ -243,17 +243,6 @@ public class RecipeTestCase extends Mockito{
 		RecipeData recipeScraper = new RecipeData();
 		resultList = recipeScraper.checkDoNotShow(recipeResults, doNotShowList);
 		
-//		System.out.println("recipe results:");
-//		for(int i=0; i<recipeResults.size(); i++) {
-//			System.out.println("         " + recipeResults.get(i).getName());
-//		}
-//		System.out.println();
-//		System.out.println("result list:");
-//		for(int i=0; i<resultList.size(); i++) {
-//			System.out.println("         " + resultList.get(i).getName());
-//		}
-		
-		
 		assertEquals(resultList.size(), 2);
 		assertEquals(resultList.get(0).getName(), "oatmeal cookie");
 		assertEquals(resultList.get(1).getName(), "peanut butter cookie");
