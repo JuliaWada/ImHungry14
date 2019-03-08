@@ -29,8 +29,8 @@ body {
 
 /* line 23, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #topDiv #collageDiv .collageImg {
-  max-width: 180px;
-  max-height: 50%;
+  width: 150px;
+  height: 50%;
 }
 
 /* line 29, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
@@ -88,7 +88,7 @@ body {
   /*height: 500px;*/
 }
 
-/* line 72, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+/* line 73, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
 #resultDiv #restuarantName, #resultDiv #recipeName {
   display: none;
 }
@@ -203,28 +203,33 @@ body {
   #topDiv {
     height: 200px;
   }
-  /* line 169, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 170, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #topDiv #collageDiv {
     height: 150px;
   }
-  /* line 172, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 173, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #topDiv #collageDiv .collageImg {
-    max-width: 80px;
-    max-height: 35%;
+    width: 80px;
+    height: 30%;
   }
   /* line 180, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  #topDiv #buttonDiv .button {
+    font-size: 10px;
+  }
+  /* line 186, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv {
     flex-direction: column;
+    align-items: center;
   }
-  /* line 182, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 189, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv #restaurantDiv {
     width: 100%;
   }
-  /* line 185, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 192, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv #recipeDiv {
     width: 100%;
   }
-  /* line 188, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
+  /* line 195, /Users/stevenmarsh/Documents/GitHub/ImHungry14/ImHungry2/src/main/webapp/sass/results.scss */
   #resultDiv #restuarantName, #resultDiv #recipeName {
     display: block;
     font-size: 1.8em;

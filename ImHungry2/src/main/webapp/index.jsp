@@ -18,7 +18,7 @@
 			</div>
 			<div id = "formDiv">
 				<form method = "POST" action = "TestServlet">
-					<input id ="searchBar" placeholder = "Enter food...">
+					<input id ="searchBar" placeholder = "Enter food">
 					<input id = "numResults" value ="5">
 				</form>
 			</div>
@@ -32,12 +32,16 @@
 		var numResultsToDisplay = document.querySelector("#numResults").value;
 		sessionStorage.setItem("foodName", foodName);
 		if (foodName == ""){
-			
-		} else {
+			//do nothing
+		} 
+		else if(numResultsToDisplay == null || numResultsToDisplay == "" || numResultsToDisplay <= 0){
+			//need to have numresults valid and above zero
+		}
+		else {
 			going(foodName, numResultsToDisplay);
 			window.location.href = "results.jsp";
 		}
-
+	
 	}
 	
 	 document.querySelector("#numResults").onmouseenter = function(){

@@ -56,8 +56,11 @@ public class restaurantMgmt extends HttpServlet {
     	
     	out.print("<h1>" + toDisplay.getName() + "</h1>" +
     			"<p> Phone Number: " + toDisplay.getPhoneNum() + "</p>" +
+    			"<a href = \"https://www.google.com/maps/dir/Tommy+Trojan/"+ cleanAddress + "\"> Address: " + toDisplay.getAddress() + "</p>" +
+    			"<p class =\"blankPee\">  </p>" +
+    			"<div id = \"webDiv\">" +
     			"<a class =\"website\" href ="+ toDisplay.getWebsite() +"> Website: " + toDisplay.getWebsite() + "</a>" +
-    			"<a href = \"https://www.google.com/maps/dir/Tommy+Trojan/"+ cleanAddress + "\"> Address: " + toDisplay.getAddress() + "</p>"
+    			"</div>"
     	);
 	}
 

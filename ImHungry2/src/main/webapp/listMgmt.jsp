@@ -11,7 +11,7 @@
 	<h1><span id = "listName"></span>'s List</h1>
 	<div id = "container">
 		<div id = "cardDiv">
-			<button onclick = "removefromList()" class ="remove">X</button>
+			
 		</div>
 		<div id = "buttonDiv">
 			<select class = "menu" id="listOptions">
@@ -21,9 +21,9 @@
    				 <option value="3">Do Not Show</option>
 			</select>
 			<br>
-			<button onclick = "toManageList()" class = "button">Manage List</button>
-			<button onclick = "toResultsPage()" class = "button">Back To Results</button>
-			<button onclick = "toSearchPage()" class = "button">Back To Search</button>
+			<button id = "Lbutton" onclick = "toManageList()" class = "button">Manage List</button>
+			<button id = "RPbutton" onclick = "toResultsPage()" class = "button">Results Page</button>
+			<button id = "RTSbutton" onclick = "toSearchPage()" class = "button">Return To Search Page</button>
 		</div>
 	</div>
 	<script>
