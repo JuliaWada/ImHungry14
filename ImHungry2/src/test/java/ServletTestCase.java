@@ -124,6 +124,7 @@ public class ServletTestCase extends Mockito {
 		instructions.add("Place sesame seeds and almonds in a single layer on a medium baking sheet. Bake in the preheated oven 10 minutes, or until lightly brown.");
 		instructions.add("In a large salad bowl, combine the cabbage, green onions and crushed ramen noodles. Pour dressing over the cabbage, and toss to coat evenly. Top with toasted sesame seeds and almonds.");
 		recipes.add(new Recipe("Ramen Coleslaw", "https://images.media-allrecipes.com/userphotos/560x315/4445089.jpg", "15 mins", 15, "10 mins", ingredients, instructions));
+		recipes.add(new Recipe("doNotDisplay", "ofia;fja;e", "15 mins", 15 , "30 mins", ingredients, instructions));
 		when(session.getAttribute("recipeList")).thenReturn(recipes);
 		
 		StringWriter stringWriter = new StringWriter();
@@ -140,39 +141,6 @@ public class ServletTestCase extends Mockito {
 				"<br><h3>Instructions:</h3><ul id=\"instructionsList\"><li>1) Preheat oven to 350 degrees F (175 degrees C).</li><li>2) In a medium bowl, whisk together the oil, vinegar, sugar, ramen noodle spice mix, salt and pepper to create a dressing.</li><li>3) Place sesame seeds and almonds in a single layer on a medium baking sheet. Bake in the preheated oven 10 minutes, or until lightly brown.</li><li>4) In a large salad bowl, combine the cabbage, green onions and crushed ramen noodles. Pour dressing over the cabbage, and toss to coat evenly. Top with toasted sesame seeds and almonds.</li></ul>\r\n"
 				, stringWriter.toString());
 	}
-	
-//	@Test
-//	//(expected = InterruptedException.class)
-//	public void testRecipeDataInterruptedException() throws IOException, ServletException, InterruptedException {
-//		HttpServletRequest request = mock(HttpServletRequest.class);
-//		HttpServletResponse response = mock(HttpServletResponse.class);
-//		HttpSession session = mock(HttpSession.class);
-//		when(request.getParameter("action")).thenReturn("page");
-//		when(request.getParameter("query")).thenReturn("Ramen Coleslaw");
-//		when(request.getSession()).thenReturn(session);
-//		
-//		StringWriter stringWriter = new StringWriter();
-//		PrintWriter printWriter = new PrintWriter(stringWriter);
-//		when(response.getWriter()).thenReturn(printWriter);
-//        when(response.getContentType()).thenReturn("text/html");
-//		RecipeData recipeData = mock(RecipeData.class);
-//		RecipeLinkScraper scraper = mock(RecipeLinkScraper.class);
-////		doThrow(new InterruptedException("Error thrown"))
-////		.when(recipeData)
-////		.displayResults(request, response, printWriter, "ramen", 5);
-////		doThrow(new InterruptedException("Error thrown"))
-////		.when(recipeData)
-////		.service(request, response);
-//		doThrow(new InterruptedException("Error thrown"))
-//		.when(scraper)
-//		.scrapeRecipeLinks("ramen", 5);
-//		
-////		
-//////		recipeData.displayResults(request, response, printWriter, "ramen", 5);
-////		recipeData.service(request, response);
-//		scraper.scrapeRecipeLinks("ramen", 5);
-//		
-//	}
 	
 	@Test
 	public void testLoadListData() throws IOException, ServletException {
@@ -280,7 +248,10 @@ public class ServletTestCase extends Mockito {
 		
 		Restaurant toDisplay = new Restaurant("Ramen Kenjo", "website", "address", "phoneNum",
 				"$$", 15);
+		Restaurant notToDisplay = new Restaurant("Do not display", "website", "address", "phoneNum",
+				"$$", 15);
 		restaurants.add(toDisplay);
+		restaurants.add(notToDisplay);
 		when(session.getAttribute("restaurantList")).thenReturn(restaurants);
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -294,6 +265,19 @@ public class ServletTestCase extends Mockito {
 		System.out.flush();
 		assertEquals("<h1>Ramen Kenjo</h1><p> Phone Number: phoneNum</p><a class =\"website\" href =website> Website: website</a><a href = \"https://www.google.com/maps/dir/Tommy+Trojan/address\"> Address: address</p>"
 				, stringWriter.toString());
+	}
+	
+	@Test
+	public void testRemoveCardThatDoNotExist() {
+		ResultList toTest = new ResultList();
+		toTest.setName("toTest");
+		ArrayList<Object> cards = new ArrayList<Object>();
+		cards.add(new Restaurant("restaurant", "website", "address", "phoneNum", "$$$", 15));
+		toTest.setCards(cards);
+		
+		toTest.removeCard("notInList");
+		assertEquals(1, toTest.getCards().size());
+		
 	}
 
 }

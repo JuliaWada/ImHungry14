@@ -70,6 +70,7 @@ public class ListMgmtData extends HttpServlet {
 	 */
 	public ResultList decider(String action, ResultList fromFront, String item, String type, String listName, ArrayList<Recipe> recipeList, ArrayList<Restaurant> restaurantList) throws IOException {
 		ResultList addToSession = new ResultList();
+		addToSession.setName(listName);
 		ArrayList<Object> grabbedList = fromFront.getCards();
 		if(action.equals("remove")) {
 			addToSession = removeFromList(grabbedList, listName, item, fromFront);

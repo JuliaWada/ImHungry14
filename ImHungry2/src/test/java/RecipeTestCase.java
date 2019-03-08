@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
@@ -12,6 +13,7 @@ public class RecipeTestCase {
 
 	@Test
 	public void testOneNumResult() throws InterruptedException, IOException {
+		TimeUnit.SECONDS.sleep(2);
 		ArrayList<Recipe> expectedList = new ArrayList<Recipe>();
 		Recipe result1 = new Recipe();
 		result1.setName("Ramen Coleslaw");
@@ -96,4 +98,19 @@ public class RecipeTestCase {
 		assertEquals(15, result1.getPrep());
 	}	
 
+	
+	@Test
+	public void testEmptyPrepAndCookTime() throws IOException, InterruptedException {
+		TimeUnit.SECONDS.sleep(2);
+		Recipe toTest = new RecipeLinkScraper().scrapeRecipeDetails("https://www.allrecipes.com/recipe/15802/ramen-cabbage-salad/?internalSource=hub%20recipe&referringContentType=Search&clickId=cardslot%208");
+		assertEquals("N/A", toTest.getPrepTime());
+		assertEquals("N/A", toTest.getCookTime());
+	}
+	
+	@Test
+	public void testNoResults() throws InterruptedException, IOException {
+		TimeUnit.SECONDS.sleep(3);
+		ArrayList<Recipe> toTest = new RecipeLinkScraper().scrapeRecipeLinks("Halfond", 3);
+		assertEquals(0, toTest.size());
+	}
 }

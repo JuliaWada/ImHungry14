@@ -48,7 +48,7 @@ public class RecipeData extends HttpServlet {
 			System.out.println("Query: " + query);
 			System.out.println("Num of Results: " + numResults);
 				displayResults(request, response, out, query, numResults);
-		} else if (action.equals("page")) {
+		} else {
 			displayPage(request, response, out, query);
 		}
 	}
@@ -110,7 +110,7 @@ public class RecipeData extends HttpServlet {
     	for(int i=0; i<stored.size(); i++) {
     		if(stored.get(i).getName().equals(query)) {
     			toDisplay = stored.get(i);
-    		}
+    		} 
     	}
     	System.out.println(toDisplay.getImageURL());
     	ArrayList<String> ingredients = toDisplay.getIngredients();

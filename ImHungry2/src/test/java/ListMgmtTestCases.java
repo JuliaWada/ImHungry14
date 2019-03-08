@@ -182,24 +182,26 @@ public class ListMgmtTestCases {
 		Recipe secondRecipe = new Recipe("secondRecipe", "https://images.media-allrecipes.com/userphotos/560x315/4445089.jpg", "15 mins", 15, "10 mins", ingredients, instructions);
 		Recipe secondRecipe2 = new Recipe("secondRecipe2", "https://images.media-allrecipes.com/userphotos/560x315/4445089.jpg", "15 mins", 15, "10 mins", ingredients, instructions);
 		Restaurant testRestaurant = new Restaurant("Ramen Kenjo", "website", "address", "phoneNumber", "$$$", 15);
+		Restaurant testRestaurant2 = new Restaurant("Ramen Kenjo", "website", "address", "phoneNumber", "$$$", 15);
 		testCards.add(expectedRecipe);
 		testCards.add(extraRecipe);
 		testCards.add(extraRecipe2);
 		testCards.add(testRestaurant);
+		testCards.add(testRestaurant2);
 		testList.setCards(testCards);
 		secondTestCards.add(secondRecipe2);
 		secondTestCards.add(secondRecipe);
 		secondTestList.setCards(secondTestCards);
-		assertEquals(4, testList.getCards().size());
+		assertEquals(5, testList.getCards().size());
 		assertEquals(2, secondTestList.getCards().size());
 		
 		ArrayList<ResultList> returned = new MoveToListData().moveToList(testCards, "copy2", testList, secondTestList);
 		assertEquals("resultList", returned.get(0).getName());
 		assertEquals("secondList", returned.get(1).getName());
-		assertEquals(3, returned.get(0).getCards().size());
+		assertEquals(4, returned.get(0).getCards().size());
 		assertEquals(3, returned.get(1).getCards().size());
 		returned = new MoveToListData().moveToList(testCards, "Ramen Kenjo", testList, secondTestList);
-		assertEquals(2, returned.get(0).getCards().size());
+		assertEquals(3, returned.get(0).getCards().size());
 		assertEquals(4, returned.get(1).getCards().size());
 	}
 	@Test
@@ -259,8 +261,10 @@ public class ListMgmtTestCases {
 		assertEquals("resultList", returned.getName());
 		assertEquals(4, resultList.size());
 		
-		
-		
+		returned = new ListMgmtData().decider("add", testList, "secondRecipe", "recipe", "resultList", secondTestCards, restaurantList);
+		resultList = returned.getCards();
+		assertEquals("resultList", returned.getName());
+		assertEquals(4, resultList.size());
 	}
 	
 	@Test
@@ -297,23 +301,29 @@ public class ListMgmtTestCases {
 		Restaurant testRestaurant2 = new Restaurant("Daikokuya", "website", "address", "phoneNumber", "$$$", 15);
 		testCards.add(expectedRecipe);
 		testCards.add(extraRecipe);
-//		testCards.add(extraRecipe2);
+		testCards.add(secondRecipe2);
+		testCards.add(testRestaurant);
+		testCards.add(testRestaurant1);
 		ArrayList<Object> restaurantList = new ArrayList<>();
 
 		restaurantList.add(testRestaurant2);
 		restaurantList.add(testRestaurant1);
 		testList.setCards(testCards);
 		secondTestList.setCards(restaurantList);
-		assertEquals(2, testCards.size());
+		assertEquals(5, testCards.size());
 		assertEquals(2, restaurantList.size());
 		
 		ResultList returned = new ListMgmtData().removeFromList(testCards, "resultList", "Ramen Coleslaw", testList);
 		ArrayList<Object> resultList = returned.getCards();
 		assertEquals("resultList", returned.getName());
-		assertEquals(1, resultList.size());
+		assertEquals(4, resultList.size());
 		
 		returned = new ListMgmtData().decider("remove", secondTestList, "Daikokuya", "", "secondList", new ArrayList<Recipe>(), new ArrayList<Restaurant>());
 		resultList = returned.getCards();
+		assertEquals("secondList", returned.getName());
+		assertEquals(1, resultList.size());
+		
+		returned = new ListMgmtData().decider("noAction", secondTestList, "noName" ,"" , "secondList", new ArrayList<Recipe>(), new ArrayList<Restaurant>());
 		assertEquals("secondList", returned.getName());
 		assertEquals(1, resultList.size());
 		

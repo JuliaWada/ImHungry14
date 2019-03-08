@@ -54,7 +54,7 @@ public class LoadList extends HttpServlet {
 		Restaurant restaurantToDisplay;
 		for(int i=0; i<grabbedList.size(); i++) {
 			System.out.println("What type of class is " + i + ": " + grabbedList.get(i).getClass().getName());
-			if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
+			if(grabbedList.get(i).getClass().getName().equals("scraping.Recipe")) {
 				recipeToDisplay = (Recipe)grabbedList.get(i);
 				out.println("<div class = \"row\">" + 
 						"<div class=\"recipeCard\" onclick = \"toRecipePage(this)\">" + 
