@@ -84,7 +84,24 @@ public class RestaurantTestCase {
 			assertEquals(expectedList.get(i).getWebsite(), actualList.get(i).getWebsite());
 		}
 		
+	}
+	
+	@Test
+	public void testing50() throws InterruptedException, IOException, ServletException, JSONException, ApiException {
+		ArrayList<Restaurant> resultList = new ArrayList<Restaurant>();
+		restaurantData yelpAPI = new restaurantData();
+		resultList = yelpAPI.getRestaurants("ramen", 50);
 		
+		assertEquals(resultList.size(), 50);
+	}
+	
+	@Test
+	public void testing100() throws InterruptedException, IOException, ServletException, JSONException, ApiException {
+		ArrayList<Restaurant> resultList = new ArrayList<Restaurant>();
+		restaurantData yelpAPI = new restaurantData();
+		resultList = yelpAPI.getRestaurants("ramen", 100);
+		
+		assertEquals(resultList.size(), 50);
 	}
 	
 	@Test
@@ -95,8 +112,6 @@ public class RestaurantTestCase {
 		
 		assertEquals(resultList.size(), 0);
 	}
-	
-	
 	
 	@Test
 	public void testErrors() throws IOException, JSONException, ApiException, InterruptedException {
@@ -208,18 +223,6 @@ public class RestaurantTestCase {
 	
 	}
 	
-
-	
-//	@Test
-//	public void testing30() throws InterruptedException, IOException, ServletException, JSONException, ApiException {
-//		ArrayList<Restaurant> resultList = new ArrayList<Restaurant>();
-//		restaurantData yelpAPI = new restaurantData();
-//		resultList = yelpAPI.getRestaurants("ramen", 30);
-//		
-//		assertEquals(resultList.size(), 30);
-//	}
-//	
-	
 	@Test
 	public void testCompareWithDNSBasic() throws ServletException, IOException, JSONException, ApiException, InterruptedException {
 		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>();
@@ -320,7 +323,6 @@ public class RestaurantTestCase {
 	    
 	}
 
-		
 	@Test
 	public void testCompareWithDNSMultipleItems() throws ServletException, IOException, JSONException, ApiException, InterruptedException {
 		//DNS has: more than one item in the list, all in the restaurant array list
@@ -429,7 +431,6 @@ public class RestaurantTestCase {
 		assertEquals(resultList.size(), 0);
 
 	}
-	
 	
 	@Test
 	public void testCompareWithDNSDiffItems() throws ServletException, IOException, JSONException, ApiException, InterruptedException {
@@ -676,7 +677,6 @@ public class RestaurantTestCase {
 		
 		
 	}
-	
 	
 	@Test
 	public void testCompareWithDiffItems() throws ServletException, IOException, JSONException, ApiException, InterruptedException {

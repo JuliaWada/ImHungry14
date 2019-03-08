@@ -212,6 +212,10 @@ public class restaurantData extends HttpServlet {
 	 */
 	public ArrayList<Restaurant> getRestaurants(String foodName, int numResultsToShow) throws ServletException, IOException, JSONException, ApiException, InterruptedException {
 		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>(); 
+		
+		if(numResultsToShow > 50) {
+			numResultsToShow = 50;
+		}
 
 		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
 		
