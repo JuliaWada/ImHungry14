@@ -23,12 +23,13 @@ public class RecipeLinkScraper {
      * @throws InterruptedException 
      * @throws IOException 
      */
-    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) throws InterruptedException, IOException {
+    public ArrayList<Recipe> scrapeRecipeLinks(String query, int numResults) throws IOException {
     	ArrayList<Recipe> toReturn = new ArrayList<Recipe>();
     	ArrayList<String> recipeLinks = new ArrayList<String>();
     	Document doc = null;
     	int currPage = 1;
     	int numResultsNeeded = (int)Math.ceil(numResults/20.0);
+    	System.out.println("Num Results Needed: " + numResultsNeeded);
 
     		//getting the links from the search page
     		for(int i = 0; i<numResultsNeeded; i++) {
@@ -41,7 +42,6 @@ public class RecipeLinkScraper {
             		}
             		System.out.println("Page number: " + currPage);
             		currPage++;
-        			break;
         		}
     		}
     		if(recipeLinks.size() > 0) {
@@ -49,7 +49,13 @@ public class RecipeLinkScraper {
 	    			System.out.println("***************Start***************");
 	    			System.out.println("Link " + i + ": " + recipeLinks.get(i));
 	    			Recipe toAdd = scrapeRecipeDetails(recipeLinks.get(i));
-	    			TimeUnit.SECONDS.sleep(1);
+	    			
+	    			long start = System.currentTimeMillis();
+	    			long goal = 2300;
+	    			long curr = System.currentTimeMillis();
+	    			while(curr - start < goal) {
+	    				curr = System.currentTimeMillis();
+	    			}
 	    			toReturn.add(toAdd);
 	    		}
     		}
@@ -72,7 +78,7 @@ public class RecipeLinkScraper {
      * @throws IOException 
      */
     
-    public Recipe scrapeRecipeDetails(String url) throws InterruptedException, IOException {
+    public Recipe scrapeRecipeDetails(String url) throws IOException {
     	String html = "";
     	String title = "";
 		String prepTime = "";
@@ -83,7 +89,12 @@ public class RecipeLinkScraper {
 		ArrayList<String> instructions = new ArrayList<String>();
 		//opening the links grabbed and adding new things to it 
 		Document doc = null;
-
+			long start = System.currentTimeMillis();
+			long goal = 1000;
+			long curr = System.currentTimeMillis();
+			while(curr - start < goal) {
+				curr = System.currentTimeMillis();
+			}
 			doc = Jsoup.connect(url).userAgent(USER_AGENT).get();
 			title = doc.select("h1#recipe-main-content").text();
 			System.out.println("Title: " + title);

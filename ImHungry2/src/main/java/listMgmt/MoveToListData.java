@@ -59,11 +59,12 @@ public class MoveToListData extends HttpServlet {
 
 	public ArrayList<ResultList> moveToList(ArrayList<Object> grabbedList, String item, ResultList fromFront, ResultList secondList) {
 		System.out.println("Inside of move");
+		System.out.println("Item: " + item);
 		Recipe recipeToMove;
 		Restaurant restaurantToMove;
 		//need to grab the object that is being moved
 		for(int i=0; i<grabbedList.size(); i++) {
-			System.out.println("What type of class is " + i + ": " + grabbedList.get(i).getClass().getName());
+			System.out.println("In: Move list: What type of class is " + i + ": " + grabbedList.get(i).getClass().getName());
 			if(grabbedList.get(i).getClass().getName() == "scraping.Recipe") {
 				recipeToMove = (Recipe)grabbedList.get(i);
 				if(recipeToMove.getName().equals(item)) {
@@ -76,9 +77,12 @@ public class MoveToListData extends HttpServlet {
 				}
 			} else {
 				restaurantToMove = (Restaurant)grabbedList.get(i);
-				fromFront.removeCard(item);
-				secondList.addCard(restaurantToMove);
-				System.out.println("moved restaurant");
+				System.out.println("Restaurant matching: " + restaurantToMove.getName());
+				if(restaurantToMove.getName().equals(item)) {
+					fromFront.removeCard(item);
+					secondList.addCard(restaurantToMove);
+					System.out.println("moved restaurant");
+				}
 			}
 		}
 		ArrayList<ResultList> toReturn = new ArrayList<>();

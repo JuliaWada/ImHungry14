@@ -51,7 +51,7 @@ public class CollageData extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		String extra = request.getParameter("extra");
-		if(extra == null || extra.equals("")) {
+		if(extra == null) {
 			extra = "getCollage";
 		}
 		String query = request.getParameter("query").trim();
@@ -62,14 +62,10 @@ public class CollageData extends HttpServlet {
 			System.out.println("Setting session");
 			HttpSession session2 = request.getSession(true);
 			session2.setAttribute("query", query);
-			System.out.println("Query: " + session2.getAttribute("query"));
+			System.out.println("Collage Query: " + session2.getAttribute("query"));
 			session2.setAttribute("numResults", numResults);
-			System.out.println("NumResults: " + session2.getAttribute("numResults"));
+			System.out.println("Collage NumResults: " + session2.getAttribute("numResults"));
 			
-			Map< String, Recipe> recipesMap =  new HashMap< String,Recipe>();
-			Map<String, Restaurant> restaurantsMap = new HashMap<String, Restaurant>();
-			session2.setAttribute("recipeMap", recipesMap);
-			session2.setAttribute("restaurantMap", restaurantsMap);
 			//for current search results
 			ArrayList<Recipe> recipes = new ArrayList<>();
 			ArrayList<Restaurant> restaurants = new ArrayList<>();
@@ -86,6 +82,8 @@ public class CollageData extends HttpServlet {
 			ResultList doNotShow = new ResultList();
 			doNotShow.setName("Do Not Show");
 			session2.setAttribute("Do Not Show", doNotShow);
+			out.println("Attribute query = " + session2.getAttribute("query"));
+			out.println("Attribue numResults = " + session2.getAttribute("numResults"));
 			
 		} else {
 			CollageScraper scraper = new CollageScraper();

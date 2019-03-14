@@ -12,7 +12,6 @@ public class CollageTestCase {
 	@Test
 	public void testGetTenImages() throws IOException {
 		CollageScraper scraper = new CollageScraper();
-		scraper.scrapeCollage("ramen");
 		ArrayList<String> expected = new ArrayList<String>();
 		expected.add("\\\"https://www.halfbakedharvest.com/wp-content/uploads/2018/09/20-Minute-Thai-Peanut-Chicken-Ramen-1.jpg\\\"");
 		expected.add("\\\"https://www.modernhoney.com/wp-content/uploads/2018/07/Homemade-Chicken-Ramen-1.jpg\\\"");
@@ -26,7 +25,15 @@ public class CollageTestCase {
 		expected.add("\\\"https://peasandcrayons.com/wp-content/uploads/2018/01/healthy-spicy-sriracha-shrimp-ramen-noodle-soup-bowls-recipe-7075.jpg\\\"");
 		ArrayList<String> actual = new ArrayList<String>();
 		actual = scraper.scrapeCollage("ramen");
-		//assertArrayEquals(expected.toArray(), actual.toArray());
+		assertEquals(expected.size(), actual.size());
+	}
+	
+	@Test
+	public void testGetNoImages() throws IOException {
+		CollageScraper scraper = new CollageScraper();
+		ArrayList<String> expected = new ArrayList<String>();
+		ArrayList<String> actual = new ArrayList<String>();
+		actual = scraper.scrapeCollage("adefrgchvijbk");
 		assertEquals(expected.size(), actual.size());
 	}
 

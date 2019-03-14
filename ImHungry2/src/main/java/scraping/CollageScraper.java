@@ -32,14 +32,17 @@ public ArrayList<String> scrapeCollage (String query) throws IOException {
             final String outer = result.outerHtml();
             String split[] = outer.split("\"ou\":");
             String splitAgain[];
-            for(int j=0; j<11; j++) {
-            	splitAgain = split[j].split(",\"");
-            	if(j != 0) {
-            		splitAgain[j] = StringEscapeUtils.escapeJava(splitAgain[j]);
-            		System.out.println("Unescaping: " + splitAgain[0]);
-            		toReturn.add(StringEscapeUtils.unescapeJava(splitAgain[0]));
-            	}            	
+            if(split.length > 1) {
+            	for(int j=0; j<11; j++) {
+                	splitAgain = split[j].split(",\"");
+                	if(j != 0) {
+                		splitAgain[j] = StringEscapeUtils.escapeJava(splitAgain[j]);
+                		System.out.println("Unescaping: " + splitAgain[0]);
+                		toReturn.add(StringEscapeUtils.unescapeJava(splitAgain[0]));
+                	}            	
+                }
             }
+            
             
         System.out.println("toReturn size: " + toReturn.size());
         return toReturn;

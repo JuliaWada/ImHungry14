@@ -3,7 +3,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ CollageTestCase.class, RecipeTestCase.class , ServletTestCase.class, RestaurantTestCase.class, ListMgmtTestCases.class})
+@SuiteClasses({ CollageTestCase.class, RecipeTestCase.class , RestaurantTestCase.class, ServletTestCase.class, ListMgmtTestCases.class})
 public class AllTests {
 	
 }

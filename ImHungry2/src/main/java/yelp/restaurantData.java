@@ -19,6 +19,7 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.DirectionsResult;
 
+import listMgmt.ResultList;
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import scraping.Recipe;
@@ -61,6 +62,17 @@ public class restaurantData extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		HttpSession session = request.getSession();
+		ResultList doNotShow = (ResultList) session.getAttribute("Do Not Show");
+		ArrayList<Object> doNotShowList = doNotShow.getCards();
+		ResultList favs = (ResultList) session.getAttribute("Favorites");
+		ArrayList<Object> favorites = favs.getCards();
+		
+		
+		restaurantArray = checkDoNotShow(restaurantArray, doNotShowList);
+		restaurantArray = checkFavorites(restaurantArray, favorites);
+		
+		
 		for(int i=0; i<restaurantArray.size(); i++) {
         	Restaurant r = restaurantArray.get(i);
         	out.println("<div class =\"restaurantCard\" onclick = \"toRestaurantPage(this)\" \"id=\"restaurant" + i + "\">" +
@@ -80,6 +92,114 @@ public class restaurantData extends HttpServlet {
 			stored.add(restaurantArray.get(i));
 		}
 	}
+	
+	/**
+	 * 
+	 * @param restaurantArray
+	 * @param doNotShowList
+	 * 
+	 * This function checks the returned restaurantArray with the ArrayList of restaurants in 
+	 * the "Do Not Show" list. It then deletes any restaurant in the restaurant Array.
+	 * 
+	 * 
+	 * @return restaurantArray 
+	 */
+	public ArrayList<Restaurant> checkDoNotShow(ArrayList<Restaurant> restaurantArray, ArrayList<Object> doNotShowList) {
+		ArrayList<Restaurant> editedArray = new ArrayList<Restaurant>();
+		
+//		System.out.println("restaurant array size: " + restaurantArray.size());
+//		System.out.println("Do Not Show array size: " + doNotShowList.size());
+
+		if(restaurantArray.size() != 0 && doNotShowList.size() !=0) {									//array list is not empty
+			for(int i=0; i<restaurantArray.size(); i++) {
+				int matchFound = 0;											//flag
+				String restArrayAddr = restaurantArray.get(i).getAddress();	
+				//System.out.println("restaurant array address: " + restArrayAddr);
+				for(int j=0; j<doNotShowList.size(); j++) {
+					if(doNotShowList.get(j).getClass().getName().equals("yelp.Restaurant")) {
+						Restaurant DNSrestaurant = (Restaurant)doNotShowList.get(j);
+						String dontShowRestAddr = DNSrestaurant.getAddress();
+						//System.out.println("DNS array address: " + dontShowRestAddr);
+						if(restArrayAddr.equals(dontShowRestAddr)) {		//compare addresses
+							matchFound = 1;	
+							//System.out.println("Match found.");
+						}
+						//System.out.println("UNO");
+					}
+					//System.out.println("DOS");
+				}
+				//System.out.println("TRES");
+				if(matchFound == 0) {										//not in "Do Not Show" list. Add to the array list.
+					editedArray.add(restaurantArray.get(i));
+					//System.out.println("Adding to list, no match found:" + restaurantArray.get(i).getName());
+				}
+				//System.out.println();
+			}
+		}
+		else {
+			//System.out.println("Nothing to compare to.");
+			return restaurantArray;
+		}
+		
+		//System.out.println("Returning the edited array. Size: " + editedArray.size());
+		return editedArray;
+	}
+	
+	/**
+	 * 
+	 * @param restaurantArray
+	 * @param favorites
+	 * 
+	 * This function checks the returned restaurantArray with the ArrayList of restaurants in 
+	 * the "Favorites" list. It then moves any matching restaurants to the front of the array list.
+	 * 
+	 * @return
+	 */
+	public ArrayList<Restaurant> checkFavorites(ArrayList<Restaurant> restaurantArray, ArrayList<Object> favorites) {
+		ArrayList<Restaurant> editedArray = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> notInList = new ArrayList<Restaurant>();	
+		
+		System.out.println("restaurant array size: " + restaurantArray.size());
+		System.out.println("favorites array size: " + favorites.size());
+		
+		if(restaurantArray.size() != 0 && favorites.size() != 0) {									//array list is not empty
+			for(int i=0; i<restaurantArray.size(); i++) {
+				int matchFound = 0;											//flag
+				String restArrayAddr = restaurantArray.get(i).getAddress();	
+				System.out.println("restaurant array address: " + restArrayAddr);
+				for(int j=0; j<favorites.size(); j++) {
+					if(favorites.get(j).getClass().getName().equals("yelp.Restaurant")) {
+						Restaurant favesRestaurant = (Restaurant)favorites.get(j);
+						String favesAddr = favesRestaurant.getAddress();
+						System.out.println("Favorites array address: " + favesAddr);
+						if(restArrayAddr.equals(favesAddr)) {		//compare addresses
+							matchFound = 1;					
+							System.out.println("Match found.");
+						}
+					}
+				}
+				if(matchFound == 1) {										//in the "Favorites" list. Add to front of the array list.
+					editedArray.add(restaurantArray.get(i));
+					System.out.println("Adding to front of edited list:" + restaurantArray.get(i).getName());
+				}
+				else {
+					notInList.add(restaurantArray.get(i));
+					System.out.println("Adding to rest of list");
+				}
+			}
+		}
+		else {
+			System.out.println("Nothing to compare to.");
+			return restaurantArray;
+		}
+		
+		editedArray.addAll(notInList);
+		System.out.println("Returning the edited array");
+		return editedArray;
+	}
+
+	
+
 	/**
 	 * 
 	 * Inputs are an array list of restaurants, request, and response
@@ -93,9 +213,12 @@ public class restaurantData extends HttpServlet {
 	 * @throws ApiException 
 	 * 
 	 */
-
 	public ArrayList<Restaurant> getRestaurants(String foodName, int numResultsToShow) throws ServletException, IOException, JSONException, ApiException, InterruptedException {
 		ArrayList<Restaurant> restaurantArray = new ArrayList<Restaurant>(); 
+		
+		if(numResultsToShow > 50) {
+			numResultsToShow = 50;
+		}
 
 		String API_KEY_YELP = "YJlrOwrflvQYjRaCRuc7qI9KbQL0CEkIP13-glWa8IFE3tUxS9pKhmmjtYgVpt7vKi3YnVbxokgMm9RyOZMth6ia3QgOHSGuwb7Eop7wl-pJGclJx-1s2ChLYYF2XHYx";
 		
@@ -110,16 +233,13 @@ public class restaurantData extends HttpServlet {
                 .build();
 
         
-        	Response APIresponse = client.newCall(APIrequest).execute();
+    	Response APIresponse = client.newCall(APIrequest).execute();
 
-        	JSONObject jsonObject = new JSONObject(APIresponse.body().string().trim());       // parser
+    	JSONObject jsonObject = new JSONObject(APIresponse.body().string().trim());       // parser
+    	
+    	//ArrayList<Restaurant> jsonParse = new ArrayList<Restaurant>();
+    	restaurantArray = jsonResponse(restaurantArray, jsonObject, numResultsToShow);
         	
-        	//ArrayList<Restaurant> jsonParse = new ArrayList<Restaurant>();
-        	restaurantArray = jsonResponse(restaurantArray, jsonObject, numResultsToShow);
-        	
-            
-
-        
         return restaurantArray;
 		
 	}
@@ -241,14 +361,13 @@ public class restaurantData extends HttpServlet {
 	   	String formatAddress = restaurantAddress.replace(" ", "+");
 	   	System.out.println("Formatted address: " + formatAddress);
 
-			DirectionsResult request =  DirectionsApi.getDirections(gcontext, "Tommy+Trojan", formatAddress).await();
-			
-			long routeSeconds = request.routes[0].legs[0].duration.inSeconds;
-			System.out.println("Route in Seconds: " + routeSeconds);
-			
-			routeMin = routeSeconds / 60;
-			System.out.println("Route in Minutes: " + routeMin);
-			
+		DirectionsResult request =  DirectionsApi.getDirections(gcontext, "Tommy+Trojan", formatAddress).await();
+		
+		long routeSeconds = request.routes[0].legs[0].duration.inSeconds;
+		System.out.println("Route in Seconds: " + routeSeconds);
+		
+		routeMin = routeSeconds / 60;
+		System.out.println("Route in Minutes: " + routeMin);
 			
 		return Math.toIntExact(routeMin);
 		
