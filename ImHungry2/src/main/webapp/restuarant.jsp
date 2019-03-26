@@ -13,15 +13,15 @@
 			
 		</div>
 		<div id ="buttonDiv">
-			<button onclick = "toPrintVersion()" class = "button">Printable Version</button>
-			<button onclick = "toResults()" class = "button">Back to Results</button>
+			<button id="PVbutton" onclick = "toPrintVersion()" class = "button">Printable Version</button>
+			<button id="RPbutton" onclick = "toResults()" class = "button">Back to Results</button>
 			<select class = "menu" id="listOptions">
 				 <option value = "0"> </option>
 				 <option value="1">Favorites</option>
    				 <option value="2">To Explore</option>
    				 <option value="3">Do Not Show</option>
 			</select>
-			<button onclick = "toAddtoList()" class = "button">Add to List</button>
+			<button id="addLbutton" onclick = "toAddtoList()" class = "button">Add to List</button>
 		</div>
 	</div>
 	<script>
@@ -41,7 +41,14 @@
 		xhttp.onreadystatechange = function () {
 			document.getElementById("infoDiv").innerHTML = this.responseText;
 		}
-		xhttp.open("POST", "restaurantMgmt?query=" + encodeURIComponent(name), true);
+		if(name.includes('%27')) {
+			console.log("in true");
+			name = name;
+		} else {
+			name = encodeURIComponent(name);
+		}
+		
+		xhttp.open("POST", "restaurantMgmt?query=" + name, true);
 		xhttp.send();
 	}
 	
@@ -62,9 +69,13 @@
 			xhttp.onreadystatechange = function () {
 				console.log("Successfully added");
 			}
-			var clean = encodeURIComponent(name);
-			console.log(clean);
-			xhttp.open("POST", "listMgmtData?action=add&type=restaurant&itemName=" + clean + "&listName=" + option, true);
+			if(name.includes('%27')) {
+				console.log("in true");
+				name = name;
+			} else {
+				name = encodeURIComponent(name);
+			}
+			xhttp.open("POST", "listMgmtData?action=add&type=restaurant&itemName=" + name + "&listName=" + option, true);
 			xhttp.send();
 		}
 		

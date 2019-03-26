@@ -35,9 +35,7 @@ public class ResultList {
 	}
 	
 	public void addCard(Object result) {
-		System.out.println("Add " + name + "- new List size: " + cards.size());
 		cards.add(result);
-		System.out.println("Add " + name + "- new List size: " + cards.size());
 	}
 	
 	public void removeCard(String name) {

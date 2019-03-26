@@ -149,6 +149,14 @@ public class RecipeLinkScraper {
 		return recipe;
     }
     
+    
+    /**
+     * It takes the time to change it from any String hour representation into minutes. It will also do so for any minute representation.
+     * 
+     * 
+     * @param time String that contains the full prep time
+     * @return an int that has the total prep time represented as an int
+     */
     public int convertTime(String time) {
     	//if the string has the hour in it
     	int finalTime = 0;

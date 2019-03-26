@@ -58,13 +58,13 @@ public class ListMgmtData extends HttpServlet {
 	 * It then calls the appropriate function for the action specified
 	 * remove -> removeFromList
 	 * add -> addToList
-	 * @param action
-	 * @param fromFront
-	 * @param item
-	 * @param type
-	 * @param listName
-	 * @param recipeList
-	 * @param restaurantList
+	 * @param action a String that represents whats we want the servlet to do (add or remove)
+	 * @param fromFront a ResultList that represents the primary List that is to edited
+	 * @param item a String that represents what item is to be added or removed
+	 * @param type a type that represents what kind of item it is
+	 * @param listName a ListName to keep track of what list we are using
+	 * @param recipeList a ArrayList that contains all searched recipes
+	 * @param restaurantList an ArrayList that contains all searched restaurants
 	 * @return
 	 * @throws IOException
 	 */
@@ -83,13 +83,13 @@ public class ListMgmtData extends HttpServlet {
 	}
 	
 	/**
-	 * It removes the item from the List and returns the final list to be readded to the session
+	 * It removes the item from the List and returns the final list to be read to the session
 	 * it must match the name to do so 
-	 * @param grabbedList
-	 * @param listName
-	 * @param item
-	 * @param fromFront
-	 * @return
+	 * @param grabbedList the ArrayList<Object> that we are removing from
+	 * @param listName the name of the grabbedList in String
+	 * @param item the String name of the item to be removed
+	 * @param fromFront the full REsultList that is associated with thte grabbedList
+	 * @return the final ResultList that contains the edited list
 	 */
 	public ResultList removeFromList(ArrayList<Object> grabbedList, String listName,  String item, ResultList fromFront) {
 		System.out.println("Item to be removed: " + item);
@@ -121,12 +121,12 @@ public class ListMgmtData extends HttpServlet {
 	 * It adds an item to the defined ResultList, which can be one of the three predefined lists
 	 * Each item needs to be determined if it is a recipe or restaurant, it searches the session and gets the full object to put into the memory
 	 * It then returns the final list to be added to the session
-	 * @param grabbedList
-	 * @param item
-	 * @param type
-	 * @param recipeList
-	 * @param restaurantList
-	 * @return 
+	 * @param grabbedList the ArrayList<Object> that is to be edited
+	 * @param item the String name of the item to be added
+	 * @param type the String representation of what type the item is
+	 * @param recipeList the ArrayList<Recipe> that represents all searched recipes
+	 * @param restaurantList the ArrayList<Restaurants> that represents all searched restaurants
+	 * @return the final edited ResultList to be returned
 	 */
 	public ResultList addToList(ArrayList<Object> grabbedList, String listName, String item, String type,
 			ArrayList<Recipe> recipeList, ArrayList<Restaurant>restaurantList) {

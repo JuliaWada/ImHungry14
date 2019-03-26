@@ -59,8 +59,6 @@ public class RecipeTestCase extends Mockito{
 		
 		RecipeLinkScraper scraper = new RecipeLinkScraper();
 		ArrayList<Recipe> actualList = scraper.scrapeRecipeLinks("ramen", 1);
-		System.out.println(expectedList.get(0).toString());
-		System.out.println(actualList.get(0).toString());
 		assertEquals(expectedList.size(), actualList.size());
 		assertEquals(expectedList.get(0).toString(), actualList.get(0).toString());
 	}

@@ -23,8 +23,8 @@
 		<ul id = "instructionsList"></ul>
 	</div>
 	<div id ="buttonDiv">
-		<button onclick = "toPrintVersion()" class = "button">Printable Version</button>
-		<button onclick = "toResults()" class = "button">Back to Results</button>
+		<button id="PVbutton" onclick = "toPrintVersion()" class = "button">Printable Version</button>
+		<button id="RPbutton" onclick = "toResults()" class = "button">Back to Results</button>
 		<select class = "menu" id="listOptions">
 				 <option value = "0"> </option>
 				 <option value="1">Favorites</option>
@@ -32,7 +32,7 @@
    				 <option value="3">Do Not Show</option>
 			</select>
 			<br>
-		<button onclick ="toAddtoList()" class = "button">Add to List</button>
+		<button id="addLbutton" onclick ="toAddtoList()" class = "button">Add to List</button>
 	</div>	
 </div>
 <script>
@@ -53,9 +53,14 @@ function loadRecipeTitle() {
 	xhttp.onreadystatechange = function () {
 		document.getElementById("infoDiv").innerHTML = this.responseText;
 	}
-	var clean = encodeURIComponent(name);
+	if(name.includes('%27')) {
+		console.log("in true");
+		name = name;
+	} else {
+		name = encodeURIComponent(name);
+	}
 	console.log(clean);
-	xhttp.open("POST", "recipeData?query=" + clean + "&action=page", true);
+	xhttp.open("POST", "recipeData?query=" + name + "&action=page", true);
 	xhttp.send();
 }
 
@@ -71,9 +76,14 @@ function toAddtoList() {
 		xhttp.onreadystatechange = function () {
 			console.log("Successfully added");
 		}
-		var clean = encodeURIComponent(name);
+		if(name.includes('%27')) {
+			console.log("in true");
+			name = name;
+		} else {
+			name = encodeURIComponent(name);
+		}
 		console.log(clean);
-		xhttp.open("POST", "listMgmtData?action=add&type=recipe&itemName=" + clean + "&listName=" + option, true);
+		xhttp.open("POST", "listMgmtData?action=add&type=recipe&itemName=" + name + "&listName=" + option, true);
 		xhttp.send();
 	}
 }

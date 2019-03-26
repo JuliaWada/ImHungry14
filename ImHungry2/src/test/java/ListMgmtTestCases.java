@@ -238,7 +238,6 @@ public class ListMgmtTestCases {
 		Restaurant testRestaurant2 = new Restaurant("Daikokuya", "website", "address", "phoneNumber", "$$$", 15);
 		testCards.add(expectedRecipe);
 		testCards.add(extraRecipe);
-//		testCards.add(extraRecipe2);
 		ArrayList<Restaurant> restaurantList = new ArrayList<>();
 		ArrayList<Recipe> secondTestCards = new ArrayList<>();
 
@@ -255,7 +254,6 @@ public class ListMgmtTestCases {
 		assertEquals("testList", returned.getName());
 		assertEquals(3, resultList.size());
 		
-//		returned = new ListMgmtData().(testCards, "resultList", "secondRecipe", "recipe", secondTestCards, restaurantList);
 		returned = new ListMgmtData().decider("add", testList, "secondRecipe", "recipe", "resultList", secondTestCards, restaurantList);
 		resultList = returned.getCards();
 		assertEquals("resultList", returned.getName());

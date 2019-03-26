@@ -47,14 +47,14 @@ public class MoveToListData extends HttpServlet {
 	}
 
 	/**
-	 * 
-	 * @param grabbedList
-	 * @param listName
-	 * @param secondListName
-	 * @param item
-	 * @param fromFront
-	 * @param secondList
-	 * @return
+	 * This function moves on Object/item of whatever type to another list
+	 * @param grabbedList the ArrayList<Object> that the item was originally on
+	 * @param listName the String name of  the list that the item was originally on
+	 * @param secondListName the String name of the list that the item is going to be moved to
+	 * @param item the String name of the Item to be moved
+	 * @param fromFront the full ResultList of the list the item was originally on
+	 * @param secondList the full ResultList of the list the item will be moved to
+	 * @return an ArrayList<ResultList> that returns the edited versions of both lists
 	 */
 
 	public ArrayList<ResultList> moveToList(ArrayList<Object> grabbedList, String item, ResultList fromFront, ResultList secondList) {
@@ -70,8 +70,6 @@ public class MoveToListData extends HttpServlet {
 				if(recipeToMove.getName().equals(item)) {
 					fromFront.removeCard(item);
 					secondList.addCard(recipeToMove);
-					System.out.println("^^^^firstList size: " + fromFront.getCards().size());
-					System.out.println("****secondlist size: " + secondList.getCards().size());
 					System.out.println("Item name: " + recipeToMove.getName());
 					System.out.println("moved recipe");
 				}

@@ -67,13 +67,15 @@ public class RecipeData extends HttpServlet {
 	}
 
     /**
-     * This grabs the necessary data to display the cards on the results page
+     * This grabs the necessary data to display the cards on the results page. 
+     * It also has calls to determine that recipes in the favorites list are shown first, and those
+     * in the Do Not Show list are not shown.
      *
      * @param request
      * @param response
-     * @param out
-     * @param query
-     * @param numResults
+     * @param out the Printwriter to write back to the front end
+     * @param query the String that contains what the user searched for
+     * @param numResults the int that contains how many results the user wants to see
      * @throws IOException
      * @throws InterruptedException
      */
@@ -214,19 +216,15 @@ public class RecipeData extends HttpServlet {
 
 
 	/**
-     * This grabs the necessary information and formats it to be sent to the front end for the recipe page
+     * This grabs the necessary information and formats it to be sent to the front end for the recipe page. Gets the name
+     * and finds it within the possible results to get the full Recipe object. It then prints it out to the front end.
      * @param request
      * @param response
-     * @param out
-     * @param query
+     * @param out the Printwriter to write back to the front end
+     * @param query the String that contains what the user wants to search for
      */
     public void displayPage(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String query) {
     	HttpSession session = request.getSession();
-//    	Map<String, Recipe> stored = (Map<String, Recipe>) session.getAttribute("recipeList");
-//
-//    	for(String key : stored.keySet()) {
-//
-//    	}
     	ArrayList<Recipe> stored = (ArrayList<Recipe>) session.getAttribute("recipeList");
     	Recipe toDisplay = new Recipe();
     	for(int i=0; i<stored.size(); i++) {
